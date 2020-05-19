@@ -97,3 +97,7 @@
         width: 72px;
     }
 }
+
+.fa-search{
+    transform: scale(1.3,1.3);
+}

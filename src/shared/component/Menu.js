@@ -57,7 +57,7 @@ const Menu = () => {
                 <Nav.Item className="search-box">
                     <input className="search-txt" type="text" placeholder="Search"/>
                     <button className="search-btn" href="#">
-                        <i className="fas fa-search"></i>
+                        <i className="fas fa-search mt-3" style={{width: '30px', height: '30px'}}></i>
                     </button>
                 </Nav.Item>
             </ul>
