@@ -46,7 +46,7 @@ const Menu = () => {
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link className="text-light mt-lg-n2" href="/">
-                        <img src={LoginButton} alt="" style={{marginLeft: '-20px', width: '110px', height: '45px'}}/>
+                        <img src={LoginButton} className="ml-n2 ml-lg-0" alt="" style={{width: '110px', height: '45px'}}/>
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>

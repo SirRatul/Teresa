@@ -9,7 +9,7 @@ const Slider = () => {
     return  <Carousel>
         <Carousel.Item>
             <img
-                className="d-block w-100 sliderimage"
+                className="d-block sliderimage"
                 src={Slider1}
                 alt="First slide"
             />
@@ -27,7 +27,7 @@ const Slider = () => {
         </Carousel.Item>
         <Carousel.Item>
             <img
-                className="d-block w-100 sliderimage"
+                className="d-block sliderimage"
                 src={Slider2}
                 alt="Third slide"
             />
@@ -46,7 +46,7 @@ const Slider = () => {
         </Carousel.Item>
         <Carousel.Item>
             <img
-                className="d-block w-100 sliderimage"
+                className="d-block sliderimage"
                 src={Slider3}
                 alt="Third slide"
             />
