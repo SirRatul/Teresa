@@ -1,0 +1,17 @@
+.serviceCard{
+    /* margin: 20px 0; */
+    border-radius: 4%;
+	-webkit-box-shadow: 0px 0px 9px 0px rgba(152,160,161,1);
+    -moz-box-shadow: 0px 0px 9px 0px rgba(152,160,161,1);
+    box-shadow: 0px 0px 9px 0px rgba(152,160,161,1);
+}
+
+.card-text{
+    color: #CAC2D0!important;
+}
+
+.service-background{
+    -webkit-box-shadow: 0px 0px 17px 5px rgba(37,138,28,1);
+    -moz-box-shadow: 0px 0px 17px 5px rgba(37,138,28,1);
+    box-shadow: 0px 0px 17px 5px rgba(37,138,28,1);
+}

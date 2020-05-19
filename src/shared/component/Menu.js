@@ -1,7 +1,7 @@
 import React from 'react';
 import {Nav, Navbar, NavDropdown} from 'react-bootstrap'
 import Logo from '../img/logo.png'
-import Avatar from '../img/avatar.jpg'
+import Avatar from '../img/avatar.png'
 import LoginButton from '../img/Login Button.png'
 import './Menu.css'
 
@@ -28,7 +28,7 @@ const Menu = () => {
                     className="justify-content-center"
                     title={
                         <span className="dropdown-toggle text-white" data-toggle="dropdown" style={{backgroundColor: '#020624'}}>Buy Medicine
-                            <i className="fa fa-angle-down"></i>
+                            <i className="fa fa-angle-down ml-1"></i>
                         </span>
                     } id="basic-nav-dropdown">
                         <NavDropdown.Item className="justify-content-lg-center text-white" href="/">
@@ -50,17 +50,14 @@ const Menu = () => {
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link className="text-light mt-lg-n2" href="/">
-                        <img src={Avatar} alt="" style={{width: '40px', height: '40px'}}/>
+                    <Nav.Link className="text-light" href="/">
+                        <img src={Avatar} alt="" style={{width: '30px', height: '30px'}}/>
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item className="search-box">
-                    {/* <Nav.Link className="text-light mt-lg-n2" href="/">
-                        <i className="fas fa-search mt-2"></i>
-                    </Nav.Link> */}
                     <input className="search-txt" type="text" placeholder="Search"/>
                     <button className="search-btn" href="#">
-                        <i className="fas fa-search mt-2"></i>
+                        <i className="fas fa-search"></i>
                     </button>
                 </Nav.Item>
             </ul>
