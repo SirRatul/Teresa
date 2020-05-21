@@ -17,12 +17,11 @@ const Slider = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-5">
-                            <p className="text-left font-weight-bold h1">Get all your medical solutions in all one place.</p>
-                            <p className="animated slideInDown text-left lead">We provide all kind of medical services for your healthy life. We can feel your pain. </p>
-                            <button className="btn btn-lg bg-white float-lg-left rounded-pill font-weight-bold" style={{color: '#080808'}}>Learn More</button>
+
+
                         </div>
                     </div>
-                </div>	
+                </div>
             </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -31,14 +30,13 @@ const Slider = () => {
                 src={Slider2}
                 alt="Third slide"
             />
-        
+
             <Carousel.Caption>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-6">
-                            <p className="text-left font-weight-bold h1">We Are Always Ready To Serve You</p>
-                            <p className="animated slideInDown text-left lead">We provide all kind of medical services for your healthy life. We can feel your pain. </p>
-                            <button className="btn btn-lg bg-white float-lg-left rounded-pill font-weight-bold" style={{color: '#080808'}}>Learn More</button>
+
+
                         </div>
                     </div>
                 </div>
@@ -50,14 +48,13 @@ const Slider = () => {
                 src={Slider3}
                 alt="Third slide"
             />
-        
+
             <Carousel.Caption>
             <div className="container">
                     <div className="row">
                         <div className="col-lg-6">
-                            <p className="text-left font-weight-bold h1">We Are Always Ready To Serve You</p>
-                            <p className="animated slideInDown text-left lead">We provide all kind of medical services for your healthy life. We can feel your pain. </p>
-                            <button className="btn btn-lg bg-white float-lg-left rounded-pill font-weight-bold" style={{color: '#080808'}}>Learn More</button>
+
+                          
                         </div>
                     </div>
                 </div>

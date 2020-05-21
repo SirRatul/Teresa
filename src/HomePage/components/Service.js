@@ -26,9 +26,9 @@ const Service = () => {
             </div>
             <div className="col-xs-6 col-md-6 col-lg-4 d-flex align-items-stretch">
                 <Card className="serviceCard p-2 my-5">
-                    <Card.Img className="mx-auto" variant="top" src={PatientRoutineIcon} alt="Patient Routine Icon" style={{width: '80px', height: '75px'}}></Card.Img>
+                    <Card.Img className="mx-auto" variant="top" src={PatientRoutineIcon} alt="Patient Routine Icon" style={{width: '60px', height: '60px'}}></Card.Img>
                     <Card.Body>
-                        <Card.Title className="text-left"> 
+                        <Card.Title className="text-left">
                             <p className="h4 font-weight-bold">Patient Routine</p>
                         </Card.Title>
                         <Card.Text className="text-left">
@@ -39,7 +39,7 @@ const Service = () => {
             </div>
             <div className="col-xs-6 col-md-6 col-lg-4 d-flex align-items-stretch">
                 <Card className="serviceCard p-2 my-5">
-                    <Card.Img className="mx-auto" variant="top" src={NotificationIcon} alt="Notification Icon" style={{width: '80px', height: '80px'}}></Card.Img>
+                    <Card.Img className="mx-auto" variant="top" src={NotificationIcon} alt="Notification Icon" style={{width: '50px', height: '50px'}}></Card.Img>
                     <Card.Body>
                         <Card.Title className="text-left">
                             <p className="h4 font-weight-bold">Real Time Notification</p>
@@ -52,7 +52,7 @@ const Service = () => {
             </div>
             <div className="col-xs-6 col-md-6 col-lg-4 d-flex align-items-stretch">
                 <Card className="serviceCard p-2 my-5">
-                    <Card.Img className="mx-auto" variant="top" src={MedicineShopIcon} alt="Medicine Shop Icon" style={{width: '80px', height: '70px'}}></Card.Img>
+                    <Card.Img className="mx-auto" variant="top" src={MedicineShopIcon} alt="Medicine Shop Icon" style={{width: '70px', height: '60px'}}></Card.Img>
                     <Card.Body>
                         <Card.Title className="text-left">
                             <p className="h4 font-weight-bold">Medicine Shop</p>
@@ -65,7 +65,7 @@ const Service = () => {
             </div>
             <div className="col-xs-6 col-md-6 col-lg-4 d-flex align-items-stretch">
                 <Card className="serviceCard p-2 my-5">
-                    <Card.Img className="mx-auto" variant="top" src={ActivityManagementIcon} alt="Activity Managemnet Icon" style={{width: '80px', height: '70px'}}></Card.Img>
+                    <Card.Img className="mx-auto" variant="top" src={ActivityManagementIcon} alt="Activity Managemnet Icon" style={{width: '70px', height: '60px'}}></Card.Img>
                     <Card.Body>
                         <Card.Title className="text-left">
                             <p className="h4 font-weight-bold">Activity Managemnet</p>
