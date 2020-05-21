@@ -14,32 +14,32 @@ const Slider = () => {
                 alt="First slide"
             />
             <Carousel.Caption>
-                <div className="container">
+                <button className="btn btn-lg bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
+                {/* <div className="container">
                     <div className="row">
-                        <div className="col-lg-5">
-
-
+                        <div className="col-6">
+                            <button className="btn btn-sm bg-white float-left rounded-pill font-weight-bold" style={{color: '#080808'}}>Learn More</button>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
             <img
                 className="d-block sliderimage"
                 src={Slider2}
-                alt="Third slide"
+                alt="Second slide"
             />
 
             <Carousel.Caption>
-                <div className="container">
+                <button className="btn btn-lg bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
+                {/* <div className="container">
                     <div className="row">
-                        <div className="col-lg-6">
-
-
+                        <div className="col-6">
+                            <button className="btn btn-sm bg-white float-left rounded-pill font-weight-bold" style={{color: '#080808'}}>Learn More</button>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -50,14 +50,14 @@ const Slider = () => {
             />
 
             <Carousel.Caption>
-            <div className="container">
+                <button className="btn btn-lg bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
+                {/* <div className="container">
                     <div className="row">
-                        <div className="col-lg-6">
-
-                          
+                        <div className="col-6">
+                            
                         </div>
                     </div>
-                </div>
+                </div> */}
             </Carousel.Caption>
         </Carousel.Item>
     </Carousel>;
