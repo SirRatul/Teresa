@@ -5,6 +5,7 @@ import Slider from './components/Slider'
 import Service from './components/Service'
 import AboutTeresa from '../HomePage/components/AboutTeresa'
 import AboutApp from '../HomePage/components/AboutApp'
+import Footer from '../shared/component/Footer'
 
 const HomePage = () => {
     return  <React.Fragment>
@@ -17,6 +18,7 @@ const HomePage = () => {
         <Service/>
         <AboutTeresa/>
         <AboutApp/>
+        <Footer/>
     </React.Fragment>;
 }
 

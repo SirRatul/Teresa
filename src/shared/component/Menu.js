@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Nav, Navbar, NavDropdown} from 'react-bootstrap'
-import Form from 'react-bootstrap/Form'
 import Logo from '../img/logo.png'
 import Avatar from '../img/avatar.png'
 import LoginButton from '../img/Login Button.png'
+import NotificationIcon from '../img/Notification Icon.png'
 import './Menu.css'
 
 const Menu = () => {
@@ -26,9 +26,6 @@ const Menu = () => {
                 <Nav.Item>
                     <Nav.Link className="text-light" href="/">My Health Record</Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link className="text-light" href="/">Products</Nav.Link>
-                </Nav.Item>
                 <NavDropdown 
                     className="justify-content-center"
                     title={
@@ -44,25 +41,30 @@ const Menu = () => {
                         </NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Item>
-                    <Nav.Link className="text-light" href="/">Service</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
                     <Nav.Link className="text-light" href="/">Set Reminder</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
+                    <Nav.Link className="text-light" href="/">Products</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
                     <Nav.Link className="text-light mt-lg-n2" href="/">
-                        <img src={LoginButton} className="ml-n2 ml-lg-0" alt="" style={{width: '110px', height: '45px'}}/>
+                        <img src={LoginButton} className="ml-n2 ml-lg-0" alt="Login Button" style={{width: '110px', height: '45px'}}/>
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link className="text-light" href="/">
-                        <img src={Avatar} alt="" style={{width: '30px', height: '30px'}}/>
+                        <img className='mt-lg-n2 ml-3 ml-lg-0' src={NotificationIcon} style={{width: '45px', height: '45px'}} alt="Notification Icon"/>
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <i className="fas fa-search mt-3" style={{width: '30px', height: '30px', color: 'white'}} onClick={function(){searchButtonClick()}}></i>
+                    <Nav.Link className="text-light" href="/">
+                        <img className='ml-3 ml-lg-0' src={Avatar} alt="Avatar" style={{width: '30px', height: '30px'}}/>
+                    </Nav.Link>
                 </Nav.Item>
-                <form className={"navbar-form navbar-left "+(visible?'visible':'invisible')} role="search">
+                <Nav.Item>
+                    <i className="fas fa-search mt-4 mt-lg-3 ml-4 ml-lg-0" style={{width: '30px', height: '30px', color: 'white'}} onClick={function(){searchButtonClick()}}></i>
+                </Nav.Item>
+                <form className={"search-form-nav "+(visible?'visible':'invisible')} role="search">
                     <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search"/>
                     </div>

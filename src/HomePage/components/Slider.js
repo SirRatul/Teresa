@@ -14,7 +14,7 @@ const Slider = () => {
                 alt="First slide"
             />
             <Carousel.Caption>
-                <button className="btn btn-lg bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
+                <button className="btn bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
                 {/* <div className="container">
                     <div className="row">
                         <div className="col-6">
@@ -32,7 +32,7 @@ const Slider = () => {
             />
 
             <Carousel.Caption>
-                <button className="btn btn-lg bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
+                <button className="btn bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
                 {/* <div className="container">
                     <div className="row">
                         <div className="col-6">
@@ -50,7 +50,7 @@ const Slider = () => {
             />
 
             <Carousel.Caption>
-                <button className="btn btn-lg bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
+                <button className="btn bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
                 {/* <div className="container">
                     <div className="row">
                         <div className="col-6">

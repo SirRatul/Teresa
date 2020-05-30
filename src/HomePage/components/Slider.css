@@ -6,7 +6,33 @@
 	height: auto;
 }
 
-@media only screen and (min-width: 1500px) and (max-width: 2100px){
+.marginSliderButton{
+	margin-top: 2vw!important;
+	margin-left: -1vw!important;
+	font-size: 1.4vw!important;
+	padding: 0.55vw 0.8vw!important;
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px){
+	.marginSliderButton{
+		margin-top: -8vw!important;
+		margin-left: -1vw!important;
+		font-size: 1.4vw!important;
+		padding: 0.55vw 0.8vw!important;
+	}
+}
+
+@media only screen and (min-width: 768px){
+	.marginSliderButton{
+		margin-top: -11vw!important;
+		margin-left: -1vw!important;
+		font-size: 1.4vw!important;
+		padding: 0.55vw 0.8vw!important;
+	}
+}
+
+
+/*@media only screen and (min-width: 1500px) and (max-width: 2100px){
 	.marginSliderButton{
 		margin-top: -16rem!important;
 		margin-left: -8rem!important;
@@ -60,4 +86,4 @@
 		padding: 0.1rem 0.1rem!important;
 		line-height: 1.5!important;
 	}
-}
+}*/

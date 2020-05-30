@@ -14,7 +14,16 @@
     margin-top: 2vw!important;
 }
 
+.app-one-column{
+    margin-bottom: 5vw!important;
+}
+
 .app-download-button{
-    width: 27vw!important;
-    height: 15vw!important;
+    font-size: 1.2vw!important;
+    font-weight: bold!important;
+    color: #0D348C!important;
+}
+
+.app-download-button-image{
+    width: 1.9vw!important;
 }
