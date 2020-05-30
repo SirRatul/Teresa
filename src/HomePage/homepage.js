@@ -3,6 +3,8 @@ import {Helmet} from "react-helmet";
 import Menu from '../shared/component/Menu'
 import Slider from './components/Slider'
 import Service from './components/Service'
+import AboutTeresa from '../HomePage/components/AboutTeresa'
+import AboutApp from '../HomePage/components/AboutApp'
 
 const HomePage = () => {
     return  <React.Fragment>
@@ -13,6 +15,8 @@ const HomePage = () => {
         <Menu/>
         <Slider/>
         <Service/>
+        <AboutTeresa/>
+        <AboutApp/>
     </React.Fragment>;
 }
 

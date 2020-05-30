@@ -11,7 +11,7 @@ const Service = () => {
     return <div className="container mb-5 mt-2 pt-5">
         <p className="h1 text-center font-weight-bold mb-5" style={{color: '#19184E'}}>Our Services</p>
         <div className="row">
-            <div className="col-xs-6 col-md-6 col-lg-4 d-flex align-items-stretch">
+            <div className="col-xs-6 col-md-6 col-lg-4 d-flex px-5 px-sm-4 align-items-stretch">
                 <Card className="serviceCard p-2 my-5">
                     <Card.Img className="mx-auto" variant="top" src={AddGuardianIcon} alt="Add Guardian Icon" style={{width: '80px', height: '65px'}}></Card.Img>
                     <Card.Body>
@@ -24,7 +24,7 @@ const Service = () => {
                     </Card.Body>
                 </Card>
             </div>
-            <div className="col-xs-6 col-md-6 col-lg-4 d-flex align-items-stretch">
+            <div className="col-xs-6 col-md-6 col-lg-4 d-flex px-5 px-sm-4 align-items-stretch">
                 <Card className="serviceCard p-2 my-5">
                     <Card.Img className="mx-auto" variant="top" src={PatientRoutineIcon} alt="Patient Routine Icon" style={{width: '60px', height: '60px'}}></Card.Img>
                     <Card.Body>
@@ -37,7 +37,7 @@ const Service = () => {
                     </Card.Body>
                 </Card>
             </div>
-            <div className="col-xs-6 col-md-6 col-lg-4 d-flex align-items-stretch">
+            <div className="col-xs-6 col-md-6 col-lg-4 d-flex px-5 px-sm-4 align-items-stretch">
                 <Card className="serviceCard p-2 my-5">
                     <Card.Img className="mx-auto" variant="top" src={NotificationIcon} alt="Notification Icon" style={{width: '50px', height: '50px'}}></Card.Img>
                     <Card.Body>
@@ -50,7 +50,7 @@ const Service = () => {
                     </Card.Body>
                 </Card>
             </div>
-            <div className="col-xs-6 col-md-6 col-lg-4 d-flex align-items-stretch">
+            <div className="col-xs-6 col-md-6 col-lg-4 d-flex px-5 px-sm-4 align-items-stretch">
                 <Card className="serviceCard p-2 my-5">
                     <Card.Img className="mx-auto" variant="top" src={MedicineShopIcon} alt="Medicine Shop Icon" style={{width: '70px', height: '60px'}}></Card.Img>
                     <Card.Body>
@@ -63,7 +63,7 @@ const Service = () => {
                     </Card.Body>
                 </Card>
             </div>
-            <div className="col-xs-6 col-md-6 col-lg-4 d-flex align-items-stretch">
+            <div className="col-xs-6 col-md-6 col-lg-4 d-flex px-5 px-sm-4 align-items-stretch">
                 <Card className="serviceCard p-2 my-5">
                     <Card.Img className="mx-auto" variant="top" src={ActivityManagementIcon} alt="Activity Managemnet Icon" style={{width: '70px', height: '60px'}}></Card.Img>
                     <Card.Body>

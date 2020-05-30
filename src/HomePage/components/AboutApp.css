@@ -1,0 +1,20 @@
+.app-section-header-text{
+    font-size: 4vw!important;
+}
+
+.heading-text{
+    font-size: 3.5vw!important;
+    margin-bottom: .3vw!important;
+    line-height: 1.2!important;
+    margin-top: 2vw!important;
+}
+
+.main-text-app-section{
+    font-size: 1.5vw!important;
+    margin-top: 2vw!important;
+}
+
+.app-download-button{
+    width: 27vw!important;
+    height: 15vw!important;
+}

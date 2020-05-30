@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Nav, Navbar, NavDropdown} from 'react-bootstrap'
+import Form from 'react-bootstrap/Form'
 import Logo from '../img/logo.png'
 import Avatar from '../img/avatar.png'
 import LoginButton from '../img/Login Button.png'
 import './Menu.css'
 
 const Menu = () => {
+    const [visible, setVisible] = useState(false)
+    const searchButtonClick = () => {
+        setVisible(!visible)
+    }
     return  <Navbar className="my-nav" expand="lg" sticky="top">
         <Navbar.Brand href="/">
             <img src={Logo} width="100" height="70" className="d-inline-block align-top" alt="Logo"/>
@@ -54,12 +59,14 @@ const Menu = () => {
                         <img src={Avatar} alt="" style={{width: '30px', height: '30px'}}/>
                     </Nav.Link>
                 </Nav.Item>
-                <Nav.Item className="search-box">
-                    <input className="search-txt" type="text" placeholder="Search"/>
-                    <button className="search-btn" href="#">
-                        <i className="fas fa-search mt-3" style={{width: '30px', height: '30px'}}></i>
-                    </button>
+                <Nav.Item>
+                    <i className="fas fa-search mt-3" style={{width: '30px', height: '30px', color: 'white'}} onClick={function(){searchButtonClick()}}></i>
                 </Nav.Item>
+                <form className={"navbar-form navbar-left "+(visible?'visible':'invisible')} role="search">
+                    <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search"/>
+                    </div>
+                </form>
             </ul>
         </Navbar.Collapse>
     </Navbar>;

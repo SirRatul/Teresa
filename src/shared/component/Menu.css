@@ -28,6 +28,31 @@
     display: none !important;
 }
 
+.navbar-form.navbar-left{
+	position: absolute;
+    right: 0;
+    top: 100%;
+}
+
+.hide
+{
+  opacity: 0;
+  max-height: 0;
+}
+
+#trigger {
+  position: absolute;
+  left: -999em;
+}
+
+#container input[type="checkbox"]:checked + div
+{
+  max-height: 99em;
+  opacity: 1;
+  height: auto;
+  overflow: hidden;
+}
+
 .search-box{
     height: 40px;
     border-radius: 40px;
