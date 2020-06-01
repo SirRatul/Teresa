@@ -53,6 +53,7 @@ input[type="checkbox"]:checked + label::after {
 
 select option:checked,
 select option:hover {
+  background: #f00 !important;
   box-shadow: 0 0 10px 100px #000 inset;
 }
 

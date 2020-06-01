@@ -4,15 +4,30 @@ import Doctor from '../shared/img/Dr.jpg';
 import './RegistrationBox.css'
 
 const RegistrationBox = () => {
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
+    const [birthDate, setBirthDate] = useState('')
+    const [gender, setGender] = useState('Male')
+    const [bloodGroup, setBloodGroup] = useState('A+')
+    const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
-    const [showpassword, setShowPassword] = useState(false)
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [dateOfBirthType, setdateOfBirthType] = useState(false)
 
     const submitHandler = async (event) => {
         event.preventDefault()
+        console.log(firstName)
+        console.log(lastName)
         console.log(email)
+        console.log(birthDate)
+        console.log(gender)
+        console.log(bloodGroup)
+        console.log('+880'+phone)
         console.log(password)
+        console.log(confirmPassword)
     }
 
     return  <React.Fragment>
@@ -36,108 +51,106 @@ const RegistrationBox = () => {
                         <div className="register" id="registerBox">
                             <form onSubmit={submitHandler}>
                                 <div className="form-group">
-                                    <div class="form-row">
+                                    <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0">
                                             <p className='h4 font-weight-bold' style={{color: '#060735'}}>General Info</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <div class="form-row">
+                                    <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0">
                                             <label>First Name</label>
-                                            <input type="text" class="form-control rounded-pill   form-input-background" placeholder="First Name"/>
+                                            <input type="text" className="form-control rounded-pill form-input-background" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} required/>
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Last Name</label>
-                                            <input type="text" class="form-control rounded-pill   form-input-background" placeholder="Last Name"/>
+                                            <input type="text" className="form-control rounded-pill form-input-background" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} required/>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <div class="form-row">
+                                    <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Email</label>
-                                            <input type="email" class="form-control rounded-pill   form-input-background" placeholder="Email"/>
+                                            <input type="email" className="form-control rounded-pill form-input-background" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Date Of Birth</label>
-                                            <input placeholder="Date Of Birth" class="form-control rounded-pill form-input-background textbox-n" type={dateOfBirthType ? 'date' : 'text'} onFocus={function(){
+                                            <input placeholder="Date Of Birth" className="form-control rounded-pill form-input-background textbox-n" type={dateOfBirthType ? 'date' : 'text'} onFocus={function(){
                                                 setdateOfBirthType(true)
                                             }} onBlur={function(){
                                                 setdateOfBirthType(false)
-                                            }}/>
+                                            }} value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required/>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <div class="form-row">
+                                    <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Gender</label>
-                                            <select class="form-control rounded-pill  form-input-background">
-                                                <option className='form-input-background rounded-pill' selected>Male</option>
-                                                <option>Female</option>
+                                            <select className="form-control rounded-pill  form-input-background" value={gender} onChange={(e) => setGender(e.target.value)}>
+                                                <option value='Male'>Male</option>
+                                                <option value='Female'>Female</option>
                                             </select>
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Blood Group</label>
-                                            <select class="custom-select form-control rounded-pill  form-input-background">
-                                                <option selected>A+</option>
-                                                <option>A-</option>
-                                                <option>B+</option>
-                                                <option>B-</option>
-                                                <option>O+</option>
-                                                <option>O-</option>
-                                                <option>AB+</option>
-                                                <option>AB-</option>
+                                            <select className="custom-select form-control rounded-pill form-input-background" value={bloodGroup} onChange={(e) => setBloodGroup(e.target.value)}>
+                                                <option value='A+'>A+</option>
+                                                <option value='A-'>A-</option>
+                                                <option value='B+'>B+</option>
+                                                <option value='B-'>B-</option>
+                                                <option value='O+'>O+</option>
+                                                <option value='O-'>O-</option>
+                                                <option value='AB+'>AB+</option>
+                                                <option value='AB-'>AB-</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <div class="form-row">
+                                    <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0">
                                             <p className='h4 font-weight-bold' style={{color: '#060735'}}>Account Info</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <div class="form-row">
+                                    <div className="form-row">
                                         <div className="col-1 d-block d-sm-none">
                                         </div>
                                         <div className="col-4 offset-0 col-sm-2 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Phone</label>
-                                            <select class="custom-select form-control rounded-pill  form-input-background" disabled>
-                                                <option selected>+880</option>
+                                            <select className="custom-select form-control rounded-pill form-input-background" value='+880' disabled>
+                                                <option value='+880'>+880</option>
                                             </select>
                                         </div>
                                         <div className="col-6 offset-0 col-sm-4 offset-sm-0 mt-2 mt-lg-0">
-                                            <input type="tel" class="form-control rounded-pill   form-input-background" style={{marginTop: '2rem'}} placeholder="Phone number"/>
+                                            <input type="tel" className="form-control rounded-pill form-input-background" style={{marginTop: '2rem'}} placeholder="Phone number" value={phone} onChange={(e) => setPhone(e.target.value)} required/>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <div class="form-row">
+                                    <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Password</label>
-                                            <div class="input-group rounded-pill form-input-background">
-                                                <input class="form-control rounded-pill form-input-background" type={(showpassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password"/>
-                                                <div class="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
-                                                    <span class="input-group-btn"><i class={"mt-2 mr-3 fas fa-eye"+(showpassword ? '': '-slash')} onClick={function(){
-                                                        console.log('click')
-                                                        setShowPassword(!showpassword)
+                                            <div className="input-group rounded-pill form-input-background">
+                                                <input className="form-control rounded-pill form-input-background" type={(showPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                                                <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
+                                                    <span className="input-group-btn"><i className={"mt-2 mr-3 fas fa-eye"+(showPassword ? '': '-slash')} onClick={function(){
+                                                        setShowPassword(!showPassword)
                                                     }}></i></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Confirm Password</label>
-                                            <div class="input-group rounded-pill form-input-background">
-                                                <input class="form-control rounded-pill form-input-background" type={(showpassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Confirm Password"/>
-                                                <div class="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
-                                                    <span class="input-group-btn"><i class={"mt-2 mr-3 fas fa-eye"+(showpassword ? '': '-slash')} onClick={function(){
-                                                        console.log('click')
-                                                        setShowPassword(!showpassword)
+                                            <div className="input-group rounded-pill form-input-background">
+                                                <input className="form-control rounded-pill form-input-background" type={(showConfirmPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required/>
+                                                <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
+                                                    <span className="input-group-btn"><i className={"mt-2 mr-3 fas fa-eye"+(showConfirmPassword ? '': '-slash')} onClick={function(){
+                                                        setShowConfirmPassword(!showConfirmPassword)
                                                     }}></i></span>
                                                 </div>
                                             </div>
@@ -145,11 +158,11 @@ const RegistrationBox = () => {
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <div class="form-row">
+                                    <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-12 offset-sm-0 mt-2 mt-lg-0">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="defaultCheck1"/>
-                                                <label for="defaultCheck1" class="custom-control-label">I've read and agree to the terms and conditions</label>
+                                            <div className="custom-control custom-checkbox">
+                                                <input type="checkbox" className="custom-control-input" id="defaultCheck1" required/>
+                                                <label htmlFor="defaultCheck1" className="custom-control-label">I've read and agree to the terms and conditions</label>
                                             </div>
                                         </div>
                                     </div>
