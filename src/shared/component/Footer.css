@@ -1,18 +1,26 @@
 .footer-icon{
-    font-size: 2.2vw!important;
     background-color: #020624!important;
     border: none!important;
     padding-left: 0.3vw!important;
     padding-right: 1.2vw!important;
 }
 
-.footer-copyright-text{
-    font-size: 1.3vw!important;
+@media only screen and (min-width: 576px){
+    .footer-copyright-text{
+        font-size: 1.3vw!important;
+    }
+
+    .footer-icon{
+        font-size: 2.2vw!important;
+        background-color: #020624!important;
+        border: none!important;
+        padding-left: 0.3vw!important;
+        padding-right: 1.2vw!important;
+    }
 }
 
 .listgroup-style{
     background-color: #020624!important;
-    font-size: 1.3vw!important;
     padding-left: 0vw!important;
 }
 

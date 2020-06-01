@@ -47,7 +47,7 @@ const Menu = () => {
                     <Nav.Link className="text-light" href="/">Products</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link className="text-light mt-lg-n2" href="/">
+                    <Nav.Link className="text-light mt-lg-n2" href="/login">
                         <img src={LoginButton} className="ml-n2 ml-lg-0" alt="Login Button" style={{width: '110px', height: '45px'}}/>
                     </Nav.Link>
                 </Nav.Item>

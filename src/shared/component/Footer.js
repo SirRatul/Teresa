@@ -5,51 +5,85 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import './Footer.css'
 
 const Footer = () => {
-    return <footer className="page-footer w-100" style={{backgroundColor: '#020624'}}>
-        <div className='container'>
-            <div className="row first-footer-row">
-                <div className="col-6 col-sm-4 mt-3">
-                    <ListGroup>
-                        <ListGroup.Item className='listgroup-style text-light'>My Health Record</ListGroup.Item>
-                        <ListGroup.Item className='listgroup-style text-light'>Buy Medicine</ListGroup.Item>
-                        <ListGroup.Item className='listgroup-style text-light'>Set Reminder</ListGroup.Item>
-                        <ListGroup.Item className='listgroup-style text-light'>Services</ListGroup.Item>
-                        <ListGroup.Item className='listgroup-style text-light'>Products</ListGroup.Item>
-                    </ListGroup>
-                </div>
-                <div className="col-6 col-sm-4 mt-3">
-                    <ListGroup>
-                        <ListGroup.Item className='listgroup-style text-light'>Need Help</ListGroup.Item>
-                        <ListGroup.Item className='listgroup-style text-light'>About Us</ListGroup.Item>
-                        <ListGroup.Item className='listgroup-style text-light'>Contact Us</ListGroup.Item>
-                        <ListGroup.Item className='listgroup-style text-light'>Health Tips</ListGroup.Item>
-                    </ListGroup>
-                </div>
-                <div className="col-6 col-sm-4 mt-3">
-                    <ListGroup>
-                        <ListGroup.Item className='listgroup-style text-light'>Privacy</ListGroup.Item>
-                        <ListGroup.Item className='listgroup-style text-light'>Accessibility</ListGroup.Item>
-                        <ListGroup.Item className='listgroup-style text-light'>Copyright</ListGroup.Item>
-                        <ListGroup.Item className='listgroup-style text-light'>Disclaimer</ListGroup.Item>
-                        <ListGroup.Item className='listgroup-style text-light'>Terms of use</ListGroup.Item>
-                        <ListGroup.Item className='listgroup-style text-light'>Service Availability</ListGroup.Item>
-                    </ListGroup>
-                </div>
+    return <footer className="page-footer" style={{backgroundColor: '#020624'}}>
+        <div className="container text-center text-sm-left">
+            <div className="row">
+            <div class="col-sm-4 mx-auto">
+                <ListGroup>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">My Health Record</a>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Buy Medicine</a>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Set Reminder</a>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Services</a>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Products</a>
+                    </ListGroup.Item>
+                </ListGroup>
+            </div>
+            <hr class="bg-white w-100 d-sm-none"/>
+            <div class="col-sm-4 mx-auto">
+                <ListGroup>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Need Help</a>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">About Us</a>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Contact Us</a>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Health Tips</a>
+                    </ListGroup.Item>
+                </ListGroup>
+            </div>
+            <hr class="bg-white w-100 d-sm-none"/>
+            <div class="col-sm-4 mx-auto">
+                <ListGroup>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Privacy</a>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Accessibility</a>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Copyright</a>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Disclaimer</a>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Terms of use</a>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='listgroup-style'>
+                        <a className='font-weight-normal text-light' href="#!">Service Availability</a>
+                    </ListGroup.Item>
+                </ListGroup>
+            </div>
+            <hr class="bg-white w-100 d-sm-none"/>
             </div>
             <div className="row">
-                <div className="col-6">
-                    <p className="footer-copyright-text text-light pt-2">Copyright &copy; All right reserved</p>
-                </div>
-                <div className="col-6">
-                    <ButtonGroup className='float-right' aria-label="Basic example">
-                        <Button className="footer-icon"><i class="fab fa-youtube"></i></Button>
-                        <Button className="footer-icon"><i class="fab fa-facebook-f"></i></Button>
-                        <Button className="footer-icon"><i class="fab fa-instagram"></i></Button>
-                        <Button className="footer-icon"><i class="fab fa-twitter"></i></Button>
-                    </ButtonGroup>
-                </div>
+            <div className="col-6">
+                <p className="footer-copyright-text text-light pt-2">Copyright &copy; All right reserved</p>
+            </div>
+            <div className="col-6">
+                <ButtonGroup className='float-right' aria-label="Basic example">
+                    <Button className="footer-icon"><i class="fab fa-youtube"></i></Button>
+                    <Button className="footer-icon"><i class="fab fa-facebook-f"></i></Button>
+                    <Button className="footer-icon"><i class="fab fa-instagram"></i></Button>
+                    <Button className="footer-icon"><i class="fab fa-twitter"></i></Button>
+                </ButtonGroup>
             </div>
         </div>
+        </div>
+        
     </footer>;
 };
 
