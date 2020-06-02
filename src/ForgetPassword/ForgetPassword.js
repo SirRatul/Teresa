@@ -30,7 +30,7 @@ const ForgetPassword = () => {
                                 <div className="form-row">
                                     <div className="col-8 offset-2 col-sm-6 offset-sm-3 mt-2">
                                         <label>Enter your phone number</label>
-                                        <input type="tel" className="form-control rounded-pill form-input-background" placeholder="Phone number" value={phone} onChange={(e) => setPhone(e.target.value)} required/>
+                                        <input type="tel" className="form-control rounded-pill form-input-background" placeholder="Phone number" name='phone' value={phone} onChange={(e) => setPhone(e.target.value)} required/>
                                     </div>
                                 </div>
                             </div>

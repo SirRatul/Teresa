@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import Nurse from '../shared/img/Nurse.png';
 import './ResetPassword.css'
 
 const ResetPassword = () => {
+    const history = useHistory()
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
@@ -11,6 +13,7 @@ const ResetPassword = () => {
         event.preventDefault()
         console.log(password)
         console.log(confirmPassword)
+        history.push('/login')
     }
     return  <React.Fragment>
         <div className="container-fluid w-100 h-100 full_div">
@@ -30,7 +33,7 @@ const ResetPassword = () => {
                                     <div className="col-10 offset-1 col-sm-6 offset-sm-3 mt-2">
                                         <label>Enter your new password</label>
                                         <div className="input-group rounded-pill form-input-background">
-                                            <input className="form-control rounded-pill form-input-background" type={(showPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                                            <input className="form-control rounded-pill form-input-background" type={(showPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                                             <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
                                                 <span className="input-group-btn"><i className={"mt-2 mr-3 fas fa-eye"+(showPassword ? '': '-slash')} onClick={function(){
                                                     setShowPassword(!showPassword)
@@ -45,7 +48,7 @@ const ResetPassword = () => {
                                     <div className="col-10 offset-1 col-sm-6 offset-sm-3 mt-2">
                                         <label>Confirm your new password</label>
                                         <div className="input-group rounded-pill form-input-background">
-                                            <input className="form-control rounded-pill form-input-background" type={(showConfirmPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required/>
+                                            <input className="form-control rounded-pill form-input-background" type={(showConfirmPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required/>
                                             <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
                                                 <span className="input-group-btn"><i className={"mt-2 mr-3 fas fa-eye"+(showConfirmPassword ? '': '-slash')} onClick={function(){
                                                     setShowConfirmPassword(!showConfirmPassword)

@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import Logo from '../shared/img/teresa.png'
 import Doctor from '../shared/img/Dr.jpg';
 import './RegistrationBox.css'
 
 const RegistrationBox = () => {
+    const history = useHistory()
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
@@ -28,6 +30,7 @@ const RegistrationBox = () => {
         console.log('+880'+phone)
         console.log(password)
         console.log(confirmPassword)
+        history.push('/sign-up-verification')
     }
 
     return  <React.Fragment>
@@ -61,11 +64,11 @@ const RegistrationBox = () => {
                                     <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0">
                                             <label>First Name</label>
-                                            <input type="text" className="form-control rounded-pill form-input-background" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} required/>
+                                            <input type="text" className="form-control rounded-pill form-input-background" placeholder="First Name" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} required/>
                                         </div>
-                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
+                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0">
                                             <label>Last Name</label>
-                                            <input type="text" className="form-control rounded-pill form-input-background" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} required/>
+                                            <input type="text" className="form-control rounded-pill form-input-background" placeholder="Last Name" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} required/>
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +76,7 @@ const RegistrationBox = () => {
                                     <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Email</label>
-                                            <input type="email" className="form-control rounded-pill form-input-background" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                                            <input type="email" className="form-control rounded-pill form-input-background" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Date Of Birth</label>
@@ -81,7 +84,7 @@ const RegistrationBox = () => {
                                                 setdateOfBirthType(true)
                                             }} onBlur={function(){
                                                 setdateOfBirthType(false)
-                                            }} value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required/>
+                                            }} name='dateOfBirth' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required/>
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +130,7 @@ const RegistrationBox = () => {
                                             </select>
                                         </div>
                                         <div className="col-6 offset-0 col-sm-4 offset-sm-0 mt-2 mt-lg-0">
-                                            <input type="tel" className="form-control rounded-pill form-input-background" style={{marginTop: '2rem'}} placeholder="Phone number" value={phone} onChange={(e) => setPhone(e.target.value)} required/>
+                                            <input type="tel" className="form-control rounded-pill form-input-background" style={{marginTop: '2rem'}} placeholder="Phone number" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} required/>
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +139,7 @@ const RegistrationBox = () => {
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Password</label>
                                             <div className="input-group rounded-pill form-input-background">
-                                                <input className="form-control rounded-pill form-input-background" type={(showPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                                                <input className="form-control rounded-pill form-input-background" type={(showPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                                                 <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
                                                     <span className="input-group-btn"><i className={"mt-2 mr-3 fas fa-eye"+(showPassword ? '': '-slash')} onClick={function(){
                                                         setShowPassword(!showPassword)
@@ -147,7 +150,7 @@ const RegistrationBox = () => {
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Confirm Password</label>
                                             <div className="input-group rounded-pill form-input-background">
-                                                <input className="form-control rounded-pill form-input-background" type={(showConfirmPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required/>
+                                                <input className="form-control rounded-pill form-input-background" type={(showConfirmPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Confirm Password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required/>
                                                 <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
                                                     <span className="input-group-btn"><i className={"mt-2 mr-3 fas fa-eye"+(showConfirmPassword ? '': '-slash')} onClick={function(){
                                                         setShowConfirmPassword(!showConfirmPassword)

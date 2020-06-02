@@ -37,14 +37,14 @@ const LoginBox = () => {
                                 <div className="form-group">
                                     <div className="col-10 offset-1 col-sm-6 offset-sm-3 mt-5 mt-lg-0">
                                         <label>Enter your phone number</label>
-                                        <input type="tel" className="form-control rounded-pill   form-input-background" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone number" required/>
+                                        <input type="tel" className="form-control rounded-pill   form-input-background" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone number" required/>
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <div className="col-10 offset-1 col-sm-6 offset-sm-3">
                                         <label>Enter your password</label>
                                         <div className="input-group rounded-pill form-input-background">
-                                            <input className="form-control rounded-pill form-input-background" type={(showpassword ? 'text': 'password')} value={password} onChange={(e) => setPassword(e.target.value)} style={{border: '0', boxShadow: 'none'}} placeholder="Password" required/>
+                                            <input className="form-control rounded-pill form-input-background" type={(showpassword ? 'text': 'password')} name="password" value={password} onChange={(e) => setPassword(e.target.value)} style={{border: '0', boxShadow: 'none'}} placeholder="Password" required/>
                                             <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
                                                 <span className="input-group-btn"><i className={"mt-2 mr-3 fas fa-eye"+(showpassword ? '': '-slash')} onClick={function(){
                                                     setShowPassword(!showpassword)

@@ -5,6 +5,7 @@ import Login from './Login/Login'
 import Registration from './Registration/Registration'
 import ForgetPassword from './ForgetPassword/ForgetPassword'
 import ForgetPasswordVerifiyCode from './ForgetPasswordVerifiyCode/ForgetPasswordVerifiyCode'
+import SignUpVerifiyCode from './SignUpVerifiyCode/SignUpVerifiyCode'
 import ResetPassword from './ResetPassword/ResetPassword'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -18,6 +19,7 @@ function App() {
         <Route path="/forgetPassword" component={ForgetPassword} exact/>
         <Route path="/resetPassword" component={ResetPassword} exact/>
         <Route path="/forgot-password-verification" component={ForgetPasswordVerifiyCode} exact/>
+        <Route path="/sign-up-verification" component={SignUpVerifiyCode} exact/>
         <Redirect to="/"></Redirect>
     </Switch>
   </React.Fragment>;

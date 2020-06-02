@@ -65,8 +65,8 @@ const Menu = () => {
                     <i className="fas fa-search mt-4 mt-lg-3 ml-4 ml-lg-0" style={{width: '30px', height: '30px', color: 'white'}} onClick={function(){searchButtonClick()}}></i>
                 </Nav.Item>
                 <form className={"search-form-nav "+(visible?'visible':'invisible')} role="search">
-                    <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search"/>
+                    <div className="form-group">
+                    <input type="text" className="form-control" placeholder="Search"/>
                     </div>
                 </form>
             </ul>
