@@ -48,21 +48,21 @@ const Menu = () => {
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link className="text-light mt-lg-n2" href="/login">
-                        <img src={LoginButton} className="ml-n2 ml-lg-0" alt="Login Button" style={{width: '110px', height: '45px'}}/>
+                        <img src={LoginButton} className="ml-n2 ml-lg-0 login-button" alt="Login Button"/>
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link className="text-light" href="/">
-                        <img className='mt-lg-n2 ml-3 ml-lg-0' src={NotificationIcon} style={{width: '45px', height: '45px'}} alt="Notification Icon"/>
+                        <img className='mt-lg-n2 ml-3 ml-lg-0 notification-button' src={NotificationIcon} alt="Notification Icon"/>
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link className="text-light" href="/">
-                        <img className='ml-3 ml-lg-0' src={Avatar} alt="Avatar" style={{width: '30px', height: '30px'}}/>
+                        <img className='ml-3 ml-lg-0 mt-0 mt-lg-n2 avatar-icon' src={Avatar} alt="Avatar"/>
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <i className="fas fa-search mt-4 mt-lg-3 ml-4 ml-lg-0" style={{width: '30px', height: '30px', color: 'white'}} onClick={function(){searchButtonClick()}}></i>
+                    <i className="fas fa-search mt-4 mt-lg-1 mt-xl-2 ml-4 ml-xl-0" onClick={function(){searchButtonClick()}}></i>
                 </Nav.Item>
                 <form className={"search-form-nav "+(visible?'visible':'invisible')} role="search">
                     <div className="form-group">

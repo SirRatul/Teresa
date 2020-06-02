@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
+import {Helmet} from "react-helmet";
 import Logo from '../shared/img/teresa.png'
 import Doctor from '../shared/img/Dr.jpg';
 import './SignUpVerifiyCode.css'
@@ -14,6 +15,10 @@ const SignUpVerifiyCode = () => {
     }
     return  <React.Fragment>
         <div className="container-fluid w-100 h-100 full_div">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Sign Up Verification Code</title>
+            </Helmet>
             <br/>
             <br/>
             <div className="container shadow">
