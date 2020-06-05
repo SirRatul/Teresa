@@ -1,0 +1,24 @@
+.header-background{
+    background-image: url('../shared/img/Banner.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.breadcrumb{
+    background-color: #020624!important;
+}
+
+.breadcrumb-item > a{
+    color: #f8f9fa!important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">"!important;
+}
+
+@media only screen and (max-width: 575px){
+    .upload-prescription-header-text{
+        font-size: 9vw!important;
+    }
+}

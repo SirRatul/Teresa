@@ -51,13 +51,7 @@ input[type="checkbox"]:checked + label::after {
     border-radius: 1em!important;
 }
 
-select option:checked,
-select option:hover {
-  background: #0C0C52 !important;
-  box-shadow: 0 0 10px 100px #000 inset;
-}
-
-select:focus>option:checked {
-  background: #0C0C52 !important;
-  color: white;
+.custom-select option:hover {
+    background: #E6E6E6; 
+    border-radius: 1em!important;
 }

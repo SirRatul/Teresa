@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Select from 'react-select';
 import {useHistory} from 'react-router-dom';
 import Logo from '../shared/img/teresa.png'
 import Doctor from '../shared/img/Dr.jpg';
@@ -10,14 +11,74 @@ const RegistrationBox = () => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [birthDate, setBirthDate] = useState('')
-    const [gender, setGender] = useState('Male')
-    const [bloodGroup, setBloodGroup] = useState('A+')
+    const [gender, setGender] = useState({
+        gender:{
+            value: 'Male', label: 'Male'
+        }
+    })
+    const [bloodGroup, setBloodGroup] = useState({
+        bloodGroup:{
+            value: 'A+', label: 'A+'
+        }
+    })
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [dateOfBirthType, setdateOfBirthType] = useState(false)
+    const genderOptions = [
+        { value: 'Male', label: 'Male' },
+        { value: 'Female', label: 'Female' }
+    ];
+    const bloodOptions = [
+        { value: 'A+', label: 'A+' },
+        { value: 'A-', label: 'A-' },
+        { value: 'B+', label: 'B+' },
+        { value: 'B-', label: 'B-' },
+        { value: 'O+', label: 'O+' },
+        { value: 'O-', label: 'O-' },
+        { value: 'AB+', label: 'AB+' },
+        { value: 'AB-', label: 'AB-' }
+    ];
+
+    const selectGender = (value) => {
+        setGender({
+            ...gender,
+            gender: value
+          }
+        );
+    }
+
+    const selectBloodGroup = (value) => {
+        setBloodGroup({
+            ...bloodGroup,
+            bloodGroup: value
+          }
+        );
+    }
+
+    const customStyles = {
+        option: (provided, state) => ({
+          ...provided,
+
+          '&:hover': {
+            backgroundColor: '#0C0C52',
+            color: 'white'
+        }
+        }),
+        control: base => ({
+            ...base,
+            backgroundColor: '#E6E6E6',
+            borderRadius: '50rem'
+        }),
+        singleValue: (provided, state) => {
+          const opacity = state.isDisabled ? 0.5 : 1;
+          const transition = 'opacity 300ms';
+      
+          return { ...provided, opacity, transition };
+        }
+    }
 
     const submitHandler = async (event) => {
         event.preventDefault()
@@ -25,8 +86,8 @@ const RegistrationBox = () => {
         console.log(lastName)
         console.log(email)
         console.log(birthDate)
-        console.log(gender)
-        console.log(bloodGroup)
+        console.log(gender.gender.value)
+        console.log(bloodGroup.bloodGroup.value)
         console.log('+880'+phone)
         console.log(password)
         console.log(confirmPassword)
@@ -92,23 +153,23 @@ const RegistrationBox = () => {
                                     <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Gender</label>
-                                            <select className="form-control rounded-pill  form-input-background" value={gender} onChange={(e) => setGender(e.target.value)}>
-                                                <option value='Male'>Male</option>
-                                                <option value='Female'>Female</option>
-                                            </select>
+                                            <Select
+                                                styles={customStyles}
+                                                name={"gender"}
+                                                value={gender.gender}
+                                                onChange={newValue => selectGender(newValue)}
+                                                options={genderOptions}
+                                            />
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Blood Group</label>
-                                            <select className="custom-select form-control rounded-pill form-input-background" value={bloodGroup} onChange={(e) => setBloodGroup(e.target.value)}>
-                                                <option value='A+'>A+</option>
-                                                <option value='A-'>A-</option>
-                                                <option value='B+'>B+</option>
-                                                <option value='B-'>B-</option>
-                                                <option value='O+'>O+</option>
-                                                <option value='O-'>O-</option>
-                                                <option value='AB+'>AB+</option>
-                                                <option value='AB-'>AB-</option>
-                                            </select>
+                                            <Select
+                                                styles={customStyles}
+                                                name={"bloodGroup"}
+                                                value={bloodGroup.bloodGroup}
+                                                onChange={newValue => selectBloodGroup(newValue)}
+                                                options={bloodOptions}
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +184,7 @@ const RegistrationBox = () => {
                                     <div className="form-row">
                                         <div className="col-1 d-block d-sm-none">
                                         </div>
-                                        <div className="col-4 offset-0 col-sm-2 offset-sm-0 mt-2 mt-lg-0">
+                                        <div className="col-4 offset-0 col-sm-3 offset-sm-0 mt-2 mt-lg-0">
                                             <label>Phone</label>
                                             <select className="custom-select form-control rounded-pill form-input-background" value='+880' disabled>
                                                 <option value='+880'>+880</option>

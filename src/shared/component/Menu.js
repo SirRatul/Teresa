@@ -33,7 +33,7 @@ const Menu = () => {
                             <i className="fa fa-angle-down ml-1"></i>
                         </span>
                     } id="basic-nav-dropdown">
-                        <NavDropdown.Item className="justify-content-lg-center text-white" href="/">
+                        <NavDropdown.Item className="justify-content-lg-center text-white" href="/upload-prescription">
                             Upload Prescription
                         </NavDropdown.Item>
                         <NavDropdown.Item className="justify-content-lg-center text-white">
