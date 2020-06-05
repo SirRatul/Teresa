@@ -1,0 +1,112 @@
+.form-input-background{
+    background-color: #E6E6E6!important;
+}
+
+.custom-control-input:checked~.custom-control-label.unit::before {
+    background-color: #020624;
+}
+
+.custom-control-input:checked~.custom-control-label.day::before {
+    background-color: #020624;
+}
+
+.plus-icon-button{
+    width: 2vw;
+    height: 2vw;
+}
+
+.minus-icon-button{
+    font-size: 2vw;
+    color: #8A7D7D;
+}
+
+.form-header-medicine{
+    font-size: 0.8vw;
+}
+
+.w-0{
+    width: 0%!important;
+    height: 0!important;
+}
+
+.prescription-image{
+    width: 27vw;
+    height: 33vw;
+}
+
+@media only screen and (max-width: 575px){
+    .plus-icon-button{
+        width: 4.7vw;
+        height: 4.7vw;
+    }
+
+    .minus-icon-button{
+        font-size: 4.4vw;
+        color: #8A7D7D;
+    }
+
+    .form-header-medicine{
+        font-size: 1.8vw;
+    }
+
+    .prescription-image{
+        width: 63vw;
+        height: 80vw;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px){
+    .plus-icon-button{
+        width: 3.3vw;
+        height: 3.3vw;
+    }
+
+    .minus-icon-button{
+        font-size: 3vw;
+        color: #8A7D7D;
+    }
+
+    .form-header-medicine{
+        font-size: 1.8vw;
+    }
+
+    .prescription-image{
+        width: 53vw;
+        height: 60vw;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    .plus-icon-button{
+        width: 3vw;
+        height: 3vw;
+    }
+
+    .minus-icon-button{
+        font-size: 2.7vw;
+        color: #8A7D7D;
+    }
+
+    .form-header-medicine{
+        font-size: 1.6vw;
+    }
+
+    .prescription-image{
+        width: 46vw;
+        height: 50vw;
+    }
+}
+
+@media only screen and (min-width: 1500px){
+    .prescription-image{
+        width: 18vw;
+        height: 21vw;
+    }
+}
+
+@media only screen and (min-width: 1501px) and (max-width: 1550px){
+    .prescription-image{
+        width: 25vw;
+        height: 30vw;
+    }
+}

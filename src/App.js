@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
+import {Switch, Route, Redirect} from 'react-router-dom'
+import HomePage from './HomePage/homepage'
+import Login from './Login/Login'
+import Registration from './Registration/Registration'
+import ForgetPassword from './ForgetPassword/ForgetPassword'
+import ForgetPasswordVerifiyCode from './ForgetPasswordVerifiyCode/ForgetPasswordVerifiyCode'
+import SignUpVerifiyCode from './SignUpVerifiyCode/SignUpVerifiyCode'
+import UploadPrescription from './UploadPrescription/UploadPrescription'
+import ResetPassword from './ResetPassword/ResetPassword'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <React.Fragment>
+    <Switch>
+        <Route path="/" component={HomePage} exact/>
+        <Route path="/login" component={Login} exact/>
+        <Route path="/register" component={Registration} exact/>
+        <Route path="/forgetPassword" component={ForgetPassword} exact/>
+        <Route path="/resetPassword" component={ResetPassword} exact/>
+        <Route path="/forgot-password-verification" component={ForgetPasswordVerifiyCode} exact/>
+        <Route path="/sign-up-verification" component={SignUpVerifiyCode} exact/>
+        <Route path="/upload-prescription" component={UploadPrescription} exact/>
+        <Redirect to="/"></Redirect>
+    </Switch>
+  </React.Fragment>;
 }
 
 export default App;
