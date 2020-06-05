@@ -53,6 +53,10 @@
         width: 63vw;
         height: 80vw;
     }
+
+    .form-header-medicine{
+        font-size: 2.9vw;
+    }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px){
@@ -74,6 +78,10 @@
         width: 53vw;
         height: 60vw;
     }
+
+    .form-header-medicine{
+        font-size: 2.0vw;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px){
@@ -94,6 +102,10 @@
     .prescription-image{
         width: 46vw;
         height: 50vw;
+    }
+
+    .form-header-medicine{
+        font-size: 1.5vw;
     }
 }
 

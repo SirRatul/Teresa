@@ -139,13 +139,17 @@ const RegistrationBox = () => {
                                             <label>Email</label>
                                             <input type="email" className="form-control rounded-pill form-input-background" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                                         </div>
-                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
+                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0 d-none d-lg-block">
                                             <label>Date Of Birth</label>
                                             <input placeholder="Date Of Birth" className="form-control rounded-pill form-input-background textbox-n" type={dateOfBirthType ? 'date' : 'text'} onFocus={function(){
                                                 setdateOfBirthType(true)
                                             }} onBlur={function(){
                                                 setdateOfBirthType(false)
                                             }} name='dateOfBirth' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required/>
+                                        </div>
+                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0 d-block d-lg-none">
+                                            <label>Date Of Birth</label>
+                                            <input placeholder="Date Of Birth" className="form-control rounded-pill form-input-background textbox-n" type='date' name='dateOfBirth' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required/>
                                         </div>
                                     </div>
                                 </div>
@@ -184,7 +188,7 @@ const RegistrationBox = () => {
                                     <div className="form-row">
                                         <div className="col-1 d-block d-sm-none">
                                         </div>
-                                        <div className="col-4 offset-0 col-sm-3 offset-sm-0 mt-2 mt-lg-0">
+                                        <div className="col-4 offset-0 col-sm-3 offset-sm-0 col-lg-2 offset-lg-0 mt-2 mt-lg-0">
                                             <label>Phone</label>
                                             <select className="custom-select form-control rounded-pill form-input-background" value='+880' disabled>
                                                 <option value='+880'>+880</option>
