@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ProcessPhoto from "../../shared/img/Process.jpg";
 import "./Process.css";
-import { components } from "react-select";
 
 class Process extends Component {
   render() {

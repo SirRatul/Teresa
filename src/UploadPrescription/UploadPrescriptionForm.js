@@ -45,24 +45,46 @@ const UploadPrescriptionForm = () => {
         <div className="container-fluid">
             <div className="container">
                 <div className="row">
-                    <div className="col-12">
+                    <div className="col-12 col-lg-4">
+                        <img className="d-block mx-auto prescription-image" src={prescriptionImage} alt="Prescription"/>
+                        <form className={"form-group mt-5 d-none d-lg-block "+(queryFormVisibility ? 'visible': 'invisible w-0')} onSubmit={querySubmitHandler}>
+                            <p className='h3 text-center font-weight-bold'>Send us your query</p>
+                            <div className="form-group">
+                                <div className="col-10 offset-1 col-sm-10 offset-sm-1">
+                                    <label>Name</label>
+                                    <input type="text" className="form-control rounded-pill   form-input-background" name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required/>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-10 offset-1 col-sm-10 offset-sm-1">
+                                    <label>Email</label>
+                                    <input type="email" className="form-control rounded-pill   form-input-background" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-10 offset-1 col-sm-10 offset-sm-1">
+                                    <label>Phone</label>
+                                    <input type="tel" className="form-control rounded-pill   form-input-background" name="phone" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} required/>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-10 offset-1 col-sm-10 offset-sm-1">
+                                    <label>Your Query</label>
+                                    <textarea className="form-control form-input-background" rows="3" style={{borderRadius: '1em'}} value={query} onChange={(e) => setQuery(e.target.value)} required></textarea>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <div className="col-8 offset-2">
+                                    <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}}>Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div className="col-12 col-lg-8">
                         <form onSubmit={submitHandler}>
                             <div className="form-group">
                                 <div className="form-row">
-                                    <div className="col-12 col-lg-4">
-                                        <img className="d-block mx-auto prescription-image" src={prescriptionImage} alt="Prescription"/>
-                                        <div className="form-group d-none d-lg-block">
-                                            <div className="form-row">
-                                                <div className="col-10 offset-1 col-sm-12 offset-sm-0 mt-2 mt-lg-0">
-                                                    <div className="custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input" id="defaultCheck1" required/>
-                                                        <label htmlFor="defaultCheck1" className="custom-control-label">I've read and agree to the terms and conditions</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-lg-8">
+                                    <div className="col-12 col-lg-12">
                                         <div className="form-row">
                                             <div className="col-12 col-lg-4 text-center my-lg-auto mt-5 mt-lg-0">
                                                 <label className='text-center mx-auto' htmlFor="files">
@@ -143,7 +165,7 @@ const UploadPrescriptionForm = () => {
                                                     <label>Delivery Details</label>
                                                     <textarea className="form-control form-input-background" rows="3" style={{borderRadius: '1em'}}></textarea>
                                                 </div>
-                                                <div className="form-group d-block d-lg-none">
+                                                <div className="form-group">
                                                     <div className="form-row">
                                                         <div className="col-10 offset-1 col-sm-12 offset-sm-0 mt-2 mt-lg-0">
                                                             <div className="custom-control custom-checkbox">
@@ -153,6 +175,11 @@ const UploadPrescriptionForm = () => {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <p className='h3 font-weight-bold mt-5 d-none d-lg-block' style={{color: '#090A36'}}>Procedure</p>
+                                                <p className='d-none d-lg-block' style={{color: '#090A36'}}>1. Upload your prescription using upload button.</p>
+                                                <p className='d-none d-lg-block' style={{color: '#090A36'}}>2. Input the medicine names and units that you want to buy.</p>
+                                                <p className='d-none d-lg-block' style={{color: '#090A36'}}>3. Add additional note if you want. Suppose you want to buy 1st, 2nd and 4th medicine from your uploaded prescription. You can add these serial number in the "Additional Note" field.</p>
+                                                <p className='d-none d-lg-block' style={{color: '#090A36'}}>4. Click the submit button to place order.</p>
                                                 <div className="form-group d-block d-lg-none">
                                                     <div className="form-row mb-4">
                                                         <div className="col-8 offset-2">
@@ -203,52 +230,6 @@ const UploadPrescriptionForm = () => {
                                 </div>
                             </div>
                         </form>
-                        
-                    </div>
-                </div>
-                <div className="row mt-n5">
-                    <div className="col-4 mt-5">
-                        <form className={"form-group d-none d-lg-block "+(queryFormVisibility ? 'visible': 'invisible w-0')} onSubmit={querySubmitHandler}>
-                            <p className='h3 text-center font-weight-bold'>Send us your query</p>
-                            <div className="form-group">
-                                <div className="col-10 offset-1 col-sm-10 offset-sm-1">
-                                    <label>Name</label>
-                                    <input type="text" className="form-control rounded-pill   form-input-background" name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required/>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <div className="col-10 offset-1 col-sm-10 offset-sm-1">
-                                    <label>Email</label>
-                                    <input type="email" className="form-control rounded-pill   form-input-background" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <div className="col-10 offset-1 col-sm-10 offset-sm-1">
-                                    <label>Phone</label>
-                                    <input type="tel" className="form-control rounded-pill   form-input-background" name="phone" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} required/>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <div className="col-10 offset-1 col-sm-10 offset-sm-1">
-                                    <label>Your Query</label>
-                                    <textarea className="form-control form-input-background" rows="3" style={{borderRadius: '1em'}} value={query} onChange={(e) => setQuery(e.target.value)} required></textarea>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <div className="col-8 offset-2">
-                                    <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}}>Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div className="col-3">
-                    </div>
-                    <div className="col-4 ml-n5">
-                        <p className='h3 font-weight-bold mt-5 d-none d-lg-block' style={{color: '#090A36'}}>Procedure</p>
-                        <p className='d-none d-lg-block' style={{color: '#090A36'}}>1. Upload your prescription using upload button.</p>
-                        <p className='d-none d-lg-block' style={{color: '#090A36'}}>2. Input the medicine names and units that you want to buy.</p>
-                        <p className='d-none d-lg-block' style={{color: '#090A36'}}>3. Add additional note if you want. Suppose you want to buy 1st, 2nd and 4th medicine from your uploaded prescription. You can add these serial number in the "Additional Note" field.</p>
-                        <p className='d-none d-lg-block' style={{color: '#090A36'}}>4. Click the submit button to place order.</p>
                     </div>
                 </div>
                 <p className='h3 font-weight-bold mt-5 d-block d-lg-none' style={{color: '#090A36'}}>Procedure</p>
