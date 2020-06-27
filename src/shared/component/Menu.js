@@ -41,7 +41,7 @@ const Menu = () => {
                         </NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Item>
-                    <Nav.Link className="text-light" href="/">Set Reminder</Nav.Link>
+                    <Nav.Link className="text-light" href="/set-reminder">Set Reminder</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link className="text-light" href="/">Products</Nav.Link>
