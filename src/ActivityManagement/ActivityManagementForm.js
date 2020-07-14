@@ -966,24 +966,29 @@ const ActivityManagementForm = () => {
                             > */}
                             <ButtonGroup
                               className={
-                                "col-6 col-sm-4 col-md-3 col-lg-form-size " +
-                                  i ===
-                                0
-                                  ? "mt-4"
-                                  : "mt-0"
+                                " " +
+                                  (i === 0 ? "mt-4" : "mt-0")
                               }
                               aria-label="Basic example"
                             >
                               {medicineInputList.length - 1 === i && (
                                 <i
-                                  className="fas fa-plus-circle plus-icon-button-font-awesome mt-5"
+                                  className={"fas fa-plus-circle plus-icon-button-font-awesome "+( +
+                                    i ===
+                                  0
+                                    ? "mt-3"
+                                    : "mt-2")}
                                   aria-hidden="true"
                                   onClick={handleAddClickInMedicineList}
                                 ></i>
                               )}
                               {medicineInputList.length !== 1 && (
                                 <i
-                                  className="fas fa-minus-circle minus-icon-button"
+                                  className={"fas fa-minus-circle minus-icon-button "+( +
+                                    i ===
+                                  0
+                                    ? "mt-3"
+                                    : "mt-2")}
                                   aria-hidden="true"
                                   onClick={() =>
                                     handleRemoveClickInMedicineList(i)
@@ -1180,26 +1185,31 @@ const ActivityManagementForm = () => {
                                 (i === 0 ? "mt-2" : "mt-0")
                               }
                             ></div>
-                            <div
+                            {/* <div
                               className={
                                 "col-6 col-sm-4 col-md-3 col-lg-form-size " +
                                 (i === 0 ? "mt-2" : "mt-0")
                               }
-                            >
+                            > */}
                               <ButtonGroup
-                                className={i === 0 ? "mt-4" : "mt-0"}
-                                aria-label="Basic example"
-                              >
+                              className={
+                                " " +
+                                  (i === 0 ? "mt-4" : "mt-0")
+                              }
+                              aria-label="Basic example"
+                            >
                                 {dietInputList.length - 1 === i && (
                                   <i
-                                    className="fas fa-plus-circle minus-icon-button"
+                                    className={"fas fa-plus-circle minus-icon-button "+
+                                    (i === 0 ? "mt-3" : "mt-2")}
                                     aria-hidden="true"
                                     onClick={handleAddClickInDietList}
                                   ></i>
                                 )}
                                 {dietInputList.length !== 1 && (
                                   <i
-                                    className="fas fa-minus-circle minus-icon-button"
+                                    className={"fas fa-minus-circle minus-icon-button "+
+                                    (i === 0 ? "mt-3" : "mt-2")}
                                     aria-hidden="true"
                                     onClick={() =>
                                       handleRemoveClickInDietList(i)
@@ -1207,7 +1217,7 @@ const ActivityManagementForm = () => {
                                   ></i>
                                 )}
                               </ButtonGroup>
-                            </div>
+                            {/* </div> */}
                           </Form.Row>
                         </Form.Group>
                       );
@@ -1396,26 +1406,31 @@ const ActivityManagementForm = () => {
                                 (i === 0 ? "mt-2" : "mt-0")
                               }
                             ></div>
-                            <div
+                            {/* <div
                               className={
                                 "col-6 col-sm-4 col-md-3 col-lg-form-size " +
                                 (i === 0 ? "mt-2" : "mt-0")
                               }
-                            >
+                            > */}
                               <ButtonGroup
-                                className={i === 0 ? "mt-4" : "mt-0"}
-                                aria-label="Basic example"
-                              >
+                              className={
+                                " " +
+                                  (i === 0 ? "mt-4" : "mt-0")
+                              }
+                              aria-label="Basic example"
+                            >
                                 {exerciseInputList.length - 1 === i && (
                                   <i
-                                    className="fas fa-plus-circle minus-icon-button"
+                                    className={"fas fa-plus-circle minus-icon-button "+
+                                    (i === 0 ? "mt-3" : "mt-2")}
                                     aria-hidden="true"
                                     onClick={handleAddClickInExerciseList}
                                   ></i>
                                 )}
                                 {exerciseInputList.length !== 1 && (
                                   <i
-                                    className="fas fa-minus-circle minus-icon-button"
+                                    className={"fas fa-minus-circle minus-icon-button "+
+                                    (i === 0 ? "mt-3" : "mt-2")}
                                     aria-hidden="true"
                                     onClick={() =>
                                       handleRemoveClickInExerciseList(i)
@@ -1423,7 +1438,7 @@ const ActivityManagementForm = () => {
                                   ></i>
                                 )}
                               </ButtonGroup>
-                            </div>
+                            {/* </div> */}
                           </Form.Row>
                         </Form.Group>
                       );
@@ -1566,19 +1581,17 @@ const ActivityManagementForm = () => {
                                 (i === 0 ? "mt-2" : "mt-0")
                               }
                             ></div>
-                            <div
+                            {/* <div
                               className={
                                 "col-6 col-sm-4 col-md-3 col-lg-form-size " +
                                 (i === 0 ? "mt-2" : "mt-0")
                               }
-                            >
-                              <ButtonGroup
-                                className={i === 0 ? "mt-4" : "mt-0"}
-                                aria-label="Basic example"
-                              >
+                            > */}
+                              <ButtonGroup className={" " +(i === 0 ? "mt-4" : "mt-0")} aria-label="Basic example">
                                 {doctorsScheduleInputList.length - 1 === i && (
                                   <i
-                                    className="fas fa-plus-circle minus-icon-button"
+                                    className={"fas fa-plus-circle minus-icon-button "+
+                                    (i === 0 ? "mt-3" : "mt-2")}
                                     aria-hidden="true"
                                     onClick={
                                       handleAddClickInDoctorsScheduleList
@@ -1587,7 +1600,8 @@ const ActivityManagementForm = () => {
                                 )}
                                 {doctorsScheduleInputList.length !== 1 && (
                                   <i
-                                    className="fas fa-minus-circle minus-icon-button"
+                                    className={"fas fa-minus-circle minus-icon-button "+
+                                    (i === 0 ? "mt-3" : "mt-2")}
                                     aria-hidden="true"
                                     onClick={() =>
                                       handleRemoveClickInDoctorsScheduleList(i)
@@ -1595,7 +1609,7 @@ const ActivityManagementForm = () => {
                                   ></i>
                                 )}
                               </ButtonGroup>
-                            </div>
+                            {/* </div> */}
                           </Form.Row>
                         </Form.Group>
                       );

@@ -1,18 +1,50 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import {Helmet} from "react-helmet";
+import axios from 'axios'
+import Modal from "../shared/component/Modal";
 import Logo from '../shared/img/teresa.png'
 import Doctor from '../shared/img/Dr.jpg';
+import {AuthContext} from '../shared/context/auth-context'
 import './SignUpVerifiyCode.css'
 
 const SignUpVerifiyCode = () => {
+    const auth = useContext(AuthContext)
     const [verificationCode, setVerificationCode] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
     const history = useHistory()
     const submitHandler = async (event) => {
         event.preventDefault()
         console.log(verificationCode)
-        history.push('/login')
+        try {
+            const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users/verify-otp', {
+                _id: auth.userId,
+                otp: verificationCode
+            })
+            console.log(response.data);
+            auth.userId = null
+            auth.authMessage = 'You have successfully verified your account. You can now login.'
+            history.push('/login')
+        } catch (error) {
+            console.log(error.response.data);
+            setErrorMessage(error.response.data.error)
+        }
     }
+    const resendOTPHandler = async () => {
+        try {
+            const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users/new-otp', {
+                _id: auth.userId
+            })
+            console.log(response.data);
+            setErrorMessage(response.data.success)
+        } catch (error) {
+            console.log(error.response.data);
+            setErrorMessage(error.response.data.error)
+        }
+    }
+    const modalHandler = () => {
+        setErrorMessage(null);
+    };
     return  <React.Fragment>
         <div className="container-fluid w-100 h-100 full_div">
             <Helmet>
@@ -21,6 +53,7 @@ const SignUpVerifiyCode = () => {
             </Helmet>
             <br/>
             <br/>
+            {errorMessage &&<Modal message={errorMessage} onClear={modalHandler.bind(this)}/>}
             <div className="container shadow">
                 <div className="row bg-white">
                     <div className="col-12 col-lg-6">
@@ -58,7 +91,7 @@ const SignUpVerifiyCode = () => {
                             <p className="font-weight-bold text-center mt-5 mb-2" style={{color: '#0F0F55'}}>Didn't get the code yet?</p>
                         </form>
                         <div className="col-6 offset-3 col-sm-4 offset-sm-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4 mt-4" style={{paddingRight: '5px', paddingLeft: '5px'}}>
-                            <button className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}}>Resend Code</button>
+                            <button className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}} onClick={function(){resendOTPHandler()}}>Resend Code</button>
                         </div>
                     </div>
                 </div>

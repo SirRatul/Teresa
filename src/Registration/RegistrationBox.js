@@ -1,12 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import axios from 'axios'
 import Select from 'react-select';
 import {useHistory} from 'react-router-dom';
+import Modal from "../shared/component/Modal";
 import Logo from '../shared/img/teresa.png'
 import Doctor from '../shared/img/Dr.jpg';
+import {AuthContext} from '../shared/context/auth-context'
 import './RegistrationBox.css'
 
 const RegistrationBox = () => {
     const history = useHistory()
+    const auth = useContext(AuthContext)
+    const [errorMessage, setErrorMessage] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
@@ -18,7 +23,7 @@ const RegistrationBox = () => {
     })
     const [bloodGroup, setBloodGroup] = useState({
         bloodGroup:{
-            value: 'A+', label: 'A+'
+            value: '', label: 'Select your Blood Group'
         }
     })
     const [phone, setPhone] = useState('')
@@ -32,6 +37,7 @@ const RegistrationBox = () => {
         { value: 'Female', label: 'Female' }
     ];
     const bloodOptions = [
+        { value: '', label: 'Select your Blood Group' },
         { value: 'A+', label: 'A+' },
         { value: 'A-', label: 'A-' },
         { value: 'B+', label: 'B+' },
@@ -83,19 +89,52 @@ const RegistrationBox = () => {
     const submitHandler = async (event) => {
         event.preventDefault()
         console.log(firstName)
-        console.log(lastName)
-        console.log(email)
+        if(lastName){
+            console.log(lastName)
+        }
+        if(email){
+            console.log(email)
+        }
         console.log(birthDate)
         console.log(gender.gender.value)
-        console.log(bloodGroup.bloodGroup.value)
-        console.log('+880'+phone)
+        if(bloodGroup.bloodGroup.value){
+            console.log(bloodGroup.bloodGroup.value)
+        }
+        console.log('0'+phone)
         console.log(password)
         console.log(confirmPassword)
-        history.push('/sign-up-verification')
+        if(phone.length !== 10){
+            setErrorMessage('Your phone number must be 10 digit.')
+        } else if(password !== confirmPassword){
+            setErrorMessage('Passwords do not match')
+        } else {
+            try {
+                const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users', {
+                    firstName, 
+                    lastName: lastName ? lastName : undefined,
+                    gender: gender.gender.value, 
+                    phone: '0'+phone,
+                    dob: birthDate,
+                    bloodGroup: bloodGroup.bloodGroup.value ? bloodGroup.bloodGroup.value : undefined,
+                    email:email ? email : undefined, 
+                    password
+                });
+                console.log(response.data);
+                auth.userId = response.data._id
+                history.push('/sign-up-verification')
+            } catch (error) {
+                console.log(error.response.data);
+            }
+        }
     }
+
+    const modalHandler = () => {
+        setErrorMessage(null);
+    };
 
     return  <React.Fragment>
         <div className="container-fluid w-100 h-100 full_div">
+            {errorMessage &&<Modal message={errorMessage} onClear={modalHandler.bind(this)}/>}
             <br/>
             <br/>
             <div className="container shadow">
@@ -121,26 +160,26 @@ const RegistrationBox = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group required">
                                     <div className="form-row">
-                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0">
-                                            <label>First Name</label>
+                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0 mb-3 mb-lg-0">
+                                            <label className="control-label">First Name</label>
                                             <input type="text" className="form-control rounded-pill form-input-background" placeholder="First Name" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} required/>
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0">
                                             <label>Last Name</label>
-                                            <input type="text" className="form-control rounded-pill form-input-background" placeholder="Last Name" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} required/>
+                                            <input type="text" className="form-control rounded-pill form-input-background" placeholder="Last Name" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group required">
                                     <div className="form-row">
-                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
+                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0 mb-3 mb-lg-0">
                                             <label>Email</label>
-                                            <input type="email" className="form-control rounded-pill form-input-background" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                                            <input type="email" className="form-control rounded-pill form-input-background" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0 d-none d-lg-block">
-                                            <label>Date Of Birth</label>
+                                            <label className="control-label">Date Of Birth</label>
                                             <input placeholder="Date Of Birth" className="form-control rounded-pill form-input-background textbox-n" type={dateOfBirthType ? 'date' : 'text'} onFocus={function(){
                                                 setdateOfBirthType(true)
                                             }} onBlur={function(){
@@ -148,15 +187,15 @@ const RegistrationBox = () => {
                                             }} name='dateOfBirth' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required/>
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0 d-block d-lg-none">
-                                            <label>Date Of Birth</label>
+                                            <label className="control-label">Date Of Birth</label>
                                             <input placeholder="Date Of Birth" className="form-control rounded-pill form-input-background textbox-n" type='date' name='dateOfBirth' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required/>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group required">
                                     <div className="form-row">
-                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
-                                            <label>Gender</label>
+                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0 mb-3 mb-lg-0">
+                                            <label className="control-label">Gender</label>
                                             <Select
                                                 styles={customStyles}
                                                 name={"gender"}
@@ -184,12 +223,12 @@ const RegistrationBox = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group required">
                                     <div className="form-row">
                                         <div className="col-1 d-block d-sm-none">
                                         </div>
                                         <div className="col-4 offset-0 col-sm-3 offset-sm-0 col-lg-2 offset-lg-0 mt-2 mt-lg-0">
-                                            <label>Phone</label>
+                                            <label className="control-label">Phone</label>
                                             <select className="custom-select form-control rounded-pill form-input-background" value='+880' disabled>
                                                 <option value='+880'>+880</option>
                                             </select>
@@ -199,10 +238,10 @@ const RegistrationBox = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group required">
                                     <div className="form-row">
-                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
-                                            <label>Password</label>
+                                        <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0 mb-3 mb-lg-0">
+                                            <label className="control-label">Password</label>
                                             <div className="input-group rounded-pill form-input-background">
                                                 <input className="form-control rounded-pill form-input-background" type={(showPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                                                 <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
@@ -213,7 +252,7 @@ const RegistrationBox = () => {
                                             </div>
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
-                                            <label>Confirm Password</label>
+                                            <label className="control-label">Confirm Password</label>
                                             <div className="input-group rounded-pill form-input-background">
                                                 <input className="form-control rounded-pill form-input-background" type={(showConfirmPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Confirm Password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required/>
                                                 <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>

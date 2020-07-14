@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Logo from '../shared/img/teresa.png'
 import Doctor from '../shared/img/Dr.jpg';
+import Modal from "../shared/component/Modal";
+import {AuthContext} from '../shared/context/auth-context'
 import './LoginBox.css'
 
 const LoginBox = () => {
+    const auth = useContext(AuthContext)
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [showpassword, setShowPassword] = useState(false)
@@ -14,10 +17,15 @@ const LoginBox = () => {
         console.log(password)
     }
 
+    const modalHandler = () => {
+        auth.authMessage = null
+    };
+
     return  <React.Fragment>
         <div className="container-fluid w-100 h-100 full_div">
             <br/>
             <br/>
+            {auth.authMessage &&<Modal message={auth.authMessage} onClear={modalHandler.bind(this)}/>}
             <div className="container shadow">
                 <div className="row bg-white">
                     <div className="col-12 col-lg-6">
