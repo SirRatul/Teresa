@@ -5,6 +5,7 @@ import {useHistory} from 'react-router-dom';
 import Modal from "../shared/component/Modal";
 import Logo from '../shared/img/teresa.png'
 import Doctor from '../shared/img/Dr.jpg';
+import LoadingSpinner from '../shared/component/LoadingSpinner'
 import {AuthContext} from '../shared/context/auth-context'
 import './RegistrationBox.css'
 
@@ -47,6 +48,8 @@ const RegistrationBox = () => {
         { value: 'AB+', label: 'AB+' },
         { value: 'AB-', label: 'AB-' }
     ];
+    const [isLoading, setIsLoading] = useState(false)
+    const [disable, setDisable] = useState(false)
 
     const selectGender = (value) => {
         setGender({
@@ -108,6 +111,8 @@ const RegistrationBox = () => {
         } else if(password !== confirmPassword){
             setErrorMessage('Passwords do not match')
         } else {
+            setIsLoading(true)
+            setDisable(true)
             try {
                 const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users', {
                     firstName, 
@@ -121,8 +126,12 @@ const RegistrationBox = () => {
                 });
                 console.log(response.data);
                 auth.userId = response.data._id
+                setIsLoading(false)
+                setDisable(false)
                 history.push('/sign-up-verification')
             } catch (error) {
+                setIsLoading(false)
+                setDisable(false)
                 console.log(error.response.data);
             }
         }
@@ -133,10 +142,11 @@ const RegistrationBox = () => {
     };
 
     return  <React.Fragment>
-        <div className="container-fluid w-100 h-100 full_div">
+        <div className="container-fluid w-100 h-100 full_div position-relative">
             {errorMessage &&<Modal message={errorMessage} onClear={modalHandler.bind(this)}/>}
             <br/>
             <br/>
+            {isLoading && <LoadingSpinner/>}
             <div className="container shadow">
                 <div className="row bg-white">
                     <div className="col-12 col-lg-6">
@@ -164,11 +174,11 @@ const RegistrationBox = () => {
                                     <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mb-3 mb-lg-0">
                                             <label className="control-label">First Name</label>
-                                            <input type="text" className="form-control rounded-pill form-input-background" placeholder="First Name" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} required/>
+                                            <input type="text" className="form-control rounded-pill form-input-background" placeholder="First Name" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0">
                                             <label>Last Name</label>
-                                            <input type="text" className="form-control rounded-pill form-input-background" placeholder="Last Name" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+                                            <input type="text" className="form-control rounded-pill form-input-background" placeholder="Last Name" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} disabled={(disable)? "disabled" : ""}/>
                                         </div>
                                     </div>
                                 </div>
@@ -176,7 +186,7 @@ const RegistrationBox = () => {
                                     <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0 mb-3 mb-lg-0">
                                             <label>Email</label>
-                                            <input type="email" className="form-control rounded-pill form-input-background" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                            <input type="email" className="form-control rounded-pill form-input-background" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} disabled={(disable)? "disabled" : ""}/>
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0 d-none d-lg-block">
                                             <label className="control-label">Date Of Birth</label>
@@ -184,11 +194,11 @@ const RegistrationBox = () => {
                                                 setdateOfBirthType(true)
                                             }} onBlur={function(){
                                                 setdateOfBirthType(false)
-                                            }} name='dateOfBirth' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required/>
+                                            }} name='dateOfBirth' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0 d-block d-lg-none">
                                             <label className="control-label">Date Of Birth</label>
-                                            <input placeholder="Date Of Birth" className="form-control rounded-pill form-input-background textbox-n" type='date' name='dateOfBirth' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required/>
+                                            <input placeholder="Date Of Birth" className="form-control rounded-pill form-input-background textbox-n" type='date' name='dateOfBirth' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                         </div>
                                     </div>
                                 </div>
@@ -202,6 +212,7 @@ const RegistrationBox = () => {
                                                 value={gender.gender}
                                                 onChange={newValue => selectGender(newValue)}
                                                 options={genderOptions}
+                                                disabled={(disable)? "disabled" : ""}
                                             />
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
@@ -212,6 +223,7 @@ const RegistrationBox = () => {
                                                 value={bloodGroup.bloodGroup}
                                                 onChange={newValue => selectBloodGroup(newValue)}
                                                 options={bloodOptions}
+                                                disabled={(disable)? "disabled" : ""}
                                             />
                                         </div>
                                     </div>
@@ -234,7 +246,7 @@ const RegistrationBox = () => {
                                             </select>
                                         </div>
                                         <div className="col-6 offset-0 col-sm-4 offset-sm-0 mt-2 mt-lg-0">
-                                            <input type="tel" className="form-control rounded-pill form-input-background" style={{marginTop: '2rem'}} placeholder="Phone number" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} required/>
+                                            <input type="tel" className="form-control rounded-pill form-input-background" style={{marginTop: '2rem'}} placeholder="Phone number" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                         </div>
                                     </div>
                                 </div>
@@ -243,7 +255,7 @@ const RegistrationBox = () => {
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0 mb-3 mb-lg-0">
                                             <label className="control-label">Password</label>
                                             <div className="input-group rounded-pill form-input-background">
-                                                <input className="form-control rounded-pill form-input-background" type={(showPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                                                <input className="form-control rounded-pill form-input-background" type={(showPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                                 <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
                                                     <span className="input-group-btn"><i className={"mt-2 mr-3 fas fa-eye"+(showPassword ? '': '-slash')} onClick={function(){
                                                         setShowPassword(!showPassword)
@@ -254,7 +266,7 @@ const RegistrationBox = () => {
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label className="control-label">Confirm Password</label>
                                             <div className="input-group rounded-pill form-input-background">
-                                                <input className="form-control rounded-pill form-input-background" type={(showConfirmPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Confirm Password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required/>
+                                                <input className="form-control rounded-pill form-input-background" type={(showConfirmPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Confirm Password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                                 <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
                                                     <span className="input-group-btn"><i className={"mt-2 mr-3 fas fa-eye"+(showConfirmPassword ? '': '-slash')} onClick={function(){
                                                         setShowConfirmPassword(!showConfirmPassword)
@@ -268,7 +280,7 @@ const RegistrationBox = () => {
                                     <div className="form-row">
                                         <div className="col-10 offset-1 col-sm-12 offset-sm-0 mt-2 mt-lg-0">
                                             <div className="custom-control custom-checkbox">
-                                                <input type="checkbox" className="custom-control-input" id="defaultCheck1" required/>
+                                                <input type="checkbox" className="custom-control-input" id="defaultCheck1" required disabled={(disable)? "disabled" : ""}/>
                                                 <label htmlFor="defaultCheck1" className="custom-control-label">I've read and agree to the terms and conditions</label>
                                             </div>
                                         </div>
@@ -276,13 +288,18 @@ const RegistrationBox = () => {
                                 </div>
                                 <div className="form-row mt-3 mb-5 mb-lg-0">
                                     <div className="col-8 offset-2 col-sm-4 offset-sm-4 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-                                        <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}}>CREATE ACCOUNT</button>
+                                        <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}} disabled={(disable)? "disabled" : ""}>CREATE ACCOUNT</button>
                                     </div>
                                 </div>
                                 <div className="form-group mt-n4 mt-sm-4 mb-5">
                                     <div className="col-10 offset-1 col-sm-12 offset-sm-0">
                                         <p className="text-center">
-                                            <a href="/login" style={{color: '#2D2E6A'}}>I already have an account</a>
+                                            {
+                                                disable ?
+                                                <a href="/#" style={{color: '#2D2E6A'}}>I already have an account</a>
+                                                :
+                                                <a href="/login" style={{color: '#2D2E6A'}}>I already have an account</a>
+                                            }
                                         </p>
                                     </div>
                                 </div>

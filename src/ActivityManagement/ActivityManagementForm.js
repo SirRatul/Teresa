@@ -750,7 +750,7 @@ const ActivityManagementForm = () => {
                 </div>
               </Form.Group>
               <Form.Group>
-                <Form.Row>
+                <Form.Row className='d-flex flex-column' /* style={{flex: 10}} */>
                   {activityItem.activityItem.value === "Medicine" &&
                     medicineInputList.map((x, i) => {
                       return (
@@ -1446,7 +1446,7 @@ const ActivityManagementForm = () => {
                   {activityItem.activityItem.value === "Doctor's Schedule" &&
                     doctorsScheduleInputList.map((x, i) => {
                       return (
-                        <Form.Group key={i}>
+                        <Form.Group key={i} /* style={{flex: 10}} */>
                           <Form.Row>
                             <div className="col-6 col-sm-4 col-md-3 col-lg-form-size mb-4 mb-lg-0">
                               <Form.Label
