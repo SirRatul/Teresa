@@ -118,7 +118,7 @@ const RegistrationBox = () => {
                     firstName, 
                     lastName: lastName ? lastName : undefined,
                     gender: gender.gender.value, 
-                    phone: '0'+phone,
+                    phone: '880'+phone,
                     dob: birthDate,
                     bloodGroup: bloodGroup.bloodGroup.value ? bloodGroup.bloodGroup.value : undefined,
                     email:email ? email : undefined, 
@@ -131,8 +131,9 @@ const RegistrationBox = () => {
                 history.push('/sign-up-verification')
             } catch (error) {
                 setIsLoading(false)
-                setDisable(false)
-                console.log(error.response.data);
+                setDisable(false) 
+                console.log(error.response.data.error);
+                setErrorMessage(error.response.data.error)
             }
         }
     }
