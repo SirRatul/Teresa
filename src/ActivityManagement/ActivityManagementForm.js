@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
+import axios from 'axios'
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Col from "react-bootstrap/Col";
@@ -7,10 +8,12 @@ import Row from "react-bootstrap/Row";
 import Select from "react-select";
 import Model from "../shared/component/Modal";
 import Modal from "react-bootstrap/Modal";
+import {AuthContext} from '../shared/context/auth-context'
 import "./ActivityManagementForm.css";
 
 const ActivityManagementForm = () => {
   const formRef = useRef(null);
+  const auth = useContext(AuthContext)
 
   const [activityItem, setActivityItem] = useState({
     activityItem: {
@@ -41,9 +44,7 @@ const ActivityManagementForm = () => {
   const [selfCheckBox, setselfCheckBox] = useState(false);
   const [guardianCheckBox, setGuardianCheckBox] = useState(false);
   const [allCheckBox, setAllCheckBox] = useState(false);
-  const [notificationTypeCheckBox, setNotificationTypeCheckBox] = useState(
-    false
-  );
+  const [notificationTypeCheckBox, setNotificationTypeCheckBox] = useState(false);
 
   const [medicineInputList, setMedicineInputList] = useState([
     {
@@ -95,6 +96,7 @@ const ActivityManagementForm = () => {
     { value: "Exercise", label: "Exercise" },
     { value: "Doctor's Schedule", label: "Doctor's Schedule" },
   ];
+
   const activityForOptions = [
     { value: "Ayon Mahmud", label: "Ayon Mahmud" },
     { value: "Samsul Islam", label: "Samsul Islam" },
@@ -151,6 +153,13 @@ const ActivityManagementForm = () => {
     },
   };
 
+  const authAxios = axios.create({
+    baseURL: process.env.REACT_APP_BACKEND_URL,
+    headers: {
+        Authorization : `Bearer ${auth.token}`
+    } 
+  })
+
   const submitHandler = async (event) => {
     event.preventDefault();
     console.log(activityItem.activityItem.value);
@@ -158,6 +167,48 @@ const ActivityManagementForm = () => {
     if (activityItem.activityItem.value === "Medicine") {
       console.log("Medicine Input List");
       console.log(medicineInputList);
+      var promise = Promise.resolve();
+      medicineInputList.forEach((medicineInputList) => {
+        promise = promise.then(function () {
+          var notificationTimeBefore = medicineInputList.notificationTimeState.value.split(' ')
+          console.log(activityItem.activityItem.value)
+          console.log(medicineInputList.item)
+          console.log(medicineInputList.startDate)
+          console.log(medicineInputList.endDate)
+          console.log(medicineInputList.continuity)
+          console.log(new Date().toJSON().slice(0,10) + ' '+medicineInputList.time)
+          console.log(notificationTimeBefore[1])
+          const submitFunction = async (event) => {
+            console.log('Inside submitFunction')
+            try {
+              const response = await authAxios.post('routines', {
+                activityItem: activityItem.activityItem.value,
+                itemName: medicineInputList.item,
+                startDate: medicineInputList.startDate,
+                endDate: medicineInputList.endDate,
+                continuity: medicineInputList.continuity,
+                meal: medicineInputList.mealState.value,
+                time:  new Date().toJSON().slice(0,10) + ' '+medicineInputList.time,
+                unit: medicineInputList.unit,
+                notification: false,
+                notificationTimeBefore: notificationTimeBefore[1]
+              });
+              console.log(response.data);
+            } catch (error) {
+              console.log(error.response.data);
+            }
+            console.log('Outside submitFunction')
+          }
+          submitFunction()
+          return new Promise(function (resolve) {
+            setTimeout(resolve, 3000);
+          });
+        });
+      });
+
+      promise.then(() => {
+      });
+      
       setMedicineInputList([
         {
           item: "",
@@ -237,6 +288,44 @@ const ActivityManagementForm = () => {
         console.log(activityFor.activityFor.value);
         console.log("Medicine Input List");
         console.log(medicineInputList);
+        var promise = Promise.resolve();
+        medicineInputList.forEach((medicineInputList) => {
+          promise = promise.then(function () {
+            var notificationTimeBefore = medicineInputList.notificationTimeState.value.split(' ')
+            console.log(activityItem.activityItem.value)
+            console.log(medicineInputList.item)
+            console.log(medicineInputList.startDate)
+            console.log(medicineInputList.endDate)
+            console.log(medicineInputList.continuity)
+            console.log(new Date().toJSON().slice(0,10) + ' '+medicineInputList.time)
+            console.log(notificationTimeBefore[1])
+            const submitFunction = async (event) => {
+              console.log('Inside submitFunction')
+              try {
+                const response = await authAxios.post('routines', {
+                  activityItem: activityItem.activityItem.value,
+                  itemName: medicineInputList.item,
+                  startDate: medicineInputList.startDate,
+                  endDate: medicineInputList.endDate,
+                  continuity: medicineInputList.continuity,
+                  meal: medicineInputList.mealState.value,
+                  time:  new Date().toJSON().slice(0,10) + ' '+medicineInputList.time,
+                  unit: medicineInputList.unit,
+                  notification: false,
+                  notificationTimeBefore: notificationTimeBefore[1]
+                });
+                console.log(response.data);
+              } catch (error) {
+                console.log(error.response.data);
+              }
+              console.log('Outside submitFunction')
+            }
+            submitFunction()
+            return new Promise(function (resolve) {
+              setTimeout(resolve, 3000);
+            });
+          });
+        });
         setMedicineInputList([
           {
             item: "",

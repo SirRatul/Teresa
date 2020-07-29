@@ -54,7 +54,14 @@ const Menu = () => {
             history.push('/')
         } catch (error) {
             console.log(error.response.data.error);
-            setErrorMessage(error.response.data.error)
+            // setErrorMessage(error.response.data.error)
+            cookies.remove('userId', {path: '/'})
+            cookies.remove('token', {path: '/'})
+            cookies.remove('isLoggedIn', {path: '/'})
+            auth.isLoggedIn = false
+            auth.userId = null
+            auth.token = null
+            history.push('/')
         }
     }
     const modalHandler = () => {

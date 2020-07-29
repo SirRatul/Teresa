@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom'
 import HomePage from './HomePage/homepage'
 import Login from './Login/Login'
@@ -10,11 +10,45 @@ import UploadPrescription from './UploadPrescription/UploadPrescription'
 import ActivityManagement from './ActivityManagement/ActivityManagement'
 import ResetPassword from './ResetPassword/ResetPassword'
 import {AuthContext} from './shared/context/auth-context'
+import axios from 'axios'
+import {Cookies} from 'react-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-function App() {
+const App = () => {
   const auth = useContext(AuthContext)
+  useEffect(() => {
+      console.log('Effect in App.js')
+      const verifyToken = async () => {
+        if(new Cookies().get('userId') && new Cookies().get('token')){
+          try {
+            const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users/check-authToken', {
+              _id: new Cookies().get('userId'),
+              token: new Cookies().get('token')
+            });
+            console.log(response.data);
+          } catch (error) {
+            console.log('Error From App.js');
+            console.log(error.response.data.error);
+            new Cookies().remove('userId', {path: '/'})
+            new Cookies().remove('token', {path: '/'})
+            new Cookies().remove('isLoggedIn', {path: '/'})
+            auth.isLoggedIn = false
+            auth.userId = null
+            auth.token = null
+          } 
+        } else {
+          new Cookies().remove('userId', {path: '/'})
+          new Cookies().remove('token', {path: '/'})
+          new Cookies().remove('isLoggedIn', {path: '/'})
+          auth.isLoggedIn = false
+          auth.userId = null
+          auth.token = null
+        }
+      }
+      verifyToken()
+  }, [auth])
+  // })
   return <React.Fragment>
     {
       auth.isLoggedIn?
