@@ -5,5 +5,7 @@ export const AuthContext = createContext({
     isLoggedIn: new Cookies().get('isLoggedIn') || false,
     userId: new Cookies().get('userId') || null,
     authMessage: null,
-    token: new Cookies().get('token') || null
+    token: new Cookies().get('token') || null,
+    phone: null,
+    otp: null
 })

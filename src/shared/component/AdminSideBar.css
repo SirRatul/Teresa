@@ -1,0 +1,22 @@
+.sidebar-dark-primary{
+    background-color: #010624;
+}
+
+/* .menu-open > a > .active{
+    background-color: #010624;
+} */
+
+.nav-sidebar > .active > a {
+  background-color: #050C33!important;    
+}
+.nav-item > a:hover {
+  color: #050C33!important;
+}
+
+.nav-item:hover {
+  background-color: white!important;    
+}
+
+[class*=sidebar-dark-] .nav-sidebar>.nav-item.menu-open>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item:hover>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link:focus {
+  background-color: transparent!important;
+}

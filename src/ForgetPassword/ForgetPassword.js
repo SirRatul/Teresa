@@ -1,25 +1,52 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import axios from 'axios'
 import {useHistory} from 'react-router-dom';
 import {Helmet} from "react-helmet";
 import Nurse from '../shared/img/Nurse.png';
+import LoadingSpinner from '../shared/component/LoadingSpinner'
+import Modal from "../shared/component/Modal";
+import {AuthContext} from '../shared/context/auth-context'
 import './ForgetPassword.css'
 
 const ForgetPassword = () => {
     const [phone, setPhone] = useState('')
     const history = useHistory()
+    const auth = useContext(AuthContext)
+    const [errorMessage, setErrorMessage] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+    const [disable, setDisable] = useState(false)
     const submitHandler = async (event) => {
         event.preventDefault()
         console.log(phone)
-        history.push('/forgot-password-verification')
+        setIsLoading(true)
+        setDisable(true)
+        try {
+            const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users/pass-recovery-code', {
+                phone: '88'+phone
+            })
+            console.log(response.data);
+            auth.phone = '88'+phone
+            history.push('/forgot-password-verification')
+        } catch (error) {
+            console.log(error.response.data);
+            setErrorMessage(error.response.data.message)
+        }
+        setIsLoading(false)
+        setDisable(false)
     }
+    const modalHandler = () => {
+        setErrorMessage(null);
+    };
     return  <React.Fragment>
-        <div className="container-fluid w-100 h-100 full_div">
+        <div className="container-fluid w-100 h-100 full_div position-relative">
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Forget Password</title>
             </Helmet>
             <br/>
             <br/>
+            {errorMessage &&<Modal message={errorMessage} onClear={modalHandler.bind(this)}/>}
+            {isLoading && <LoadingSpinner/>}
             <div className="container shadow">
                 <div className="row bg-white">
                     <div className="col-lg-6 mt-5 mb-5 text-center d-none d-lg-block">
@@ -35,14 +62,14 @@ const ForgetPassword = () => {
                                 <div className="form-row">
                                     <div className="col-8 offset-2 col-sm-6 offset-sm-3 mt-2">
                                         <label>Enter your phone number</label>
-                                        <input type="tel" className="form-control rounded-pill form-input-background" placeholder="Phone number" name='phone' value={phone} onChange={(e) => setPhone(e.target.value)} required/>
+                                        <input type="tel" className="form-control rounded-pill form-input-background" placeholder="Phone number" name='phone' value={phone} onChange={(e) => setPhone(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                     </div>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="form-row mt-3 mb-5 mb-lg-0">
                                     <div className="col-4 offset-4 col-sm-4 offset-sm-4 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
-                                        <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}}>NEXT</button>
+                                        <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}} disabled={(disable)? "disabled" : ""}>NEXT</button>
                                     </div>
                                 </div>
                             </div>

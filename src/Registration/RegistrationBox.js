@@ -125,15 +125,16 @@ const RegistrationBox = () => {
                     password
                 });
                 console.log(response.data);
-                auth.userId = response.data._id
+                auth.userId = response.data.message._id
                 setIsLoading(false)
                 setDisable(false)
                 history.push('/sign-up-verification')
             } catch (error) {
                 setIsLoading(false)
                 setDisable(false) 
-                console.log(error.response.data.error);
-                setErrorMessage(error.response.data.error)
+                console.log(error.response.data.message);
+                // setErrorMessage(error.response.data.error)
+                setErrorMessage(error.response.data.message)
             }
         }
     }

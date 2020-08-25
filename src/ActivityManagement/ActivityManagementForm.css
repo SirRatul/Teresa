@@ -38,3 +38,19 @@
         max-width: 100%!important;
     }
 }
+
+@media only screen and (min-width: 1200px){
+    .col-xl-form-size{
+        flex-basis: 0!important;
+        flex-grow: 1!important;
+        min-width: 0!important;
+        max-width: 100%!important;
+    }
+}
+
+@media only screen and (min-width: 954px) and (max-width: 1199px){
+    .gap-between-select-item{
+        flex: 0 0 50%!important;
+        max-width: 50%!important;
+    }
+}

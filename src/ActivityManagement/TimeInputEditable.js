@@ -1,19 +1,19 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 
-const TimeInputEditable = props => {
+const TimeInputEditable = forwardRef((props, ref) => {
+    const { value, onUpdate } = props;
     const timeFormat = (timeString) => {
         var time = timeString.split(':');
         var hour = time[0] % 12 || 12;
         var minute = time[1];
-        var ampm = (time[0] < 12 || time[0] === 24) ? "AM" : "PM";
-        return hour+':'+minute +' '+ ampm;
+        var ampm = (time[0] < 12 || time[0] === 24) ? "am" : "pm";
+        return hour < 10 ? '0'+hour +':'+minute +' '+ ampm : hour +':'+minute +' '+ ampm;
     }
-    const { value, onUpdate } = props;
-      return <React.Fragment>
-        <input type="time" name="time" value={value} onChange={(e) => {
+    return <React.Fragment>
+        <input className='rounded-pill' type="time" name="time" value={value} onChange={(e) => {
             onUpdate(timeFormat(e.target.value))
         }}/>
     </React.Fragment> ;
-}
+})
 
 export default TimeInputEditable;

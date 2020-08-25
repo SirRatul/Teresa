@@ -32,9 +32,9 @@ const LoginBox = () => {
                 password
             });
             console.log(response.data);
-            auth.userId = response.data.user._id
+            auth.userId = response.data.message.user._id
             auth.isLoggedIn = true
-            auth.token = response.data.token
+            auth.token = response.data.message.token
             cookies.set('userId', auth.userId, { path: '/', maxAge: 31536000 });
             cookies.set('token', auth.token, { path: '/', maxAge: 31536000 });
             cookies.set('isLoggedIn', auth.isLoggedIn, { path: '/', maxAge: 31536000 });
@@ -44,8 +44,8 @@ const LoginBox = () => {
         } catch (error) {
             setIsLoading(false)
             setDisable(false)
-            console.log(error.response.data.error);
-            setErrorMessage(error.response.data.error)
+            console.log(error.response.data.message);
+            setErrorMessage(error.response.data.message)
         }
     }
 

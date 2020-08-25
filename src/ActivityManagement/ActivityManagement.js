@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Helmet} from "react-helmet";
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import Menu from '../shared/component/Menu'
@@ -8,6 +8,10 @@ import Footer from '../shared/component/Footer'
 import './ActivityManagement.css'
 
 const ActivityManagement = () => {
+    const [renderPageParent, setRenderPageParent] = useState(false)
+    const pageRenderParent = () => {
+        setRenderPageParent(!renderPageParent)
+    }
     return <React.Fragment>
         <Helmet>
             <meta charSet="utf-8" />
@@ -27,8 +31,8 @@ const ActivityManagement = () => {
                 </div>
             </div>
         </div>
-        <ActivityManagementForm/>
-        <ActivityManagementTable/>
+        <ActivityManagementForm pageRenderParent={pageRenderParent.bind(this)}/>
+        <ActivityManagementTable renderPageParent={renderPageParent} pageRenderParent={pageRenderParent.bind(this)}/>
         <Footer/>
         </React.Fragment>;
 };

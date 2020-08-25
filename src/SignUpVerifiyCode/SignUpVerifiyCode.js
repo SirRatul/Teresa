@@ -28,7 +28,8 @@ const SignUpVerifiyCode = () => {
             })
             console.log(response.data);
             auth.userId = null
-            auth.authMessage = 'You have successfully verified your account. You can now login.'
+            // auth.authMessage = 'You have successfully verified your account. You can now login.'
+            auth.authMessage = response.data.message
             setIsLoading(false)
             setDisable(false)
             history.push('/login')
@@ -36,7 +37,8 @@ const SignUpVerifiyCode = () => {
             console.log(error.response.data);
             setIsLoading(false)
             setDisable(false)
-            setErrorMessage(error.response.data.error)
+            // setErrorMessage(error.response.data.error)
+            setErrorMessage(error.response.data.message)
         }
     }
     const resendOTPHandler = async () => {
@@ -49,12 +51,14 @@ const SignUpVerifiyCode = () => {
             console.log(response.data);
             setIsLoading(false)
             setDisable(false)
-            setErrorMessage(response.data.success)
+            // setErrorMessage(response.data.success)
+            setErrorMessage(response.data.message)
         } catch (error) {
             console.log(error.response.data);
             setIsLoading(false)
             setDisable(false)
-            setErrorMessage(error.response.data.error)
+            // setErrorMessage(error.response.data.error)
+            setErrorMessage(error.response.data.message)
         }
     }
     const modalHandler = () => {

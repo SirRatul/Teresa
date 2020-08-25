@@ -53,7 +53,7 @@ const Menu = () => {
             cookies.remove('isLoggedIn', {path: '/'})
             history.push('/')
         } catch (error) {
-            console.log(error.response.data.error);
+            console.log(error.response.data.message);
             // setErrorMessage(error.response.data.error)
             cookies.remove('userId', {path: '/'})
             cookies.remove('token', {path: '/'})

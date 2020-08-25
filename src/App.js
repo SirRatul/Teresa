@@ -9,6 +9,8 @@ import SignUpVerifiyCode from './SignUpVerifiyCode/SignUpVerifiyCode'
 import UploadPrescription from './UploadPrescription/UploadPrescription'
 import ActivityManagement from './ActivityManagement/ActivityManagement'
 import ResetPassword from './ResetPassword/ResetPassword'
+import AdminLogin from './AdminLogin/AdminLogin'
+import AdminInvoiceList from './AdminInvoiceList/AdminInvoiceList'
 import {AuthContext} from './shared/context/auth-context'
 import axios from 'axios'
 import {Cookies} from 'react-cookie';
@@ -29,7 +31,7 @@ const App = () => {
             console.log(response.data);
           } catch (error) {
             console.log('Error From App.js');
-            console.log(error.response.data.error);
+            console.log(error.response.data.message);
             new Cookies().remove('userId', {path: '/'})
             new Cookies().remove('token', {path: '/'})
             new Cookies().remove('isLoggedIn', {path: '/'})
@@ -63,6 +65,8 @@ const App = () => {
         <Route path="/" component={HomePage} exact/>
         <Route path="/login" component={Login} exact/>
         <Route path="/register" component={Registration} exact/>
+        <Route path="/admin" component={AdminLogin} exact/>
+        <Route path="/admin-invoice-list" component={AdminInvoiceList} exact/>
         <Route path="/forgetPassword" component={ForgetPassword} exact/>
         <Route path="/resetPassword" component={ResetPassword} exact/>
         <Route path="/forgot-password-verification" component={ForgetPasswordVerifiyCode} exact/>
