@@ -2,18 +2,20 @@ import React from 'react';
 import {Helmet} from "react-helmet";
 import AdminMenu from '../shared/component/AdminMenu'
 import AdminSideBar from '../shared/component/AdminSideBar'
-import AdminInvoiceListTable from './AdminInvoiceListTable'
+import AdminCreateInvoiceDetails from './AdminCreateInvoiceDetails'
+import AdminCreateInvoiceForm from './AdminCreateInvoiceForm'
 
-const AdminInvoiceList = () => {
+const AdminCreateInvoice = () => {
     return  <React.Fragment>
         <Helmet>
             <meta charSet="utf-8" />
-            <title>Invoice List</title>
+            <title>Create Invoice</title>
         </Helmet>
         <AdminMenu/>
         <AdminSideBar/>
-        <AdminInvoiceListTable/>
+        <AdminCreateInvoiceDetails/>
+        <AdminCreateInvoiceForm/>
     </React.Fragment>;
 }
 
-export default AdminInvoiceList;
+export default AdminCreateInvoice;

@@ -1,0 +1,13 @@
+.mt-6{
+    margin-top: 2.0rem!important;
+}
+
+.mt-unit{
+    margin-top: -2.0rem!important;
+}
+
+@media only screen and (max-width: 575px){
+    .mt-medicineName{
+        margin-top: 0rem!important;
+    }
+}

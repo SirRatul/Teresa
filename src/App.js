@@ -11,6 +11,8 @@ import ActivityManagement from './ActivityManagement/ActivityManagement'
 import ResetPassword from './ResetPassword/ResetPassword'
 import AdminLogin from './AdminLogin/AdminLogin'
 import AdminInvoiceList from './AdminInvoiceList/AdminInvoiceList'
+import AdminCreateInvoice from './AdminCreateInvoice/AdminCreateInvoice'
+import AdminInvoicePreview from './AdminInvoicePreview/AdminInvoicePreview'
 import {AuthContext} from './shared/context/auth-context'
 import axios from 'axios'
 import {Cookies} from 'react-cookie';
@@ -67,6 +69,8 @@ const App = () => {
         <Route path="/register" component={Registration} exact/>
         <Route path="/admin" component={AdminLogin} exact/>
         <Route path="/admin-invoice-list" component={AdminInvoiceList} exact/>
+        <Route path="/admin-create-invoice" component={AdminCreateInvoice} exact/>
+        <Route path="/admin-invoice-preview" component={AdminInvoicePreview} exact/>
         <Route path="/forgetPassword" component={ForgetPassword} exact/>
         <Route path="/resetPassword" component={ResetPassword} exact/>
         <Route path="/forgot-password-verification" component={ForgetPasswordVerifiyCode} exact/>

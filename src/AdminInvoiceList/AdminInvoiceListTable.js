@@ -1,7 +1,10 @@
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
+import {useHistory} from 'react-router-dom';
+import './AdminInvoiceListTable.css'
 
 const AdminInvoiceListTable = () => {
+    const history = useHistory()
     const orderList = [
         {
             _id: 1,
@@ -60,16 +63,28 @@ const AdminInvoiceListTable = () => {
         }
     ];
 
+    const selectRow = {
+        mode: 'radio',
+        clickToSelect: true,
+        onSelect: (row, isSelect, rowIndex, e) => {
+            if(row.invoiceStatus === "Not Created"){
+                console.log(row)
+                history.push('/admin-create-invoice')
+            }
+        }
+    };
 
-    return  <div className="content-wrapper">
+
+    return  <div className="content-wrapper overflow-hidden">
         <h1 className="text-center">Order List</h1>
         <BootstrapTable
             keyField='_id'
             data={orderList}
             columns={orderTableColumns}
-            wrapperClasses="table-responsive"
-            classes="table-light table-striped table-hover"
+            wrapperClasses="table-responsive ml-3 px-5"
+            classes="table-light table-striped table-hover invoice-table"
             headerWrapperClasses="thead-dark"
+            selectRow={ selectRow }
         />
     </div>
 }
