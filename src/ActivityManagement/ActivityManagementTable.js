@@ -7,7 +7,7 @@ import { Type } from 'react-bootstrap-table2-editor';
 import EditableButtonForMedicine from './EditableButtonForMedicine';
 import EditableButtonForDiet from './EditableButtonForDiet';
 import EditableButtonForExercise from './EditableButtonForExercise';
-import EditableButtonForDoctorsSchedule from './EditableButtonForDoctorsSchedule';
+// import EditableButtonForDoctorsSchedule from './EditableButtonForDoctorsSchedule';
 import TimeInputEditable from './TimeInputEditable';
 import {AuthContext} from '../shared/context/auth-context'
 import moment from 'moment'
@@ -23,7 +23,7 @@ const ActivityManagementTable = props => {
     const [medicineData, setMedicineData] = useState([])
     const [dietData, setDietData] = useState([])
     const [exerciseData, setExerciseData] = useState([])
-    const [doctorsScheudleData, setDoctorsScheudleData] = useState([
+    /*const [doctorsScheudleData, setDoctorsScheudleData] = useState([
         {
             _id: 1,
             doctorsName: "Dr. Ahmed",
@@ -51,7 +51,7 @@ const ActivityManagementTable = props => {
             notification: true,
             notificationBefore: 60
         }
-    ])
+    ])*/
     const setSearchIdThroughFunction = (id) => {
         setSearchId(id)
         console.log('setSearchIdThroughFunction')
@@ -135,11 +135,11 @@ const ActivityManagementTable = props => {
             <p>{row.startDate.substring(0, 10)}</p>
         </React.Fragment>;
     }
-    const dateFormatter = (cell, row, rowIndex, formatExtraData) => { 
+    /*const dateFormatter = (cell, row, rowIndex, formatExtraData) => { 
         return <React.Fragment>
             <p>{row.date.substring(0, 10)}</p>
         </React.Fragment>;
-    }
+    }*/
     const endDateFormatter = (cell, row, rowIndex, formatExtraData) => { 
         return <React.Fragment>
             <p>{row.endDate.substring(0, 10)}</p>
@@ -424,7 +424,7 @@ const ActivityManagementTable = props => {
             }
         </React.Fragment>;
     }
-    const notificationButtonFormatterForDoctorsSchedule = (cell, row, rowIndex, formatExtraData) => { 
+    /*const notificationButtonFormatterForDoctorsSchedule = (cell, row, rowIndex, formatExtraData) => { 
         return <React.Fragment>
             {
                 row.notification ?
@@ -507,7 +507,7 @@ const ActivityManagementTable = props => {
                 </button>
             }
         </React.Fragment>;
-    }
+    }*/
     const editButtonFormatterForMedicine = (cell, row, rowIndex, formatExtraData) => { 
         return <React.Fragment>
             <div className="btn-group" role="group" aria-label="Basic example">
@@ -792,7 +792,7 @@ const ActivityManagementTable = props => {
             </div>
         </React.Fragment>;
     }
-    const editButtonFormatterForDoctorsSchedule = (cell, row, rowIndex, formatExtraData) => { 
+    /*const editButtonFormatterForDoctorsSchedule = (cell, row, rowIndex, formatExtraData) => { 
         return <React.Fragment>
             <div className="btn-group" role="group" aria-label="Basic example">
                 <button type="button" className={"table-row-icon "+(editButtonShow ? "d-none" : null)} onClick={function() {
@@ -887,7 +887,7 @@ const ActivityManagementTable = props => {
                 </button>
             </div>
         </React.Fragment>;
-    }
+    }*/
     const deleteButtonFormatterForMedicine = (cell, row, rowIndex, formatExtraData) => { 
         return <React.Fragment>
             <button type="button" className="table-row-icon" onClick={async() => {
@@ -1002,7 +1002,7 @@ const ActivityManagementTable = props => {
             </button>
         </React.Fragment>;
     }
-    const deleteButtonFormatterForDoctorsSchedule = (cell, row, rowIndex, formatExtraData) => { 
+    /*const deleteButtonFormatterForDoctorsSchedule = (cell, row, rowIndex, formatExtraData) => { 
         return <React.Fragment>
             <button type="button" className="table-row-icon" onClick={async() => {
                 console.log('Delete Row '+row._id)
@@ -1039,7 +1039,7 @@ const ActivityManagementTable = props => {
                 <i className="fas fa-trash"></i>
             </button>
         </React.Fragment>;
-    }
+    }*/
 
     const medicineTableColumns = [
         {
@@ -1570,7 +1570,7 @@ const ActivityManagementTable = props => {
         }
     ];
 
-    const doctorsScheduleTableColumns = [
+    /*const doctorsScheduleTableColumns = [
         {
             dataField: '_id',
             text: 'Id',
@@ -1597,7 +1597,7 @@ const ActivityManagementTable = props => {
                 }
                 return true;
             }, */
-            editorClasses: (cell, row, rowIndex, colIndex) => (row._id === searchId ? 'rounded-pill' : '')
+            /*editorClasses: (cell, row, rowIndex, colIndex) => (row._id === searchId ? 'rounded-pill' : '')
         }, 
         {
             dataField: 'date',
@@ -1687,7 +1687,7 @@ const ActivityManagementTable = props => {
             editable: false,
             headerClasses: 'd-none'
         }
-    ];
+    ];*/
     
     return <React.Fragment>
         <div className="container-fluid" style={{backgroundColor: '#D0F2F9'}}>
@@ -1803,7 +1803,7 @@ const ActivityManagementTable = props => {
                             }
                         />
                     </div>
-                    <div className="col-12 mt-4 mb-4">
+                    {/* <div className="col-12 mt-4 mb-4">
                         <h1 className="text-center mb-4">Activity : Doctor's Schedule</h1>
                         <BootstrapTable
                             keyField='_id'
@@ -1828,7 +1828,7 @@ const ActivityManagementTable = props => {
                                 }) 
                             }
                         />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

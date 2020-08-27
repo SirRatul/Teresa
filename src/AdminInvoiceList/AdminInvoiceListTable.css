@@ -1,0 +1,11 @@
+.selection-cell-header{
+    display: none;
+}
+
+.selection-cell{
+    display: none;
+}
+
+.invoice-table tr td{
+    cursor: default;
+}

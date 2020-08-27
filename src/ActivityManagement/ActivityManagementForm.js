@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react"
 import axios from 'axios'
 import Button from "react-bootstrap/Button"
 import ButtonGroup from "react-bootstrap/ButtonGroup"
-import Col from "react-bootstrap/Col"
 import Form from "react-bootstrap/Form"
 import Row from "react-bootstrap/Row"
 import Select from "react-select"
@@ -90,7 +89,7 @@ const ActivityManagementForm = props => {
       notificationTimeState: notificationTimeState.notificationTimeState,
     }
   ])
-  const [doctorsScheduleInputList, setDoctorsScheduleInputList] = useState([
+  /*const [doctorsScheduleInputList, setDoctorsScheduleInputList] = useState([
     {
       doctorsName: "",
       place: "",
@@ -98,20 +97,20 @@ const ActivityManagementForm = props => {
       time: "",
       notificationTimeState: notificationTimeState.notificationTimeState,
     }
-  ])
+  ])*/
 
   const activityItemOptions = [
     { value: "Medicine", label: "Medicine" },
     { value: "Diet", label: "Diet" },
     { value: "Exercise", label: "Exercise" },
-    { value: "Doctor's Schedule", label: "Doctor's Schedule" }
+    // { value: "Doctor's Schedule", label: "Doctor's Schedule" }
   ]
 
-  const activityForOptions = [
+  /*const activityForOptions = [
     { value: "Ayon Mahmud", label: "Ayon Mahmud" },
     { value: "Samsul Islam", label: "Samsul Islam" },
     { value: "Abu Ubaida Akash", label: "Abu Ubaida Akash" }
-  ]
+  ]*/
 
   const mealStateOptions = [
     { value: "Before", label: "Before" },
@@ -348,7 +347,6 @@ const ActivityManagementForm = props => {
           }
         ])
       }
-      
     } else if (activityItem.activityItem.value === "Exercise") {
       console.log("Exercise Input List")
       console.log(exerciseInputList)
@@ -431,8 +429,7 @@ const ActivityManagementForm = props => {
           },
         ])
       }
-      
-    } else if (activityItem.activityItem.value === "Doctor's Schedule") {
+    } /*else if (activityItem.activityItem.value === "Doctor's Schedule") {
       console.log("Doctor's Schedule Input List")
       console.log(doctorsScheduleInputList)
       setDoctorsScheduleInputList([
@@ -444,7 +441,7 @@ const ActivityManagementForm = props => {
           notificationTimeState: notificationTimeState.notificationTimeState,
         },
       ])
-    }
+    }*/
   }
 
   const activityItemChangeSubmitHandler = async (event) => {
@@ -749,7 +746,7 @@ const ActivityManagementForm = props => {
         }
       }
     }
-    if (activityItem.activityItem.value === "Doctor's Schedule") {
+    /*if (activityItem.activityItem.value === "Doctor's Schedule") {
       submitForm = false
       doctorsScheduleInputList.forEach(function (doctorsScheduleInputList) {
         if (
@@ -782,7 +779,7 @@ const ActivityManagementForm = props => {
         ])
         selectActivityItem(activityItemChangeValue)
       }
-    }
+    }*/
   }
 
   const handleInputChangeInMedicineList = (e, index) => {
@@ -1065,7 +1062,7 @@ const ActivityManagementForm = props => {
                             selectActivityItem(newValue)
                           }
                         }
-                        if (activityItem.activityItem.value ==="Doctor's Schedule") {
+                        /*if (activityItem.activityItem.value ==="Doctor's Schedule") {
                           console.log("Previuos Value: " + activityItem.activityItem.value)
                           console.log("New Value: " + newValue.value)
                           changeActivityItemValue = false
@@ -1090,20 +1087,20 @@ const ActivityManagementForm = props => {
                           if (changeActivityItemValue) {
                             selectActivityItem(newValue)
                           }
-                        }
+                        }*/
                       }
                       setActivityItemChangeValue(newValue)
                     }}
                     options={activityItemOptions}
                   />
                 </div>
-                <div className="col-12 col-md-4 col-xl-2 gap-between-select-item"></div>
+                {/* <div className="col-12 col-md-4 col-xl-2 gap-between-select-item"></div>
                 <Form.Label className="h4 ml-3 mr-5 mr-md-5 mr-xl-0" htmlFor="activityFor">Activity For</Form.Label>
                 <div className="col-8 col-md-3 col-xl-3 ml-2 ml-sm-4 ml-xl-2">
                   <Select id="activityFor" styles={customStyles} name={"activityFor"} value={activityFor.activityFor} onChange={(newValue) => 
                     selectActivityFor(newValue)
                   } options={activityForOptions}/>
-                </div>
+                </div> */} 
               </Form.Group>
               <Form.Group>
                 <Form.Row className='d-flex flex-column'>
@@ -1459,7 +1456,7 @@ const ActivityManagementForm = props => {
                         </Form.Group>
                       )
                     })}
-                  {activityItem.activityItem.value === "Doctor's Schedule" &&
+                  {/*activityItem.activityItem.value === "Doctor's Schedule" &&
                     doctorsScheduleInputList.map((x, i) => {
                       return (
                         <Form.Group key={i}>
@@ -1557,11 +1554,11 @@ const ActivityManagementForm = props => {
                           </Form.Row>
                         </Form.Group>
                       )
-                    })}
+                    })*/}
                 </Form.Row>
               </Form.Group>
               <Form.Group>
-                <Form.Row>
+                {/* <Form.Row>
                   <Col>
                     <Form.Label className="mr-2 mr-xl-5">Send notification to:</Form.Label>
                     <Form.Check inline label="Self"
@@ -1612,7 +1609,7 @@ const ActivityManagementForm = props => {
                         }
                       }}/>
                   </Col>
-                </Form.Row>
+                </Form.Row> */}
               </Form.Group>
               <div className="col-6 offset-3 col-sm-4 col-md-3 col-xl-2 offset-sm-4 offset-md-4 offset-xl-5">
                 <Button type="submit" block style={{ borderRadius: "1em", backgroundColor: "#0C0C52" }}>Activate</Button>
