@@ -67,6 +67,8 @@ const App = () => {
             component={UploadPrescription}
             exact
           />
+          <Route path="/my-orders" component={MyOrders} exact />
+
           <Route path="/set-reminder" component={ActivityManagement} exact />
           <Redirect to="/"></Redirect>
         </Switch>
@@ -91,7 +93,7 @@ const App = () => {
             component={AdminInvoicePreview}
             exact
           />
-          <Route path="/my-orders" component={MyOrders} exact />
+
           <Route path="/forgetPassword" component={ForgetPassword} exact />
           <Route path="/resetPassword" component={ResetPassword} exact />
           <Route

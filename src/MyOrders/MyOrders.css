@@ -1,13 +1,13 @@
 .Order_list_column {
   background-color: #d1e3e2;
+  margin-left: -15px;
 }
 
 .your-orders-text {
   font-weight: 700;
 }
 
-/*
 .Order-Numbers {
   background-color: #dccece;
+  margin-right: -15px;
 }
-*/
