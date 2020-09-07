@@ -20,16 +20,19 @@ export default class Registration extends Component {
     this.state = {
       selectedOrderRow: 1,
 
+      invoiceStatus: "",
+
       orderDetails: [],
     };
     this.handleOrderNumClick = this.handleOrderNumClick.bind(this);
   }
 
-  handleOrderNumClick(orderNum) {
-    alert(orderNum);
+  handleOrderNumClick(order) {
+    alert(order.orderNo);
 
     this.setState({
-      selectedOrderRow: orderNum,
+      selectedOrderRow: order.orderNo,
+      invoiceStatus: order.invoiceStatus,
     });
   }
 
@@ -77,6 +80,10 @@ export default class Registration extends Component {
         }
       }
     }
+
+    //when the page loads it'll select the first order and show invoice
+
+    this.handleOrderNumClick(this.state.orderDetails[0]);
   };
 
   render() {
@@ -117,11 +124,11 @@ export default class Registration extends Component {
               {this.state.orderDetails.map((order) => (
                 <div
                   className={
-                    this.state.selectedOrderRow === 1
-                      ? "pt-2 pb-2 pl-4" /* "Order-Numbers  pt-2 pb-2 pl-4" */
-                      : "pt-2 pb-2 pl-4"
+                    this.state.selectedOrderRow === order.orderNo
+                      ? "Order-Numbers  pt-3 pb-2 pl-4"
+                      : "pt-3 pb-2 pl-4"
                   }
-                  onClick={() => this.handleOrderNumClick(order.orderNo)}
+                  onClick={() => this.handleOrderNumClick(order)}
                 >
                   <label>Order No: {order.orderNo}</label>
                   <p style={{ cursor: "default" }}>{order.dateTime}</p>
@@ -165,17 +172,29 @@ export default class Registration extends Component {
               <br />
               <br />
               <br />
+
               <br />
 
               <br />
             </MDBCol>
 
-            <MDBCol size="9" className="Invoice_Column  pl-5">
+            <MDBCol size="9" className="Invoice_Column">
               <br />
               <br />
-              <div className="container-fluid">
-                <InvoicePreview />
-              </div>
+
+              {/*Check if the invoice is created or not created */}
+
+              {this.state.invoiceStatus === "Not Created" ? (
+                <div className="m-auto">
+                  <h1>Sorry Your invoice isn't created yet!!</h1>
+                </div>
+              ) : (
+                //Call the invoice component
+
+                <div className="container-fluid">
+                  <InvoicePreview />
+                </div>
+              )}
             </MDBCol>
           </div>
         </div>

@@ -11,3 +11,8 @@
   background-color: #dccece;
   margin-right: -15px;
 }
+
+.Invoice_Column {
+  margin-left: auto;
+  margin-right: auto;
+}
