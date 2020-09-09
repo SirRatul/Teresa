@@ -1,10 +1,50 @@
-import React from 'react';
+import React, {useContext} from 'react';
 // import Avatar from '../img/avatar.png'
 // import NotificationIcon from '../img/Notification Icon.png'
+import {useHistory} from 'react-router-dom';
+import {Cookies} from 'react-cookie';
+import {AuthContext} from '../context/auth-context'
+import axios from 'axios'
 import './AdminMenu.css'
 
 const AdminMenu = () => {
-    return <nav className="main-header navbar navbar-expand navbar-white navbar-light">
+  const history = useHistory()
+  const auth = useContext(AuthContext)
+  const cookies = new Cookies()
+  const adminCreatePageRedirect = () => {
+    history.push({
+      pathname: '/admin-create',
+      state:{
+          adminToken: auth.adminToken
+      }
+    })
+  }
+  const authAdminAxios = axios.create({
+    baseURL: process.env.REACT_APP_BACKEND_URL,
+    headers: {
+        Authorization : `Bearer ${auth.adminToken}`
+    } 
+  })
+  const adminLogout = async() => {
+    console.log('admin logout')
+    try {
+        const response = await authAdminAxios.post(process.env.REACT_APP_BACKEND_URL+'admin/logout');
+        console.log(response.data);
+    } catch (error) {
+        console.log(error.response.data);
+    }
+    auth.adminUserId = null
+    auth.isLoggedInAdmin = false
+    auth.adminToken = null
+    auth.medicineDetails = null
+    auth.sellerName = null
+    auth.sellerPhone = null
+    cookies.remove('adminUserId', {path: '/'})
+    cookies.remove('adminToken', {path: '/'})
+    cookies.remove('isLoggedInAdmin', {path: '/'})
+    history.push('/admin')
+  }
+  return <nav className="main-header navbar navbar-expand navbar-white navbar-light">
     {/* Left navbar links */}
     <ul className="navbar-nav">
         <li className="nav-item">
@@ -13,12 +53,16 @@ const AdminMenu = () => {
     </ul>
     {/* Right navbar links */}
     <ul className="navbar-nav ml-auto">
+      <li className="nav-item">
+          <button className="nav-link" onClick={adminCreatePageRedirect}>
+            Create Admin
+          </button>
+        </li>
         <li className="nav-item">
-        <a className="nav-link" data-widget="pushmenu" href="#/" role="button">
-            <i className="fas fa-bell" />
-
-        </a>
-      </li>
+          <a className="nav-link" data-widget="pushmenu" href="#/" role="button">
+              <i className="fas fa-bell" />
+          </a>
+        </li>
       {/* Notifications Dropdown Menu */}
       <li className="nav-item dropdown">
         <a className="nav-link" data-toggle="dropdown" href="#/">
@@ -29,9 +73,9 @@ const AdminMenu = () => {
         </a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" data-widget="fullscreen" href="#/" role="button">
-        <i className="fas fa-sign-out-alt" />
-        </a>
+        <button className="nav-link" onClick={adminLogout}>
+          <i className="fas fa-sign-out-alt" />
+        </button>
       </li>
     </ul>
   </nav>;

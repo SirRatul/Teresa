@@ -9,6 +9,7 @@ import SignUpVerifiyCode from "./SignUpVerifiyCode/SignUpVerifiyCode";
 import UploadPrescription from "./UploadPrescription/UploadPrescription";
 import ActivityManagement from "./ActivityManagement/ActivityManagement";
 import ResetPassword from "./ResetPassword/ResetPassword";
+import AdminCreate from "./AdminCreate/AdminCreate";
 import AdminLogin from "./AdminLogin/AdminLogin";
 import AdminInvoiceList from "./AdminInvoiceList/AdminInvoiceList";
 import MyOrders from "./MyOrders/MyOrders";
@@ -62,13 +63,8 @@ const App = () => {
       {auth.isLoggedIn ? (
         <Switch>
           <Route path="/" component={HomePage} exact />
-          <Route
-            path="/upload-prescription"
-            component={UploadPrescription}
-            exact
-          />
+          <Route path="/upload-prescription" component={UploadPrescription} exact/>
           <Route path="/my-orders" component={MyOrders} exact />
-
           <Route path="/set-reminder" component={ActivityManagement} exact />
           <Redirect to="/"></Redirect>
         </Switch>
@@ -77,40 +73,16 @@ const App = () => {
           <Route path="/" component={HomePage} exact />
           <Route path="/login" component={Login} exact />
           <Route path="/register" component={Registration} exact />
+          <Route path="/admin-create" component={AdminCreate} exact />
           <Route path="/admin" component={AdminLogin} exact />
-          <Route
-            path="/admin-invoice-list"
-            component={AdminInvoiceList}
-            exact
-          />
-          <Route
-            path="/admin-create-invoice"
-            component={AdminCreateInvoice}
-            exact
-          />
-          <Route
-            path="/admin-invoice-preview"
-            component={AdminInvoicePreview}
-            exact
-          />
-
+          <Route path="/admin-invoice-list" component={AdminInvoiceList} exact />
+          <Route path="/admin-create-invoice" component={AdminCreateInvoice} exact />
+          <Route path="/admin-invoice-preview" component={AdminInvoicePreview} exact />
           <Route path="/forgetPassword" component={ForgetPassword} exact />
           <Route path="/resetPassword" component={ResetPassword} exact />
-          <Route
-            path="/forgot-password-verification"
-            component={ForgetPasswordVerifiyCode}
-            exact
-          />
-          <Route
-            path="/sign-up-verification"
-            component={SignUpVerifiyCode}
-            exact
-          />
-          <Route
-            path="/upload-prescription"
-            component={UploadPrescription}
-            exact
-          />
+          <Route path="/forgot-password-verification" component={ForgetPasswordVerifiyCode} exact />
+          <Route path="/sign-up-verification" component={SignUpVerifiyCode} exact />
+          <Route path="/upload-prescription" component={UploadPrescription} exact />
           <Redirect to="/login"></Redirect>
         </Switch>
       )}

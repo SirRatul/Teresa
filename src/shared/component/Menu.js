@@ -101,7 +101,7 @@ const Menu = () => {
                     <Nav.Link className="text-light" href="/set-reminder">Set Reminder</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link className="text-light" href="/">Products</Nav.Link>
+                    <Nav.Link className="text-light" href="/my-orders">My Orders</Nav.Link>
                 </Nav.Item>
                 {
                     auth.isLoggedIn?

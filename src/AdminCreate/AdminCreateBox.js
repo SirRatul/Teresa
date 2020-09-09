@@ -1,45 +1,43 @@
 import React, {useState, useContext} from 'react';
 import {useHistory} from 'react-router-dom';
-import {Cookies} from 'react-cookie';
 import Logo from '../shared/img/teresa.png'
 import Doctor from '../shared/img/Dr.jpg';
 import Modal from "../shared/component/Modal";
 import axios from 'axios'
 import {AuthContext} from '../shared/context/auth-context'
 import LoadingSpinner from '../shared/component/LoadingSpinner'
-import './AdminLoginBox.css'
+import './AdminCreateBox.css'
 
-const AdminLoginBox = () => {
+const AdminCreateBox = props => {
     const history = useHistory()
     const auth = useContext(AuthContext)
-    const cookies = new Cookies();
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [showpassword, setShowPassword] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [disable, setDisable] = useState(false)
-
+    const authAdminAxios = axios.create({
+        baseURL: process.env.REACT_APP_BACKEND_URL,
+        headers: {
+            Authorization : `Bearer ${props.adminToken}`
+        } 
+    })
     const submitHandler = async (event) => {
         event.preventDefault()
+        console.log(props.adminToken)
         console.log(userName)
         console.log(password)
         setIsLoading(true)
         setDisable(true)
         try {
-            const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'admin/login', {
+            const response = await authAdminAxios.post(process.env.REACT_APP_BACKEND_URL+'admin/create-user', {
                 userName,
                 password
             });
             console.log(response.data);
             setIsLoading(false)
             setDisable(false)
-            auth.adminUserId = response.data.message._id
-            auth.isLoggedInAdmin = true
-            auth.adminToken = response.data.message.token
-            cookies.set('adminUserId', auth.adminUserId, { path: '/', maxAge: 31536000 });
-            cookies.set('adminToken', auth.adminToken, { path: '/', maxAge: 31536000 });
-            cookies.set('isLoggedInAdmin', auth.isLoggedInAdmin, { path: '/', maxAge: 31536000 });
             history.push('/admin-invoice-list')
         } catch (error) {
             setIsLoading(false)
@@ -47,8 +45,6 @@ const AdminLoginBox = () => {
             console.log(error.response.data.message);
             setErrorMessage(error.response.data.message)
         }
-        setIsLoading(false)
-        setDisable(false)
     }
 
     const modalHandler = () => {
@@ -69,7 +65,7 @@ const AdminLoginBox = () => {
                         <img className="mx-auto d-block teresa-logo" src={Logo} alt="Teresa Logo"/>
                     </div>
                     <div className="col-12 col-lg-6">
-                        <p className="active text-center font-weight-bold login-text">Admin Log In</p>
+                        <p className="active text-center font-weight-bold login-text">Admin Create</p>
                     </div>
                 </div>
                 <div className="row bg-white">
@@ -100,7 +96,7 @@ const AdminLoginBox = () => {
                                 </div>
                                 <div className="form-row mt-4">
                                     <div className="col-6 offset-3 col-sm-4 offset-sm-4 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-                                        <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}} disabled={(disable)? "disabled" : ""}>LOG IN</button>
+                                        <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}} disabled={(disable)? "disabled" : ""}>Create</button>
                                     </div>
                                 </div>
                             </form>
@@ -114,4 +110,4 @@ const AdminLoginBox = () => {
     </React.Fragment>;
 }
 
-export default AdminLoginBox;
+export default AdminCreateBox;

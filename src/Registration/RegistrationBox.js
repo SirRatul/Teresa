@@ -50,6 +50,8 @@ const RegistrationBox = () => {
     ];
     const [isLoading, setIsLoading] = useState(false)
     const [disable, setDisable] = useState(false)
+    const [passwordError, setPasswordError] = useState(null)
+    const [confirmPasswordError, setConfirmPasswordError] = useState(null)
 
     const selectGender = (value) => {
         setGender({
@@ -257,24 +259,48 @@ const RegistrationBox = () => {
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0 mb-3 mb-lg-0">
                                             <label className="control-label">Password</label>
                                             <div className="input-group rounded-pill form-input-background">
-                                                <input className="form-control rounded-pill form-input-background" type={(showPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
+                                                <input className="form-control rounded-pill form-input-background" type={(showPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" name="password" value={password} onChange={(e) =>{
+                                                    if(e.target.value.length < 8){
+                                                        // setPassword(e.target.value)
+                                                        setPasswordError("Password length must be 8 characters.")
+                                                    } else{
+                                                        setPasswordError(null)
+                                                        setPassword(e.target.value)
+                                                    }
+                                                    setPassword(e.target.value)
+                                                } } required disabled={(disable)? "disabled" : ""}/>
                                                 <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
                                                     <span className="input-group-btn"><i className={"mt-2 mr-3 fas fa-eye"+(showPassword ? '': '-slash')} onClick={function(){
                                                         setShowPassword(!showPassword)
                                                     }}></i></span>
                                                 </div>
                                             </div>
+                                            {
+                                                passwordError && <span className="text-danger">{passwordError}</span>
+                                            }
                                         </div>
                                         <div className="col-10 offset-1 col-sm-6 offset-sm-0 mt-2 mt-lg-0">
                                             <label className="control-label">Confirm Password</label>
                                             <div className="input-group rounded-pill form-input-background">
-                                                <input className="form-control rounded-pill form-input-background" type={(showConfirmPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Confirm Password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
+                                                <input className="form-control rounded-pill form-input-background" type={(showConfirmPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Confirm Password" name="confirmPassword" value={confirmPassword} onChange={(e) => {
+                                                    if(e.target.value !== password){
+                                                        // setPassword(e.target.value)
+                                                        setConfirmPasswordError("Must be same as password.")
+                                                        setConfirmPassword(e.target.value)
+                                                    } else{
+                                                        setConfirmPasswordError(null)
+                                                        setConfirmPassword(e.target.value)
+                                                    }
+                                                }} required disabled={(disable)? "disabled" : ""}/>
                                                 <div className="input-group-addon" style={{border: '0', boxShadow: 'none'}}>
                                                     <span className="input-group-btn"><i className={"mt-2 mr-3 fas fa-eye"+(showConfirmPassword ? '': '-slash')} onClick={function(){
                                                         setShowConfirmPassword(!showConfirmPassword)
                                                     }}></i></span>
                                                 </div>
                                             </div>
+                                            {
+                                                confirmPasswordError && <span className="text-danger">{confirmPasswordError}</span>
+                                            }
                                         </div>
                                     </div>
                                 </div>

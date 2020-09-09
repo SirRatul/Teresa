@@ -8,5 +8,10 @@ export const AuthContext = createContext({
     token: new Cookies().get('token') || null,
     phone: null,
     otp: null,
-    medicineDetails: null
+    medicineDetails: null,
+    sellerName: null,
+    sellerPhone: null,
+    isLoggedInAdmin: new Cookies().get('isLoggedInAdmin') || false,
+    adminUserId: new Cookies().get('adminUserId') || null,
+    adminToken: new Cookies().get('adminToken') || null
 })

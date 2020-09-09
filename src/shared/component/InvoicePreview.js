@@ -1,49 +1,29 @@
 import React, {useState, useEffect} from 'react';
 import Form from "react-bootstrap/Form"
-import axios from 'axios'
 
 const InvoicePreview = props => {
-    const [orderNo, setOrderNo] = useState(false)
     const [unitCheck, setUnitCheck] = useState(false)
-    const [customerName, setCustomerName] = useState(null)
-    const [customerPhone, setCustomerPhone] = useState(null)
-    const [deliveryAddress, setDeliveryAddress] = useState(null)
     const [totalPrice, setTotalPrice] = useState(null)
     useEffect(() => {
-        const getOrderInfo = async () => {
-            try {
-                const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'admin/orders/prescription', {
-                    _id: props.prescriptionId
-                })
-                console.log(response.data)
-                setOrderNo(response.data.orderNo)
-                setCustomerName(response.data.owner.firstName + " "+response.data.owner.lastName)
-                setCustomerPhone(response.data.owner.phone)
-                setDeliveryAddress(response.data.deliveryDetails)
-                for(var i = 0; i <props.medicineInfo.length; i++){
-                    if(props.medicineInfo[i].unit){
-                        setUnitCheck(true)
-                        break
-                    }
-                }
-            } catch (error) {
-                console.log(error.response.data);
+        for(var i = 0; i <props.medicineInfo.length; i++){
+            if(props.medicineInfo[i].unit){
+                setUnitCheck(true)
+                break
             }
         }
-        getOrderInfo()
         console.log(props.medicineInfo)
         var totalPrice = 0
         props.medicineInfo.forEach((item) => {
             totalPrice += parseInt(item.price)
         })
         setTotalPrice(totalPrice)
-    }, [props.prescriptionId, props.medicineInfo])
+    }, [props.medicineInfo])
     return <React.Fragment>
         <div className="row">
             <div className='col-12 px-2 px-lg-5 ml-3'>
                 <div className='col-8 offset-2 px-2 px-lg-5 ml-n4 ml-lg-5'>
-                    <p className='h6 font-weight-bold ml-3'>Order No: {orderNo}</p>
-                    <p className='ml-3'>Date and Time: 12-08-2020 08:00 PM</p>
+                    <p className='h6 font-weight-bold ml-3'>Order No: {props.orderNo}</p>
+                    <p className='ml-3'>Date and Time: {props.orderTime}</p>
                 </div>
             </div>
             <div className='col-12 col-lg-1 d-none d-lg-block'>
@@ -98,9 +78,9 @@ const InvoicePreview = props => {
         </div>
         <div className='col-12 col-lg-4 ml-2 mt-3'>
             <p className='h5 font-weight-bold'>Bills To</p>
-            <p>Customer Name: {customerName}</p>
-            <p>Mobile Number: {customerPhone}</p>
-            <p>Address: {deliveryAddress}</p>
+            <p>Customer Name: {props.customerName}</p>
+            <p>Mobile Number: {props.customerPhone}</p>
+            <p>Address: {props.deliveryAddress}</p>
         </div>
         <div className='col-12 col-lg-6 ml-2 ml-lg-5 mt-3'>
             <p className='h5 font-weight-bold'>Seller Information</p>

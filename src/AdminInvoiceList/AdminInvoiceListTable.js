@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios'
+import {AuthContext} from '../shared/context/auth-context'
 import './AdminInvoiceListTable.css'
 
 const AdminInvoiceListTable = () => {
     const history = useHistory()
+    const auth = useContext(AuthContext)
     /* const orderList = [
         {
             _id: 1,
@@ -37,11 +39,19 @@ const AdminInvoiceListTable = () => {
         }
     ] */
 
+    const authAdminAxios = axios.create({
+        baseURL: process.env.REACT_APP_BACKEND_URL,
+        headers: {
+            Authorization : `Bearer ${auth.adminToken}`
+        }
+    })
+
     const [orderList, setOrderList] = useState([])
     useEffect(() => {
         const getOrderList = async () => {
+            // console.log('Admin Token:'+auth.adminToken)
             try {
-                const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'admin/orders/prescriptions')
+                const response = await authAdminAxios.get(process.env.REACT_APP_BACKEND_URL+'admin/orders/prescriptions')
                 console.log(response.data)
                 setOrderList(response.data.message)
             } catch (error) {
@@ -49,7 +59,7 @@ const AdminInvoiceListTable = () => {
             }
         }
         getOrderList()
-    }, [])
+    }, [authAdminAxios])
 
     const orderTableColumns = [
         {

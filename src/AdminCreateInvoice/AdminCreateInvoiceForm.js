@@ -23,8 +23,13 @@ const AdminCreateInvoiceForm = props => {
             price: '' 
         }
     ]);
+    const [orderNo, setOrderNo] = useState('')
+    const [customerName, setCustomerName] = useState('')
+    const [customerPhone, setCustomerPhone] = useState('')
+    const [deliveryAddress, setDeliveryAddress] = useState('')
     const [sellerName, setSellerName] = useState('')
     const [sellerPhone, setSellerPhone] = useState('')
+    const [orderTime, setOrderTime] = useState('')
     const [dynamicCheckBox, setDynamicCheckBox] = useState('Unit')
     const handleInputChange = (e, index) => {
         const { name, value } = e.target;
@@ -45,13 +50,47 @@ const AdminCreateInvoiceForm = props => {
             price: '' 
         }]);
     };
+    const authAdminAxios = axios.create({
+        baseURL: process.env.REACT_APP_BACKEND_URL,
+        headers: {
+            Authorization : `Bearer ${auth.adminToken}`
+        }
+    })
     useEffect(() => {
         console.log('Auth')
+        console.log(auth.adminToken)
         console.log(auth.medicineDetails)
         if(auth.medicineDetails){
             setInputList(auth.medicineDetails)
+            setSellerName(auth.sellerName)
+            setSellerPhone(auth.sellerPhone)
+            for(var i = 0; i <auth.medicineDetails.length; i++){
+                if(auth.medicineDetails[i].unit){
+                    setDynamicCheckBox('Unit')
+                    break
+                } else {
+                    setDynamicCheckBox('Day')
+                    break
+                }
+            }
         }
-    }, [auth.medicineDetails]) 
+        const getPrescriptionInfo = async () => {
+            try {
+                const response = await authAdminAxios.post(process.env.REACT_APP_BACKEND_URL+'admin/orders/prescription', {
+                    _id: props.orderId
+                })
+                console.log(response.data)
+                setOrderNo(response.data.message.orderNo)
+                setCustomerName(response.data.message.owner.firstName + " "+response.data.message.owner.lastName)
+                setCustomerPhone(response.data.message.owner.phone)
+                setDeliveryAddress(response.data.message.deliveryDetails)
+                setOrderTime(response.data.message.updatedAt)
+            } catch (error) {
+                console.log(error.response.data);
+            }
+        }
+        getPrescriptionInfo()
+    }, [auth.medicineDetails, auth.sellerName, auth.sellerPhone, auth.adminToken, authAdminAxios, props.orderId])
     const submitHandler= async (event) => {
         event.preventDefault()
         var totalPrice = 0
@@ -67,7 +106,7 @@ const AdminCreateInvoiceForm = props => {
         setIsLoading(true)
         setDisable(true)
         try {
-            const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'admin/create-invoice', {
+            const response = await authAdminAxios.post(process.env.REACT_APP_BACKEND_URL+'admin/create-invoice', {
                 medicineDetails: inputList,
                 sellerInfo: {
                     sellerName,
@@ -103,15 +142,22 @@ const AdminCreateInvoiceForm = props => {
         setErrorMessage(null)
     };
 
-    const previewHandler= () => {
+    const previewHandler= async() => {
         auth.medicineDetails = inputList
+        auth.sellerName = sellerName
+        auth.sellerPhone = sellerPhone
         history.push({
             pathname: '/admin-invoice-preview',
             state:{
                 medicineInfo: inputList,
                 sellerName,
                 sellerPhone,
-                prescriptionId: props.orderId
+                prescriptionId: props.orderId,
+                customerName,
+                customerPhone,
+                deliveryAddress,
+                orderNo,
+                orderTime
             }
         })
     }
@@ -188,7 +234,7 @@ const AdminCreateInvoiceForm = props => {
                                     <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}} disabled={(disable)? "disabled" : ""}>Create</button>
                                 </div>
                             </div>
-                            <div className="col-12 col-lg-3 ml-2">
+                            <div className="col-12 col-lg-3 ml-5">
                                 <div className="row">
                                     <div className="col-12">
                                         <p className="h5 mb-3 ml-2 ml-lg-0">Seller Information</p>

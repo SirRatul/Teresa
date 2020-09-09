@@ -1,26 +1,35 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 // import PrescriptionPhoto from '../shared/img/prescriptionPhoto.png';
 import axios from 'axios'
 import Table from 'react-bootstrap/Table'
+import {AuthContext} from '../shared/context/auth-context'
 
 const AdminCreateInvoiceDetails = props => {
+    const auth = useContext(AuthContext)
     const [orderInfo, setOrderInfo] = useState([])
     const [dayCheck, setDayCheck] = useState(false)
     const [unitCheck, setUnitCheck] = useState(false)
     const [customerName, setCustomerName] = useState(null)
     const [customerPhone, setCustomerPhone] = useState(null)
+    const authAdminAxios = axios.create({
+        baseURL: process.env.REACT_APP_BACKEND_URL,
+        headers: {
+            Authorization : `Bearer ${auth.adminToken}`
+        } 
+    })
     useEffect(() => {
         const getOrderInfo = async () => {
             try {
-                const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'admin/orders/prescription', {
+                // console.log('Admin Token In create invoice details:'+auth.adminToken)
+                const response = await authAdminAxios.post(process.env.REACT_APP_BACKEND_URL+'admin/orders/prescription', {
                     _id: props.orderId
                 })
                 console.log(response.data)
-                setOrderInfo(response.data)
-                setCustomerName(response.data.owner.firstName + " "+response.data.owner.lastName)
-                setCustomerPhone(response.data.owner.phone)
-                for(var i = 0; i < response.data.order.length; i++){
-                    if(response.data.order[i].unit){
+                setOrderInfo(response.data.message)
+                setCustomerName(response.data.message.owner.firstName + " "+response.data.message.owner.lastName)
+                setCustomerPhone(response.data.message.owner.phone)
+                for(var i = 0; i < response.data.message.order.length; i++){
+                    if(response.data.message.order[i].unit){
                         setUnitCheck(true)
                         break
                     } else {
@@ -32,11 +41,11 @@ const AdminCreateInvoiceDetails = props => {
             }
         }
         getOrderInfo()
-    }, [props.orderId])
+    }, [props.orderId, authAdminAxios])
     return  <div className="content-wrapper overflow-hidden px-3 mt-4">
         <div className="row">
             <div className="col-12 col-lg-4 mb-3 mb-lg-0">
-                <img className="d-block ml-2 w-100 h-100" src={process.env.REACT_APP_BACKEND_URL+orderInfo.path} alt="Prescription"/>
+                <img className="d-block ml-2 w-100 h-100" src={orderInfo.path} alt="Prescription"/>
             </div>
             <div className="col-12 col-lg-4 mb-3 mb-lg-0 mx-2 mx-lg-0 px-2 px-lg-0 ">
                 <Table className='border border-dark'>

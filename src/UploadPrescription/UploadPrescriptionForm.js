@@ -1,5 +1,6 @@
 import React, {useState, useContext} from 'react';
 import PrescriptionPhoto from '../shared/img/prescriptionPhoto.png';
+import {Cookies} from 'react-cookie';
 import axios from 'axios'
 import UploadIcon from '../shared/img/upload.png';
 import PlusCurcle from '../shared/img/plus-circle.png';
@@ -12,6 +13,7 @@ import './UploadPrescriptionForm.css'
 
 const UploadPrescriptionForm = () => {
     const auth = useContext(AuthContext)
+    const cookies = new Cookies();
     const [inputList, setInputList] = useState([{ medicineSN: '', unit: '', day: '' }]);
     const [prescriptionImage, setPrescriptionImage] = useState(PrescriptionPhoto)
     const [prescriptionImagePath, setPrescriptionImagePath] = useState(null)
@@ -28,6 +30,7 @@ const UploadPrescriptionForm = () => {
     const [prescriptionPhotoUpload, setPrescriptionPhotoUpload] = useState();
     const [isLoading, setIsLoading] = useState(false)
     const [disable, setDisable] = useState(false)
+    const [errorMessage, setErrorMessage] = useState(false)
     const authAxios = axios.create({
         baseURL: process.env.REACT_APP_BACKEND_URL,
         headers: {
@@ -59,8 +62,44 @@ const UploadPrescriptionForm = () => {
                 console.log(response.data)
                 setIsLoading(false)
                 setDisable(false)
+                setInputList([{ medicineSN: '', unit: '', day: '' }])
+                setAdditionalNote("")
+                setDeliveryDetails("")
+                setErrorMessage("Prescription Uploaded Successfully")
             } catch (error) {
                 console.log(error.response.data)
+                if(error.response.data.error === 'Please authenticate'){
+                    const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users/refresh-token', {
+                      _id: auth.userId
+                    });
+                    console.log(response.data)
+                    auth.token = response.data.token
+                    cookies.set('token', auth.token, { path: '/', maxAge: 31536000 })
+                    const authAxiosChange = axios.create({
+                        baseURL: process.env.REACT_APP_BACKEND_URL,
+                        headers: {
+                            Authorization : `Bearer ${response.data.token}`
+                        } 
+                    })
+                    try {
+                        const response = await authAxiosChange.post('files/prescription', formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        });
+                        console.log(response.data)
+                        setInputList([{ medicineSN: '', unit: '', day: '' }])
+                        setAdditionalNote("")
+                        setDeliveryDetails("")
+                        setErrorMessage("Prescription Uploaded Successfully")
+                    } catch (error) {
+                        console.log(error.response.data)
+                        setErrorMessage(error.response.data.message)
+                    }
+                  }
+                  else {
+                    setErrorMessage(error.response.data.message)
+                  }
                 setIsLoading(false)
                 setDisable(false)
             }
@@ -90,12 +129,14 @@ const UploadPrescriptionForm = () => {
     };
     const modalHandler = () => {
         setPrescriptionPhotoUpload(null)
+        setErrorMessage(null)
     }
     return <React.Fragment>
         <div className="container-fluid">
             <div className="container">
                 <div className="row">
                     {prescriptionPhotoUpload === "Not Uploaded" ? <Modal message="Please Upload Prescription Image to submit your order" onClear={modalHandler.bind(this)}/> : null}
+                    {errorMessage &&<Modal message={errorMessage} onClear={modalHandler.bind(this)}/>}
                     <div className="col-12 col-lg-4">
                         <div className="prescription-image-container position-relative text-center">
                             <span className={"close position-absolute "+ (prescriptionImage !== PrescriptionPhoto? "": "d-none")} style={{top: '0%', right: '0%'}} onClick={function(){setPrescriptionImage(PrescriptionPhoto)}}><i className="fa fa-window-close close-icon-button text-light bg-danger" aria-hidden="true"></i></span>
