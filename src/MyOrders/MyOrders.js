@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import Sorry from "../shared/img/Sorry_Invoice.jpg";
 import Menu from "../shared/component/Menu";
 import Footer from "../shared/component/Footer";
 import { MDBCol } from "mdbreact";
@@ -25,16 +26,43 @@ export default class Registration extends Component {
       orderDetails: [],
     };
     this.handleOrderNumClick = this.handleOrderNumClick.bind(this);
+    this.getOrderDetails = this.getOrderDetails.bind(this);
   }
 
   handleOrderNumClick(order) {
-    alert(order.orderNo);
+    //alert(order.orderNo);
+    console.log("Order Click" + order.orderNo);
 
     this.setState({
       selectedOrderRow: order.orderNo,
       invoiceStatus: order.invoiceStatus,
     });
+
+    if (order.invoiceStatus === "Created") {
+      console.log("function call for " + this.state.selectedOrderRow);
+      this.getOrderDetails(order.orderNo);
+    }
   }
+
+  getOrderDetails = async (orderNo) => {
+    const auth = this.context;
+
+    axios.defaults.headers.common["Authorization"] = auth.token;
+
+    try {
+      const response = await axios.get(
+        process.env.REACT_APP_BACKEND_URL + "orders/prescription/me/" + orderNo
+      );
+
+      console.log(response.data.message);
+
+      this.setState({
+        // orderDetails: response.data.message,
+      });
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
 
   componentDidMount = async (e) => {
     const auth = this.context;
@@ -42,14 +70,14 @@ export default class Registration extends Component {
     axios.defaults.headers.common["Authorization"] = auth.token;
 
     try {
-      const response = await axios.post(
+      const response = await axios.get(
         process.env.REACT_APP_BACKEND_URL + "orders/prescription/me"
       );
 
       console.log(response.data);
 
       this.setState({
-        orderDetails: response.data,
+        orderDetails: response.data.message,
       });
     } catch (error) {
       console.log(error.response.data);
@@ -68,7 +96,7 @@ export default class Registration extends Component {
         //set new token as header
 
         try {
-          const response = await axios.post(
+          const response = await axios.get(
             process.env.REACT_APP_BACKEND_URL + "orders/prescription/me"
           );
 
@@ -186,7 +214,12 @@ export default class Registration extends Component {
 
               {this.state.invoiceStatus === "Not Created" ? (
                 <div className="m-auto">
-                  <h1>Sorry Your invoice isn't created yet!!</h1>
+                  <img
+                    className="mx-auto d-block doctor-image "
+                    src={Sorry}
+                    alt=""
+                  />
+                  {/* <h1>Sorry Your invoice isn't created yet!!</h1>*/}
                 </div>
               ) : (
                 //Call the invoice component
