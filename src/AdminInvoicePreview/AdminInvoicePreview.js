@@ -9,7 +9,7 @@ const AdminInvoicePreview = props => {
                 <img className="d-block teresa-logo" src={Logo} alt="Teresa Logo"/>
             </div>
             <div className="col-12 ml-5">
-                <InvoicePreview medicineInfo={props.location.state.medicineInfo}/>
+                <InvoicePreview medicineInfo={props.location.state.medicineInfo} sellerName={props.location.state.sellerName} sellerPhone={props.location.state.sellerPhone} prescriptionId={props.location.state.prescriptionId}/>
             </div>
         </div>
     </div>

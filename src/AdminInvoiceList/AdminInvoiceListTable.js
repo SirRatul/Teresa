@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import {useHistory} from 'react-router-dom';
+import axios from 'axios'
 import './AdminInvoiceListTable.css'
 
 const AdminInvoiceListTable = () => {
     const history = useHistory()
-    const orderList = [
+    /* const orderList = [
         {
             _id: 1,
             orderNo: '0012',
@@ -34,11 +35,25 @@ const AdminInvoiceListTable = () => {
             orderTime: '08/08/2020 8:00 AM',
             invoiceStatus: 'Not Created'
         }
-    ]
+    ] */
+
+    const [orderList, setOrderList] = useState([])
+    useEffect(() => {
+        const getOrderList = async () => {
+            try {
+                const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'admin/orders/prescriptions')
+                console.log(response.data)
+                setOrderList(response.data.message)
+            } catch (error) {
+                console.log(error.response.data);
+            }
+        }
+        getOrderList()
+    }, [])
 
     const orderTableColumns = [
         {
-            dataField: '_id',
+            dataField: 'orderId',
             text: 'Id',
             hidden: true,
             headerStyle: {
@@ -54,7 +69,7 @@ const AdminInvoiceListTable = () => {
             text: 'Customer Name'
         }, 
         {
-            dataField: 'orderTime',
+            dataField: 'dateTime',
             text: 'Order Time'
         },
         {
@@ -69,7 +84,14 @@ const AdminInvoiceListTable = () => {
         onSelect: (row, isSelect, rowIndex, e) => {
             if(row.invoiceStatus === "Not Created"){
                 console.log(row)
-                history.push('/admin-create-invoice')
+                // history.push('/admin-create-invoice')
+                history.push({
+                    pathname: '/admin-create-invoice',
+                    state:{
+                        orderId: row.orderId,
+                        ownerId: row.ownerId
+                    }
+                })
             }
         }
     };
@@ -78,7 +100,7 @@ const AdminInvoiceListTable = () => {
     return  <div className="content-wrapper overflow-hidden">
         <h1 className="text-center">Order List</h1>
         <BootstrapTable
-            keyField='_id'
+            keyField='orderId'
             data={orderList}
             columns={orderTableColumns}
             wrapperClasses="table-responsive ml-3 px-5"

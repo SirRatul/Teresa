@@ -1,31 +1,69 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import PrescriptionPhoto from '../shared/img/prescriptionPhoto.png';
+import axios from 'axios'
 import UploadIcon from '../shared/img/upload.png';
 import PlusCurcle from '../shared/img/plus-circle.png';
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Collapse from 'react-bootstrap/Collapse'
 import Modal from '../shared/component/Modal'
+import {AuthContext} from '../shared/context/auth-context'
+import LoadingSpinner from '../shared/component/LoadingSpinner'
 import './UploadPrescriptionForm.css'
 
 const UploadPrescriptionForm = () => {
-    const [inputList, setInputList] = useState([{ serialNumber: '', unit: '', day: '' }]);
+    const auth = useContext(AuthContext)
+    const [inputList, setInputList] = useState([{ medicineSN: '', unit: '', day: '' }]);
     const [prescriptionImage, setPrescriptionImage] = useState(PrescriptionPhoto)
+    const [prescriptionImagePath, setPrescriptionImagePath] = useState(null)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [query, setQuery] = useState('')
+    const [additionalNote, setAdditionalNote] = useState('')
+    const [deliveryDetails, setDeliveryDetails] = useState('')
     const [queryFormVisibility, setQueryFormVisibility] = useState(false)
     const [dynamicCheckBox, setDynamicCheckBox] = useState('Unit')
     const [firstQuestionOpen, setFirstQuestionOpen] = useState(false);
     const [secondQuestionOpen, setSecondQuestionOpen] = useState(false);
     const [prescriptionPhotoUpload, setPrescriptionPhotoUpload] = useState();
+    const [isLoading, setIsLoading] = useState(false)
+    const [disable, setDisable] = useState(false)
+    const authAxios = axios.create({
+        baseURL: process.env.REACT_APP_BACKEND_URL,
+        headers: {
+            Authorization : `Bearer ${auth.token}`
+        }
+    })
     const submitHandler = async (event) => {
         event.preventDefault()
         if(prescriptionImage === PrescriptionPhoto){
             setPrescriptionPhotoUpload("Not Uploaded")
         } else {
+            setIsLoading(true)
+            setDisable(true)
             console.log(prescriptionImage)
             console.log(inputList)
+            console.log(additionalNote)
+            console.log(deliveryDetails)
+            var formData = new FormData();
+            formData.append("file", prescriptionImagePath);
+            formData.append("order", JSON.stringify(inputList));
+            formData.append("additionalNote", additionalNote);
+            formData.append("deliveryDetails", deliveryDetails);
+            try {
+                const response = await authAxios.post('files/prescription', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                console.log(response.data)
+                setIsLoading(false)
+                setDisable(false)
+            } catch (error) {
+                console.log(error.response.data)
+                setIsLoading(false)
+                setDisable(false)
+            }
         }
     }
     const querySubmitHandler = async (event) => {
@@ -48,7 +86,7 @@ const UploadPrescriptionForm = () => {
         setInputList(list);
     };
     const handleAddClick = () => {
-        setInputList([...inputList, { serialNumber: '', unit: '', day: '' }]);
+        setInputList([...inputList, { medicineSN: '', unit: '', day: '' }]);
     };
     const modalHandler = () => {
         setPrescriptionPhotoUpload(null)
@@ -72,6 +110,7 @@ const UploadPrescriptionForm = () => {
                                             </label>
                                             <input id="files" style={{visibility: 'hidden',width: '0%'}} type="file" accept="image/*" onChange={(e) => {if(e.target.files[0]){
                                                     setPrescriptionImage(URL.createObjectURL(e.target.files[0]))
+                                                    setPrescriptionImagePath(e.target.files[0])
                                                 }
                                             }}/>
                                         </div>
@@ -87,30 +126,30 @@ const UploadPrescriptionForm = () => {
                             <div className="form-group">
                                 <div className="col-10 offset-1 col-sm-10 offset-sm-1">
                                     <label>Your Name</label>
-                                    <input type="text" className="form-control rounded-pill   form-input-background" name="name" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} required/>
+                                    <input type="text" className="form-control rounded-pill   form-input-background" name="name" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="col-10 offset-1 col-sm-10 offset-sm-1">
                                     <label>Your Email</label>
-                                    <input type="email" className="form-control rounded-pill   form-input-background" name="email" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                                    <input type="email" className="form-control rounded-pill   form-input-background" name="email" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="col-10 offset-1 col-sm-10 offset-sm-1">
                                     <label>Your Phone</label>
-                                    <input type="tel" className="form-control rounded-pill   form-input-background" name="phone" placeholder="Your Phone" value={phone} onChange={(e) => setPhone(e.target.value)} required/>
+                                    <input type="tel" className="form-control rounded-pill   form-input-background" name="phone" placeholder="Your Phone" value={phone} onChange={(e) => setPhone(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="col-10 offset-1 col-sm-10 offset-sm-1">
                                     <label>Your Query</label>
-                                    <textarea className="form-control form-input-background" rows="3" style={{borderRadius: '1em'}} value={query} onChange={(e) => setQuery(e.target.value)} required></textarea>
+                                    <textarea className="form-control form-input-background" rows="3" style={{borderRadius: '1em'}} value={query} onChange={(e) => setQuery(e.target.value)} required disabled={(disable)? "disabled" : ""}></textarea>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="col-8 offset-2">
-                                    <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}}>Send</button>
+                                    <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}} disabled={(disable)? "disabled" : ""}>Send</button>
                                 </div>
                             </div>
                         </form>
@@ -136,7 +175,8 @@ const UploadPrescriptionForm = () => {
                     </div>
                     <div className="col-12 col-lg-2">
                     </div>
-                    <div className="col-12 col-lg-6">
+                    <div className="col-12 col-lg-6 position-relative">
+                        {isLoading && <LoadingSpinner/>}
                         <form onSubmit={submitHandler}>
                             <div className="form-group">
                                 <div className="form-row">
@@ -174,7 +214,7 @@ const UploadPrescriptionForm = () => {
                                                     return (
                                                         <div className="row mb-4" key={i}>
                                                             <div className="col-5 col-sm-5">
-                                                                <input type="text" className="form-control rounded-pill form-input-background" name="serialNumber" value={x.serialNumber} onChange={e => handleInputChange(e, i)}/>
+                                                                <input type="text" className="form-control rounded-pill form-input-background" name="medicineSN" value={x.medicineSN} onChange={e => handleInputChange(e, i)} disabled={(disable)? "disabled" : ""}/>
                                                             </div>
                                                             <div className="col-3 col-sm-3">
                                                                 <input type="text" className="form-control rounded-pill form-input-background" name="unit" value={x.unit} onChange={e => handleInputChange(e, i)} disabled = {(dynamicCheckBox === 'Day')? "disabled" : ""}/>
@@ -183,7 +223,7 @@ const UploadPrescriptionForm = () => {
                                                                 <input type="text" className="form-control rounded-pill form-input-background" name="day" value={x.day} onChange={e => handleInputChange(e, i)} disabled = {(dynamicCheckBox === 'Unit')? "disabled" : ""}/>
                                                             </div>
                                                             <div className="col-1 col-sm-1 ml-n3 ml-sm-0">
-                                                                <ButtonGroup aria-label="Basic example">
+                                                                <ButtonGroup aria-label="Basic example" disabled={(disable)? "disabled" : ""}>
                                                                     {inputList.length - 1 === i &&<img className='mr-2 plus-icon-button' src={PlusCurcle} onClick={handleAddClick} alt='Plus Icon'/>}
                                                                     {inputList.length !== 1 &&<i className="fas fa-minus-circle minus-icon-button" aria-hidden="true" onClick={() => handleRemoveClick(i)}></i>}
                                                                 </ButtonGroup>
@@ -193,17 +233,17 @@ const UploadPrescriptionForm = () => {
                                                 })}
                                                 <div className="form-group mb-5">
                                                     <label>Additional Note</label>
-                                                    <textarea className="form-control form-input-background" rows="3" style={{borderRadius: '1em'}}></textarea>
+                                                    <textarea className="form-control form-input-background" rows="3" style={{borderRadius: '1em'}} value={additionalNote} onChange={(e) => setAdditionalNote(e.target.value)} disabled={(disable)? "disabled" : ""}></textarea>
                                                 </div>
                                                 <div className="form-group mt-2">
                                                     <label>Delivery Details</label>
-                                                    <textarea className="form-control form-input-background" rows="3" style={{borderRadius: '1em'}} placeholder="House No:&#10;Road No:&#10;Area:&#10;" required></textarea>
+                                                    <textarea className="form-control form-input-background" rows="3" style={{borderRadius: '1em'}} placeholder="House No:&#10;Road No:&#10;Area:&#10;" value={deliveryDetails} onChange={(e) => setDeliveryDetails(e.target.value)} required disabled={(disable)? "disabled" : ""}></textarea>
                                                 </div>
                                                 <div className="form-group">
                                                     <div className="form-row">
                                                         <div className="col-10 offset-1 col-sm-12 offset-sm-0 mt-2 mt-lg-0">
                                                             <div className="custom-control custom-checkbox">
-                                                                <input type="checkbox" className="custom-control-input" id="defaultCheck1ForNotLg" required/>
+                                                                <input type="checkbox" className="custom-control-input" id="defaultCheck1ForNotLg" required disabled={(disable)? "disabled" : ""}/>
                                                                 <label htmlFor="defaultCheck1ForNotLg" className="custom-control-label">I've read and agree to the terms and conditions</label>
                                                             </div>
                                                         </div>
@@ -211,7 +251,7 @@ const UploadPrescriptionForm = () => {
                                                 </div>
                                                 <div className="form-row mb-4 d-none d-lg-block">
                                                     <div className="col-6 offset-3">
-                                                        <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}}>Submit</button>
+                                                        <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}} disabled={(disable)? "disabled" : ""}>Submit</button>
                                                     </div>
                                                 </div>
                                                 <p className='h3 font-weight-bold mt-5 d-none d-lg-block' style={{color: '#090A36'}}>Procedure</p>
@@ -222,12 +262,12 @@ const UploadPrescriptionForm = () => {
                                                 <div className="form-group d-block d-lg-none">
                                                     <div className="form-row mb-4">
                                                         <div className="col-8 col-sm-6 col-md-4 offset-2 offset-sm-3 offset-md-4">
-                                                            <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}}>Submit</button>
+                                                            <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}} disabled={(disable)? "disabled" : ""}>Submit</button>
                                                         </div>
                                                     </div>
                                                     <div className="form-row">
                                                         <div className="col-8 col-sm-6 col-md-4 offset-2 offset-sm-3 offset-md-4">
-                                                            <button type="button" className="btn btn-block btn-outline-purple mt-1" onClick={function(){setQueryFormVisibility(true)}}>Need Help?</button>
+                                                            <button type="button" className="btn btn-block btn-outline-purple mt-1" onClick={function(){setQueryFormVisibility(true)}} disabled={(disable)? "disabled" : ""}>Need Help?</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -242,30 +282,30 @@ const UploadPrescriptionForm = () => {
                             <div className="form-group">
                                 <div className="col-10 offset-1 col-sm-10 offset-sm-1">
                                     <label>Your Name</label>
-                                    <input type="text" className="form-control rounded-pill   form-input-background" name="name" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} required/>
+                                    <input type="text" className="form-control rounded-pill   form-input-background" name="name" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="col-10 offset-1 col-sm-10 offset-sm-1">
                                     <label>Your Email</label>
-                                    <input type="email" className="form-control rounded-pill   form-input-background" name="email" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                                    <input type="email" className="form-control rounded-pill   form-input-background" name="email" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="col-10 offset-1 col-sm-10 offset-sm-1">
                                     <label>Phone</label>
-                                    <input type="tel" className="form-control rounded-pill   form-input-background" name="phone" placeholder="Your Phone" value={phone} onChange={(e) => setPhone(e.target.value)} required/>
+                                    <input type="tel" className="form-control rounded-pill   form-input-background" name="phone" placeholder="Your Phone" value={phone} onChange={(e) => setPhone(e.target.value)} required disabled={(disable)? "disabled" : ""}/>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="col-10 offset-1 col-sm-10 offset-sm-1">
                                     <label>Your Query</label>
-                                    <textarea className="form-control form-input-background" rows="3" style={{borderRadius: '1em'}} value={query} onChange={(e) => setQuery(e.target.value)} required></textarea>
+                                    <textarea className="form-control form-input-background" rows="3" style={{borderRadius: '1em'}} value={query} onChange={(e) => setQuery(e.target.value)} required disabled={(disable)? "disabled" : ""}></textarea>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <div className="col-8 col-sm-6 offset-2 offset-sm-3">
-                                    <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}}>Send</button>
+                                    <button type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}} disabled={(disable)? "disabled" : ""}>Send</button>
                                 </div>
                             </div>
                         </form>

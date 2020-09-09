@@ -133,12 +133,12 @@ const ActivityManagementForm = props => {
     })
   }
 
-  const selectActivityFor = (value) => {
+  /* const selectActivityFor = (value) => {
     setActivityFor({
       ...activityFor,
       activityFor: value
     })
-  }
+  } */
 
   const customStyles = {
     option: (provided, state) => ({

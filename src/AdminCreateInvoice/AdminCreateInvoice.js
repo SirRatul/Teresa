@@ -5,7 +5,7 @@ import AdminSideBar from '../shared/component/AdminSideBar'
 import AdminCreateInvoiceDetails from './AdminCreateInvoiceDetails'
 import AdminCreateInvoiceForm from './AdminCreateInvoiceForm'
 
-const AdminCreateInvoice = () => {
+const AdminCreateInvoice = props => {
     return  <React.Fragment>
         <Helmet>
             <meta charSet="utf-8" />
@@ -13,8 +13,8 @@ const AdminCreateInvoice = () => {
         </Helmet>
         <AdminMenu/>
         <AdminSideBar/>
-        <AdminCreateInvoiceDetails/>
-        <AdminCreateInvoiceForm/>
+        <AdminCreateInvoiceDetails orderId={props.location.state.orderId}/>
+        <AdminCreateInvoiceForm ownerId={props.location.state.ownerId} orderId={props.location.state.orderId}/>
     </React.Fragment>;
 }
 
