@@ -107,11 +107,6 @@ const ActivityManagementTable = props => {
         }
     }
     
-    /* useEffect(() => {
-        console.log('effect 1st')
-        getRoutine()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []) */
     useEffect(() => {
         console.log('effect page render')
         getRoutine()

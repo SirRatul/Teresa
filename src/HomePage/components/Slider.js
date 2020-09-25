@@ -3,6 +3,7 @@ import Carousel from 'react-bootstrap/Carousel'
 import Slider1 from '../../shared/img/front 1.jpg'
 import Slider2 from '../../shared/img/front 2.jpg'
 import Slider3 from '../../shared/img/front 3.jpg'
+import { Link } from "react-scroll";
 import './Slider.css'
 
 const Slider = () => {
@@ -14,7 +15,9 @@ const Slider = () => {
                 alt="First slide"
             />
             <Carousel.Caption>
-                <button className="btn bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
+                <Link className="nav-link text-light" to="about-teresa" spy={true} smooth={true} offset={-70} duration={500} style={{ cursor: "pointer" }}>
+                    <button className="btn bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
+                </Link>
                 {/* <div className="container">
                     <div className="row">
                         <div className="col-6">
@@ -32,7 +35,9 @@ const Slider = () => {
             />
 
             <Carousel.Caption>
-                <button className="btn bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
+                <Link className="nav-link text-light" to="about-teresa" spy={true} smooth={true} offset={-70} duration={500} style={{ cursor: "pointer" }}>
+                    <button className="btn bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
+                </Link>
                 {/* <div className="container">
                     <div className="row">
                         <div className="col-6">
@@ -50,7 +55,9 @@ const Slider = () => {
             />
 
             <Carousel.Caption>
-                <button className="btn bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
+                <Link className="nav-link text-light" to="about-teresa" spy={true} smooth={true} offset={-70} duration={500} style={{ cursor: "pointer" }}>
+                    <button className="btn bg-white float-left rounded-pill font-weight-bold marginSliderButton mb-lg-5" style={{color: '#080808'}}>Learn More</button>
+                </Link>
                 {/* <div className="container">
                     <div className="row">
                         <div className="col-6">

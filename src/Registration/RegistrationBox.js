@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react';
 import axios from 'axios'
 import Select from 'react-select';
-import {useHistory} from 'react-router-dom';
+import {useHistory, Link} from 'react-router-dom';
 import Modal from "../shared/component/Modal";
 import Logo from '../shared/img/teresa.png'
 import Doctor from '../shared/img/Dr.jpg';
@@ -52,7 +52,6 @@ const RegistrationBox = () => {
     const [disable, setDisable] = useState(false)
     const [passwordError, setPasswordError] = useState(null)
     const [confirmPasswordError, setConfirmPasswordError] = useState(null)
-
     const selectGender = (value) => {
         setGender({
             ...gender,
@@ -93,7 +92,7 @@ const RegistrationBox = () => {
 
     const submitHandler = async (event) => {
         event.preventDefault()
-        console.log(firstName)
+        /*console.log(firstName)
         if(lastName){
             console.log(lastName)
         }
@@ -107,7 +106,7 @@ const RegistrationBox = () => {
         }
         console.log('0'+phone)
         console.log(password)
-        console.log(confirmPassword)
+        console.log(confirmPassword)*/
         if(phone.length !== 10){
             setErrorMessage('Your phone number must be 10 digit.')
         } else if(password !== confirmPassword){
@@ -127,15 +126,16 @@ const RegistrationBox = () => {
                     password
                 });
                 console.log(response.data);
-                auth.userId = response.data.message._id
+                // auth.userId = response.data.message._id
                 setIsLoading(false)
                 setDisable(false)
-                history.push('/sign-up-verification')
+                // history.push('/sign-up-verification')
+                auth.authMessage = "Registration is complete. You can now login."
+                history.push('/login')
             } catch (error) {
                 setIsLoading(false)
                 setDisable(false) 
-                console.log(error.response.data.message);
-                // setErrorMessage(error.response.data.error)
+                // console.log(error.response.data.message);
                 setErrorMessage(error.response.data.message)
             }
         }
@@ -260,12 +260,16 @@ const RegistrationBox = () => {
                                             <label className="control-label">Password</label>
                                             <div className="input-group rounded-pill form-input-background">
                                                 <input className="form-control rounded-pill form-input-background" type={(showPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" name="password" value={password} onChange={(e) =>{
-                                                    if(e.target.value.length < 8){
-                                                        // setPassword(e.target.value)
-                                                        setPasswordError("Password length must be 8 characters.")
-                                                    } else{
+                                                    if(e.target.value.length === 0){
                                                         setPasswordError(null)
-                                                        setPassword(e.target.value)
+                                                    } else if(e.target.value.length < 8){
+                                                        setPasswordError("Password length must be 8 characters.")
+                                                    } else if(e.target.value.length > 8 && confirmPassword && e.target.value !== confirmPassword){
+                                                        setConfirmPasswordError("Must be same as password.")
+                                                    }
+                                                    else {
+                                                        setConfirmPasswordError(null)
+                                                        setPasswordError(null)
                                                     }
                                                     setPassword(e.target.value)
                                                 } } required disabled={(disable)? "disabled" : ""}/>
@@ -283,7 +287,10 @@ const RegistrationBox = () => {
                                             <label className="control-label">Confirm Password</label>
                                             <div className="input-group rounded-pill form-input-background">
                                                 <input className="form-control rounded-pill form-input-background" type={(showConfirmPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Confirm Password" name="confirmPassword" value={confirmPassword} onChange={(e) => {
-                                                    if(e.target.value !== password){
+                                                    if(e.target.value.length === 0){
+                                                        setConfirmPasswordError(null)
+                                                        setConfirmPassword(e.target.value)
+                                                    } else if(e.target.value !== password){
                                                         // setPassword(e.target.value)
                                                         setConfirmPasswordError("Must be same as password.")
                                                         setConfirmPassword(e.target.value)
@@ -324,9 +331,9 @@ const RegistrationBox = () => {
                                         <p className="text-center">
                                             {
                                                 disable ?
-                                                <a href="/#" style={{color: '#2D2E6A'}}>I already have an account</a>
+                                                <Link to="/#" style={{color: '#2D2E6A'}}>I already have an account</Link>
                                                 :
-                                                <a href="/login" style={{color: '#2D2E6A'}}>I already have an account</a>
+                                                <Link to="/login" style={{color: '#2D2E6A'}}>I already have an account</Link>
                                             }
                                         </p>
                                     </div>

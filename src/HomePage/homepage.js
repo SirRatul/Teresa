@@ -18,7 +18,7 @@ const HomePage = () => {
       <Menu />
       <Slider />
       <Service />
-      <AboutTeresa />
+      <AboutTeresa id="about-teresa"/>
       <AboutApp />
       <Process />
 

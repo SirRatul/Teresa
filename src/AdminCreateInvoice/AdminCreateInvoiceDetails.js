@@ -45,7 +45,7 @@ const AdminCreateInvoiceDetails = props => {
     return  <div className="content-wrapper overflow-hidden px-3 mt-4">
         <div className="row">
             <div className="col-12 col-lg-4 mb-3 mb-lg-0">
-                <img className="d-block ml-2 w-100 h-100" src={orderInfo.path} alt="Prescription"/>
+                <img className="d-block ml-2 w-100 h-100" src={"https://"+orderInfo.path} alt="Prescription"/>
             </div>
             <div className="col-12 col-lg-4 mb-3 mb-lg-0 mx-2 mx-lg-0 px-2 px-lg-0 ">
                 <Table className='border border-dark'>

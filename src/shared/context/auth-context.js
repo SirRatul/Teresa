@@ -11,6 +11,7 @@ export const AuthContext = createContext({
     medicineDetails: null,
     sellerName: null,
     sellerPhone: null,
+    adminUserName: new Cookies().get('adminUserName') || null,
     isLoggedInAdmin: new Cookies().get('isLoggedInAdmin') || false,
     adminUserId: new Cookies().get('adminUserId') || null,
     adminToken: new Cookies().get('adminToken') || null

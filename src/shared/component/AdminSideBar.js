@@ -1,9 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {useHistory} from 'react-router-dom';
 import Avatar from '../img/avatar.png'
 import Logo from '../img/teresa.png'
+import {AuthContext} from '../context/auth-context'
 import './AdminSideBar.css'
 
 const AdminSideBar = () => {
+  const history = useHistory()
+  const auth = useContext(AuthContext)
+  const adminCreatePageRedirect = () => {
+    history.push({
+      pathname: '/admin-create',
+      state:{
+          adminToken: auth.adminToken
+      }
+    })
+  }
     return <aside className="main-sidebar sidebar-dark-primary elevation-4 position-fixed">
      {/* Brand Logo */}
     <a href="index3.html" className="brand-link bg-white">
@@ -55,6 +67,12 @@ const AdminSideBar = () => {
                 Order Time Line
               </p>
             </a>
+          </li>
+          <li className="nav-item nav-item-sidebar">
+            <button className="nav-link btn-block text-light border-0" style={{backgroundColor: '#010624'}} onClick={adminCreatePageRedirect}>
+              <i className="nav-icon fas fa-box" />
+              <span className="ml-3">Create Admin</span>
+            </button>
           </li>
         </ul>
       </nav>

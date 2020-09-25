@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory, Link} from 'react-router-dom';
 import {Cookies} from 'react-cookie';
 import Logo from '../shared/img/teresa.png'
 import Doctor from '../shared/img/Dr.jpg';
@@ -99,7 +99,7 @@ const LoginBox = () => {
                                 <div className="form-group mb-5">
                                     <div className="col-10 offset-1 col-sm-6 offset-sm-3">
                                         <p className="text-left">
-                                            <a href="/forgetPassword" style={{color: '#2D2E6A'}}>Forgot Password</a>
+                                            <Link to="/forgetPassword" style={{color: '#2D2E6A'}}>Forgot Password</Link>
                                         </p>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@ const LoginBox = () => {
                                 </div>
                                 <div className="form-row mt-3 mb-5 mb-lg-0">
                                     <div className="col-6 offset-3 col-sm-4 offset-sm-4 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-                                        <a href='/register' type="submit" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}}>CREATE ACCOUNT</a>
+                                        <Link to="/register" className="btn btn-block text-white text-center" style={{borderRadius: '1em', backgroundColor: '#0C0C52'}}>CREATE ACCOUNT</Link>
                                     </div>
                                 </div>
                             </form>

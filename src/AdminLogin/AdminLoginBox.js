@@ -37,9 +37,11 @@ const AdminLoginBox = () => {
             auth.adminUserId = response.data.message._id
             auth.isLoggedInAdmin = true
             auth.adminToken = response.data.message.token
+            auth.adminUserName = response.data.message.userName
             cookies.set('adminUserId', auth.adminUserId, { path: '/', maxAge: 31536000 });
             cookies.set('adminToken', auth.adminToken, { path: '/', maxAge: 31536000 });
             cookies.set('isLoggedInAdmin', auth.isLoggedInAdmin, { path: '/', maxAge: 31536000 });
+            cookies.set('isLoggedInAdmin', auth.adminUserName, { path: '/', maxAge: 31536000 });
             history.push('/admin-invoice-list')
         } catch (error) {
             setIsLoading(false)

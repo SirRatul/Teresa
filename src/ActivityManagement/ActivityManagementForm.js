@@ -782,6 +782,44 @@ const ActivityManagementForm = props => {
     }*/
   }
 
+  const resetAllInput = () => {
+    setMedicineInputList([
+      {
+        item: "",
+        startDate: "",
+        endDate: "",
+        continuity: "",
+        mealState: mealState.mealState,
+        time: "",
+        unit: "",
+        notificationTimeState: notificationTimeState.notificationTimeState,
+      },
+    ])
+    setDietInputList([
+      {
+        item: "",
+        startDate: "",
+        endDate: "",
+        continuity: "",
+        time: "",
+        unit: "",
+        notificationTimeState: notificationTimeState.notificationTimeState
+      }
+    ])
+    setExerciseInputList([
+      {
+        item: "",
+        startDate: "",
+        endDate: "",
+        continuity: "",
+        time: "",
+        duration: "",
+        notificationTimeState: notificationTimeState.notificationTimeState,
+      },
+    ])
+    selectActivityItem(activityItemChangeValue)
+  }
+
   const handleInputChangeInMedicineList = (e, index) => {
     const { name, value } = e.target
     const list = [...medicineInputList]
@@ -964,16 +1002,25 @@ const ActivityManagementForm = props => {
                       Modal heading
                     </Modal.Title>
                   </Modal.Header>
-                  <Modal.Body>Please save the form</Modal.Body>
+                  <Modal.Body>Do you want to reset this item?</Modal.Body>
                   <Modal.Footer>
                     <Button
                       variant="secondary"
                       onClick={function (e) {
-                        activityItemChangeSubmitHandler(e)
+                        // activityItemChangeSubmitHandler(e)
+                        resetAllInput()
                         setErrorModal(false)
                       }}
                     >
-                      Okay
+                      Yes
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      onClick={function (e) {
+                        setErrorModal(false)
+                      }}
+                    >
+                      No
                     </Button>
                   </Modal.Footer>
                 </Modal>

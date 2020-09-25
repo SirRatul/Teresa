@@ -1,5 +1,6 @@
 import React from 'react';
 import {Card}from 'react-bootstrap'
+import {Link} from 'react-router-dom';
 import AddGuardianIcon from '../../shared/img/addGuardianIcon.png'
 import PatientRoutineIcon from '../../shared/img/patientRoutineIcon.png'
 import NotificationIcon from '../../shared/img/notificationIcon.png'
@@ -25,17 +26,19 @@ const Service = () => {
                 </Card>
             </div>
             <div className="col-xs-6 col-md-6 col-lg-4 d-flex px-5 px-sm-4 align-items-stretch">
-                <Card className="serviceCard p-2 my-5">
-                    <Card.Img className="mx-auto" variant="top" src={PatientRoutineIcon} alt="Patient Routine Icon" style={{width: '60px', height: '60px'}}></Card.Img>
-                    <Card.Body>
-                        <Card.Title className="text-left">
-                            <p className="h4 font-weight-bold">Patient Routine</p>
-                        </Card.Title>
-                        <Card.Text className="text-left">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, ised in the 1960s with the release of Letraset sheets containing Lorem
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                <Link to="/set-reminder" className="text-decoration-none">
+                    <Card className="serviceCard p-2 my-5">
+                        <Card.Img className="mx-auto" variant="top" src={PatientRoutineIcon} alt="Patient Routine Icon" style={{width: '60px', height: '60px'}}></Card.Img>
+                        <Card.Body>
+                            <Card.Title className="text-left">
+                                <p className="h4 font-weight-bold text-dark">Patient Routine</p>
+                            </Card.Title>
+                            <Card.Text className="text-left">
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, ised in the 1960s with the release of Letraset sheets containing Lorem
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Link>
             </div>
             <div className="col-xs-6 col-md-6 col-lg-4 d-flex px-5 px-sm-4 align-items-stretch">
                 <Card className="serviceCard p-2 my-5">
@@ -51,17 +54,19 @@ const Service = () => {
                 </Card>
             </div>
             <div className="col-xs-6 col-md-6 col-lg-4 d-flex px-5 px-sm-4 align-items-stretch">
-                <Card className="serviceCard p-2 my-5">
-                    <Card.Img className="mx-auto" variant="top" src={MedicineShopIcon} alt="Medicine Shop Icon" style={{width: '70px', height: '60px'}}></Card.Img>
-                    <Card.Body>
-                        <Card.Title className="text-left">
-                            <p className="h4 font-weight-bold">Medicine Shop</p>
-                        </Card.Title>
-                        <Card.Text className="text-left">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, ised in the 1960s with the release of Letraset sheets containing Lorem
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                <Link to="/upload-prescription" className="text-decoration-none">
+                    <Card className="serviceCard p-2 my-5">
+                        <Card.Img className="mx-auto" variant="top" src={MedicineShopIcon} alt="Medicine Shop Icon" style={{width: '70px', height: '60px'}}></Card.Img>
+                        <Card.Body>
+                            <Card.Title className="text-left">
+                                <p className="h4 font-weight-bold text-dark">Medicine Shop</p>
+                            </Card.Title>
+                            <Card.Text className="text-left">
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, ised in the 1960s with the release of Letraset sheets containing Lorem
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Link>
             </div>
             <div className="col-xs-6 col-md-6 col-lg-4 d-flex px-5 px-sm-4 align-items-stretch">
                 <Card className="serviceCard p-2 my-5">

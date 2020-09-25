@@ -14,10 +14,10 @@ const Footer = () => {
                             <a className='font-weight-normal text-light' href="#!">My Health Record</a>
                         </ListGroup.Item>
                         <ListGroup.Item className='listgroup-style'>
-                            <a className='font-weight-normal text-light' href="#!">Buy Medicine</a>
+                            <a className='font-weight-normal text-light' href="/upload-prescription">Buy Medicine</a>
                         </ListGroup.Item>
                         <ListGroup.Item className='listgroup-style'>
-                            <a className='font-weight-normal text-light' href="#!">Set Reminder</a>
+                            <a className='font-weight-normal text-light' href="/set-reminder">Set Reminder</a>
                         </ListGroup.Item>
                         <ListGroup.Item className='listgroup-style'>
                             <a className='font-weight-normal text-light' href="#!">Services</a>

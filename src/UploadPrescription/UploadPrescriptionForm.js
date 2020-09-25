@@ -134,7 +134,8 @@ const UploadPrescriptionForm = () => {
     return <React.Fragment>
         <div className="container-fluid">
             <div className="container">
-                <div className="row">
+                <div className="row position-relative">
+                    {isLoading && <LoadingSpinner/>}
                     {prescriptionPhotoUpload === "Not Uploaded" ? <Modal message="Please Upload Prescription Image to submit your order" onClear={modalHandler.bind(this)}/> : null}
                     {errorMessage &&<Modal message={errorMessage} onClear={modalHandler.bind(this)}/>}
                     <div className="col-12 col-lg-4">
@@ -216,8 +217,7 @@ const UploadPrescriptionForm = () => {
                     </div>
                     <div className="col-12 col-lg-2">
                     </div>
-                    <div className="col-12 col-lg-6 position-relative">
-                        {isLoading && <LoadingSpinner/>}
+                    <div className="col-12 col-lg-6 ">
                         <form onSubmit={submitHandler}>
                             <div className="form-group">
                                 <div className="form-row">
@@ -255,13 +255,13 @@ const UploadPrescriptionForm = () => {
                                                     return (
                                                         <div className="row mb-4" key={i}>
                                                             <div className="col-5 col-sm-5">
-                                                                <input type="text" className="form-control rounded-pill form-input-background" name="medicineSN" value={x.medicineSN} onChange={e => handleInputChange(e, i)} disabled={(disable)? "disabled" : ""}/>
+                                                                <input type="number" className="form-control rounded-pill form-input-background" name="medicineSN" placeholder="Ex: 1" value={x.medicineSN} onChange={e => handleInputChange(e, i)} disabled={(disable)? "disabled" : ""}/>
                                                             </div>
                                                             <div className="col-3 col-sm-3">
-                                                                <input type="text" className="form-control rounded-pill form-input-background" name="unit" value={x.unit} onChange={e => handleInputChange(e, i)} disabled = {(dynamicCheckBox === 'Day')? "disabled" : ""}/>
+                                                                <input type="number" className="form-control rounded-pill form-input-background" name="unit" placeholder="Ex: 1" value={x.unit} onChange={e => handleInputChange(e, i)} disabled = {(dynamicCheckBox === 'Day')? "disabled" : ""}/>
                                                             </div>
                                                             <div className="col-3 col-sm-3">
-                                                                <input type="text" className="form-control rounded-pill form-input-background" name="day" value={x.day} onChange={e => handleInputChange(e, i)} disabled = {(dynamicCheckBox === 'Unit')? "disabled" : ""}/>
+                                                                <input type="number" className="form-control rounded-pill form-input-background" name="day" placeholder="Ex: 1" value={x.day} onChange={e => handleInputChange(e, i)} disabled = {(dynamicCheckBox === 'Unit')? "disabled" : ""}/>
                                                             </div>
                                                             <div className="col-1 col-sm-1 ml-n3 ml-sm-0">
                                                                 <ButtonGroup aria-label="Basic example" disabled={(disable)? "disabled" : ""}>
