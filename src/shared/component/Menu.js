@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 import axios from 'axios'
 import {Cookies} from 'react-cookie';
 import Logo from '../img/logo.png'
-// import Avatar from '../img/avatar.png'
+import Avatar from '../img/avatar.png'
 import LoginButton from '../img/Login Button.png'
 import LogoutButton from '../img/Logout Button.png'
 // import NotificationIcon from '../img/Notification Icon.png'
@@ -111,11 +111,17 @@ const Menu = () => {
                         <img className='mt-lg-n2 ml-3 ml-lg-0 notification-button' src={NotificationIcon} alt="Notification Icon"/>
                     </Nav.Link>
                 </Nav.Item> */}
-                {/* <Nav.Item>
-                    <Nav.Link className="text-light" href="/">
-                        <img className='ml-3 ml-lg-0 mt-0 mt-lg-n2 avatar-icon' src={Avatar} alt="Avatar"/>
-                    </Nav.Link>
-                </Nav.Item> */}
+                {
+                    auth.isLoggedIn?
+                    <Nav.Item>
+                        <Nav.Link className="text-light" href="/profile">
+                            <img className='ml-3 ml-lg-0 avatar-icon' src={Avatar} alt="Avatar"/>
+                        </Nav.Link>
+                    </Nav.Item>
+                    : 
+                    null
+                }
+                
                 {/* <Nav.Item>
                     <i className="fas fa-search mt-4 mt-lg-1 mt-xl-2 ml-4 ml-xl-0" onClick={function(){searchButtonClick()}}></i>
                 </Nav.Item>

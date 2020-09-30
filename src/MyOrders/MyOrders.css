@@ -5,6 +5,7 @@
 
 .your-orders-text {
   font-weight: 700;
+  font-size: 3vw;
 }
 
 .Order-Numbers {
@@ -19,4 +20,28 @@
 
 .doctor-image {
   width: 65% !important;
+}
+
+@media screen and (max-width: 767px) {
+  .orderLabel {
+    font-size: 3vw;
+  }
+  .dateLabel {
+    font-size: 2.7vw;
+  }
+  .your-orders-text {
+    font-size: 4vw;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .orderLabel {
+    font-size: 4vw;
+  }
+  .dateLabel {
+    font-size: 3vw;
+  }
+  .your-orders-text {
+    font-size: 5vw;
+  }
 }

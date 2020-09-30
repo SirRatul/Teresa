@@ -21,7 +21,6 @@ const HomePage = () => {
       <AboutTeresa id="about-teresa"/>
       <AboutApp />
       <Process />
-
       <Footer />
     </React.Fragment>
   );

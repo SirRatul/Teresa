@@ -262,9 +262,9 @@ const RegistrationBox = () => {
                                                 <input className="form-control rounded-pill form-input-background" type={(showPassword ? 'text': 'password')} style={{border: '0', boxShadow: 'none'}} placeholder="Password" name="password" value={password} onChange={(e) =>{
                                                     if(e.target.value.length === 0){
                                                         setPasswordError(null)
-                                                    } else if(e.target.value.length < 8){
-                                                        setPasswordError("Password length must be 8 characters.")
-                                                    } else if(e.target.value.length > 8 && confirmPassword && e.target.value !== confirmPassword){
+                                                    } else if(e.target.value.length < 6){
+                                                        setPasswordError("Password length must be 6 characters.")
+                                                    } else if(e.target.value.length > 6 && confirmPassword && e.target.value !== confirmPassword){
                                                         setConfirmPasswordError("Must be same as password.")
                                                     }
                                                     else {

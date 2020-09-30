@@ -90,7 +90,8 @@ const AdminCreateInvoiceForm = props => {
             }
         }
         getPrescriptionInfo()
-    }, [auth.medicineDetails, auth.sellerName, auth.sellerPhone, auth.adminToken, authAdminAxios, props.orderId])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     const submitHandler= async (event) => {
         event.preventDefault()
         var totalPrice = 0

@@ -84,7 +84,7 @@ const MyOrders = () => {
     axios.defaults.headers.common["Authorization"] = auth.token;
     try {
       const response = await axios.get(
-        process.env.REACT_APP_BACKEND_URL + "orders/prescription/me/" + orderNo
+        process.env.REACT_APP_BACKEND_URL + "orders/prescription/" + orderNo
       );
       console.log(response.data.message[0]);
       setSelectedOrderDetails(response.data.message[0])
@@ -136,14 +136,14 @@ const MyOrders = () => {
           orderDetails ?
           <React.Fragment>
             <MDBCol size="3" className="Order_list_column">
-              <div className="Orders p-3 ml-2">
+              <div className="Orders p-1 p-sm-2 p-md-3 ml-2">
                 <h3 className="your-orders-text">Your Orders</h3>
               </div>
               {
               orderDetails.map((order) => (
-                <div className={selectedOrderRow === order.orderNo? "Order-Numbers  pt-3 pb-2 pl-4": "pt-3 pb-2 pl-4"} onClick={() => handleOrderNumClick(order)}>
+                <div className={selectedOrderRow === order.orderNo? "Order-Numbers justify-content-center px-1 pl-2 pt-md-3 pb-md-2 pl-md-4 orderLabel": "justify-content-center px-1 pl-2 pt-md-3 pb-md-2 pl-md-4 orderLabel"} onClick={() => handleOrderNumClick(order)}>
                   <label>Order No: {order.orderNo}</label>
-                  <p style={{ cursor: "default" }}>{order.dateTime}</p>
+                  <p className='dateLabel' style={{ cursor: "default" }}>{order.dateTime}</p>
                 </div>
               ))}
               <br />

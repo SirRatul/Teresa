@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import Logo from '../shared/img/teresa.png'
-import Doctor from '../shared/img/Dr.jpg';
+import Doctor from '../shared/img/create admin.jpg';
 import Modal from "../shared/component/Modal";
 import axios from 'axios'
 import {AuthContext} from '../shared/context/auth-context'

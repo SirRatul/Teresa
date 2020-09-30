@@ -42,20 +42,10 @@ input[type=date]:focus::-webkit-datetime-edit {
     color: #2C2C6A;
 }
 
-.teresa-logo{
-    width: 18vw;
-    height: 14vw;
-}
-
 @media only screen and (min-width: 576px){
     .login-text{
         font-size: 2.5vw!important;
         color: #2C2C6A;
-    }
-
-    .teresa-logo{
-        width: 12vw;
-        height: 8vw;
     }
 }
 

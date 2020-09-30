@@ -29,7 +29,7 @@ const AdminSideBar = () => {
           <img src={Avatar} className="img-circle elevation-2 mt-3" alt="User" />
         </div>
         <div className="info">
-          <p className="h4 d-block text-white">Ayon Mahmud</p>
+          <p className="h4 d-block text-white">{auth.adminUserName}</p>
           <div className="panel-body mt-n2">
             <div className="row">
               <span className="col-2"><span className="dot" /></span>
@@ -68,10 +68,11 @@ const AdminSideBar = () => {
               </p>
             </a>
           </li>
-          <li className="nav-item nav-item-sidebar">
-            <button className="nav-link btn-block text-light border-0" style={{backgroundColor: '#010624'}} onClick={adminCreatePageRedirect}>
-              <i className="nav-icon fas fa-box" />
-              <span className="ml-3">Create Admin</span>
+          <li className="nav-item nav-item-sidebar ml-4">
+            <button className="nav-link btn-block text-light border-0 ml-n3" style={{backgroundColor: '#010624'}} onClick={adminCreatePageRedirect}>
+              {/* <i className="nav-icon fas fa-box ml-n5" /> */}
+              <i className="nav-icon fa fa-user-plus ml-n5" aria-hidden="true"></i>
+              <span style={{fontSize: '18px'}}>Create Admin</span>
             </button>
           </li>
         </ul>

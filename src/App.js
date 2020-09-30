@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Router, Switch, Route, Redirect } from "react-router-dom";
+import { createBrowserHistory } from "history";
 import HomePage from "./HomePage/homepage";
 import Login from "./Login/Login";
 import Registration from "./Registration/Registration";
@@ -7,6 +8,7 @@ import ForgetPassword from "./ForgetPassword/ForgetPassword";
 import ForgetPasswordVerifiyCode from "./ForgetPasswordVerifiyCode/ForgetPasswordVerifiyCode";
 import SignUpVerifiyCode from "./SignUpVerifiyCode/SignUpVerifiyCode";
 import UploadPrescription from "./UploadPrescription/UploadPrescription";
+import Profile from "./Profile/Profile";
 import ActivityManagement from "./ActivityManagement/ActivityManagement";
 import ResetPassword from "./ResetPassword/ResetPassword";
 import AdminCreate from "./AdminCreate/AdminCreate";
@@ -23,6 +25,7 @@ import "./App.css";
 
 const App = () => {
   const auth = useContext(AuthContext);
+  const history = createBrowserHistory();
   useEffect(() => {
     console.log("Effect in App.js");
     const verifyToken = async () => {
@@ -56,16 +59,17 @@ const App = () => {
       }
     };
     verifyToken();
-  }, [auth]);
-
+  });
+  
   return (
-    <React.Fragment>
-      {auth.isLoggedIn ? (
+    <Router history={history}>
+      {new Cookies().get('isLoggedIn') ? (
         <Switch>
           <Route path="/" component={HomePage} exact />
           <Route path="/upload-prescription" component={UploadPrescription} exact/>
           <Route path="/my-orders" component={MyOrders} exact />
           <Route path="/set-reminder" component={ActivityManagement} exact />
+          <Route path="/profile" component={Profile} exact />
           <Redirect to="/"></Redirect>
         </Switch>
       ) : (
@@ -82,12 +86,33 @@ const App = () => {
           <Route path="/resetPassword" component={ResetPassword} exact />
           <Route path="/forgot-password-verification" component={ForgetPasswordVerifiyCode} exact />
           <Route path="/sign-up-verification" component={SignUpVerifiyCode} exact />
-          <Route path="/upload-prescription" component={UploadPrescription} exact />
           <Redirect to="/login"></Redirect>
         </Switch>
       )}
-    </React.Fragment>
+    </Router>
   );
+  /*return <AuthContext.Provider value={{
+    isLoggedIn: auth.isLoggedIn, 
+    userId: auth.userId, 
+    authMessage: auth.authMessage,
+    token: auth.token,
+    phone: auth.phone,
+    otp: auth.otp,
+    medicineDetails: auth.medicineDetails,
+    sellerName: auth.sellerName,
+    sellerPhone: auth.sellerPhone,
+    adminUserName: auth.adminUserName,
+    isLoggedInAdmin: auth.isLoggedInAdmin,
+    adminUserId: auth.adminUserId,
+    adminToken: auth.adminToken}}>
+      <BrowserRouter>
+        <main>
+          <Suspense fallback={<div className="center"><LoadingSpinner/></div>}>
+            {routes}
+          </Suspense>
+        </main>
+    </BrowserRouter>
+  </AuthContext.Provider>;*/
 };
 
 export default App;

@@ -10,7 +10,7 @@ const Model = props => {
   };
 
   return <Modal show={show} onHide={handleClose}>
-      <Modal.Header style={{backgroundColor: '#0C0C52'}}>
+      <Modal.Header style={{backgroundColor: '#020624'}}>
         <Modal.Title style={{color: 'white'}}>Teresa</Modal.Title>
       </Modal.Header>
       <Modal.Body>{props.message}</Modal.Body>

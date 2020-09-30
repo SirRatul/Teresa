@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import {Cookies} from 'react-cookie';
 import Logo from '../shared/img/teresa.png'
-import Doctor from '../shared/img/Dr.jpg';
+import Doctor from '../shared/img/create admin.jpg';
 import Modal from "../shared/component/Modal";
 import axios from 'axios'
 import {AuthContext} from '../shared/context/auth-context'
@@ -41,7 +41,7 @@ const AdminLoginBox = () => {
             cookies.set('adminUserId', auth.adminUserId, { path: '/', maxAge: 31536000 });
             cookies.set('adminToken', auth.adminToken, { path: '/', maxAge: 31536000 });
             cookies.set('isLoggedInAdmin', auth.isLoggedInAdmin, { path: '/', maxAge: 31536000 });
-            cookies.set('isLoggedInAdmin', auth.adminUserName, { path: '/', maxAge: 31536000 });
+            cookies.set('adminUserName', auth.adminUserName, { path: '/', maxAge: 31536000 });
             history.push('/admin-invoice-list')
         } catch (error) {
             setIsLoading(false)
