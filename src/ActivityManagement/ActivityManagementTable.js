@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios'
 import BootstrapTable from 'react-bootstrap-table-next';
+import Button from "react-bootstrap/Button"
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import { Type } from 'react-bootstrap-table2-editor';
@@ -8,6 +9,7 @@ import EditableButtonForMedicine from './EditableButtonForMedicine';
 import EditableButtonForDiet from './EditableButtonForDiet';
 import EditableButtonForExercise from './EditableButtonForExercise';
 // import EditableButtonForDoctorsSchedule from './EditableButtonForDoctorsSchedule';
+import Modal from "react-bootstrap/Modal"
 import TimeInputEditable from './TimeInputEditable';
 import {AuthContext} from '../shared/context/auth-context'
 import moment from 'moment'
@@ -23,6 +25,15 @@ const ActivityManagementTable = props => {
     const [medicineData, setMedicineData] = useState([])
     const [dietData, setDietData] = useState([])
     const [exerciseData, setExerciseData] = useState([])
+    const [deleteMedicineRoutine, setDeleteMedicineRoutine] = useState(false)
+    const [deleteDietRoutine, setDeleteDietRoutine] = useState(false)
+    const [deleteExerciseRoutine, setDeleteExerciseRoutine] = useState(false)
+    const [deleteMedicineRoutineId, setDeleteMedicineRoutineId] = useState(null)
+    const [deleteDietRoutineId, setDeleteDietRoutineId] = useState(null)
+    const [deleteExerciseRoutineId, setDeleteExerciseRoutineId] = useState(null)
+    const [showMedicine, setShowMedicine] = useState(true)
+    const [showDiet, setShowDiet] = useState(true)
+    const [showExercise, setShowExercise] = useState(true)
     /*const [doctorsScheudleData, setDoctorsScheudleData] = useState([
         {
             _id: 1,
@@ -68,6 +79,21 @@ const ActivityManagementTable = props => {
     })
     const pageRender = () => {
         setRenderPage(!renderPage)
+    }
+    const handleCloseMedicine = () => {
+        setShowMedicine(false)
+        setDeleteMedicineRoutine(false)
+        setDeleteMedicineRoutineId(null)
+    }
+    const handleCloseDiet = () => {
+        setShowDiet(false)
+        setDeleteDietRoutine(false)
+        setDeleteDietRoutineId(null)
+    }
+    const handleCloseExercise = () => {
+        setShowExercise(false)
+        setDeleteExerciseRoutine(false)
+        setDeleteExerciseRoutineId(null)
     }
 
     const getRoutine = async () => {
@@ -885,37 +911,9 @@ const ActivityManagementTable = props => {
     }*/
     const deleteButtonFormatterForMedicine = (cell, row, rowIndex, formatExtraData) => { 
         return <React.Fragment>
-            <button type="button" className="table-row-icon" onClick={async() => {
-                console.log('Delete Row '+row._id)
-                try {
-                    const response = await authAxios.delete('routines/medicine/'+row._id)
-                    console.log('response.data');
-                    console.log(response.data);
-                } catch (error) {
-                    console.log(error.response.data);
-                    if(error.response.data.error === 'Please authenticate'){
-                        const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users/refresh-token', {
-                            _id: auth.userId
-                        });
-                        console.log(response.data)
-                        auth.token = response.data.token
-                        cookies.set('token', auth.token, { path: '/', maxAge: 31536000 });
-                        const authAxiosChange = axios.create({
-                            baseURL: process.env.REACT_APP_BACKEND_URL,
-                            headers: {
-                                Authorization : `Bearer ${response.data.token}`
-                            } 
-                        })
-                        try {
-                            const response = await authAxiosChange.delete('routines/medicine/'+row._id)
-                            console.log('response.data');
-                            console.log(response.data);
-                        } catch (error) {
-                            console.log(error.response.data);
-                        }
-                    }
-                }
-                pageRender()
+            <button type="button" className="table-row-icon" onClick={() => {
+                setDeleteMedicineRoutine(true)
+                setDeleteMedicineRoutineId(row._id)
             }}>
                 <i className="fas fa-trash"></i>
             </button>
@@ -923,37 +921,9 @@ const ActivityManagementTable = props => {
     }
     const deleteButtonFormatterForDiet = (cell, row, rowIndex, formatExtraData) => { 
         return <React.Fragment>
-            <button type="button" className="table-row-icon" onClick={async() => {
-                console.log('Delete Row '+row._id)
-                try {
-                    const response = await authAxios.delete('routines/diet/'+row._id)
-                    console.log('response.data');
-                    console.log(response.data);
-                } catch (error) {
-                    console.log(error.response.data);
-                    if(error.response.data.error === 'Please authenticate'){
-                        const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users/refresh-token', {
-                            _id: auth.userId
-                        });
-                        console.log(response.data)
-                        auth.token = response.data.token
-                        cookies.set('token', auth.token, { path: '/', maxAge: 31536000 });
-                        const authAxiosChange = axios.create({
-                            baseURL: process.env.REACT_APP_BACKEND_URL,
-                            headers: {
-                                Authorization : `Bearer ${response.data.token}`
-                            } 
-                        })
-                        try {
-                            const response = await authAxiosChange.delete('routines/diet/'+row._id)
-                            console.log('response.data');
-                            console.log(response.data);
-                        } catch (error) {
-                            console.log(error.response.data);
-                        }
-                    }
-                }
-                pageRender()
+            <button type="button" className="table-row-icon" onClick={() => {
+                setDeleteDietRoutine(true)
+                setDeleteDietRoutineId(row._id)
             }}>
                 <i className="fas fa-trash"></i>
             </button>
@@ -961,37 +931,10 @@ const ActivityManagementTable = props => {
     }
     const deleteButtonFormatterForExercise = (cell, row, rowIndex, formatExtraData) => { 
         return <React.Fragment>
-            <button type="button" className="table-row-icon" onClick={async() => {
-                console.log('Delete Row '+row._id)
-                try {
-                    const response = await authAxios.delete('routines/exercise/'+row._id)
-                    console.log('response.data');
-                    console.log(response.data);
-                } catch (error) {
-                    console.log(error.response.data);
-                    if(error.response.data.error === 'Please authenticate'){
-                        const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users/refresh-token', {
-                            _id: auth.userId
-                        });
-                        console.log(response.data)
-                        auth.token = response.data.token
-                        cookies.set('token', auth.token, { path: '/', maxAge: 31536000 });
-                        const authAxiosChange = axios.create({
-                            baseURL: process.env.REACT_APP_BACKEND_URL,
-                            headers: {
-                                Authorization : `Bearer ${response.data.token}`
-                            } 
-                        })
-                        try {
-                            const response = await authAxiosChange.delete('routines/exercise/'+row._id)
-                            console.log('response.data');
-                            console.log(response.data);
-                        } catch (error) {
-                            console.log(error.response.data);
-                        }
-                    }
-                }
-                pageRender()
+            <button type="button" className="table-row-icon" onClick={() => {
+                setDeleteExerciseRoutine(true)
+                setDeleteExerciseRoutineId(row._id)
+                
             }}>
                 <i className="fas fa-trash"></i>
             </button>
@@ -1687,6 +1630,196 @@ const ActivityManagementTable = props => {
     return <React.Fragment>
         <div className="container-fluid" style={{backgroundColor: '#D0F2F9'}}>
             <div className="container">
+                {deleteMedicineRoutine ? 
+                <Modal show={showMedicine} onHide={handleCloseMedicine}>
+                <Modal.Header style={{ backgroundColor: "#0C0C52" }}>
+                <Modal.Title style={{ color: "white" }}>
+                    Teresa
+                </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Do you want to delete this routine?</Modal.Body>
+                <Modal.Footer>
+                <Button
+                    variant="secondary"
+                    onClick={ async(e) => {
+                        console.log('Delete Row '+deleteMedicineRoutineId)
+                        try {
+                            const response = await authAxios.delete('routines/medicine/'+deleteMedicineRoutineId)
+                            console.log('response.data');
+                            console.log(response.data);
+                        } catch (error) {
+                            console.log(error.response.data);
+                            if(error.response.data.error === 'Please authenticate'){
+                                const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users/refresh-token', {
+                                    _id: auth.userId
+                                });
+                                console.log(response.data)
+                                auth.token = response.data.token
+                                cookies.set('token', auth.token, { path: '/', maxAge: 31536000 });
+                                const authAxiosChange = axios.create({
+                                    baseURL: process.env.REACT_APP_BACKEND_URL,
+                                    headers: {
+                                        Authorization : `Bearer ${response.data.token}`
+                                    } 
+                                })
+                                try {
+                                    const response = await authAxiosChange.delete('routines/medicine/'+deleteMedicineRoutineId)
+                                    console.log('response.data');
+                                    console.log(response.data);
+                                } catch (error) {
+                                    console.log(error.response.data);
+                                }
+                            }
+                        }
+                        setShowMedicine(true)
+                        setDeleteMedicineRoutine(false)
+                        setDeleteMedicineRoutineId(null)
+                        pageRender()
+                    }}
+                    >
+                    Yes
+                </Button>
+                <Button
+                    variant="secondary"
+                    onClick={function (e) {
+                        setShowMedicine(true)
+                        setDeleteMedicineRoutine(false)
+                        setDeleteMedicineRoutineId(null)
+                    }}
+                >
+                    No
+                </Button>
+                </Modal.Footer>
+            </Modal> :
+                null
+                }
+                {deleteDietRoutine ? 
+                <Modal show={showDiet} onHide={handleCloseDiet}>
+                <Modal.Header style={{ backgroundColor: "#0C0C52" }}>
+                <Modal.Title style={{ color: "white" }}>
+                    Teresa
+                </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Do you want to delete this routine?</Modal.Body>
+                <Modal.Footer>
+                <Button
+                    variant="secondary"
+                    onClick={ async(e) => {
+                        console.log('Delete Row '+deleteDietRoutineId)
+                try {
+                    const response = await authAxios.delete('routines/diet/'+deleteDietRoutineId)
+                    console.log('response.data');
+                    console.log(response.data);
+                } catch (error) {
+                    console.log(error.response.data);
+                    if(error.response.data.error === 'Please authenticate'){
+                        const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users/refresh-token', {
+                            _id: auth.userId
+                        });
+                        console.log(response.data)
+                        auth.token = response.data.token
+                        cookies.set('token', auth.token, { path: '/', maxAge: 31536000 });
+                        const authAxiosChange = axios.create({
+                            baseURL: process.env.REACT_APP_BACKEND_URL,
+                            headers: {
+                                Authorization : `Bearer ${response.data.token}`
+                            } 
+                        })
+                        try {
+                            const response = await authAxiosChange.delete('routines/diet/'+deleteDietRoutineId)
+                            console.log('response.data');
+                            console.log(response.data);
+                        } catch (error) {
+                            console.log(error.response.data);
+                        }
+                    }
+                }
+                        setShowDiet(true)
+                        setDeleteDietRoutine(false)
+                        setDeleteDietRoutineId(null)
+                        pageRender()
+                    }}
+                    >
+                    Yes
+                </Button>
+                <Button
+                    variant="secondary"
+                    onClick={function (e) {
+                        setShowDiet(true)
+                        setDeleteDietRoutine(false)
+                        setDeleteDietRoutineId(null)
+                    }}
+                >
+                    No
+                </Button>
+                </Modal.Footer>
+            </Modal> :
+                null
+                }
+                {deleteExerciseRoutine ? 
+                <Modal show={showExercise} onHide={handleCloseExercise}>
+                <Modal.Header style={{ backgroundColor: "#0C0C52" }}>
+                <Modal.Title style={{ color: "white" }}>
+                    Teresa
+                </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Do you want to delete this routine?</Modal.Body>
+                <Modal.Footer>
+                <Button
+                    variant="secondary"
+                    onClick={ async(e) => {
+                        console.log('Delete Row '+deleteExerciseRoutineId)
+                try {
+                    const response = await authAxios.delete('routines/exercise/'+deleteExerciseRoutineId)
+                    console.log('response.data');
+                    console.log(response.data);
+                } catch (error) {
+                    console.log(error.response.data);
+                    if(error.response.data.error === 'Please authenticate'){
+                        const response = await axios.post(process.env.REACT_APP_BACKEND_URL+'users/refresh-token', {
+                            _id: auth.userId
+                        });
+                        console.log(response.data)
+                        auth.token = response.data.token
+                        cookies.set('token', auth.token, { path: '/', maxAge: 31536000 });
+                        const authAxiosChange = axios.create({
+                            baseURL: process.env.REACT_APP_BACKEND_URL,
+                            headers: {
+                                Authorization : `Bearer ${response.data.token}`
+                            } 
+                        })
+                        try {
+                            const response = await authAxiosChange.delete('routines/exercise/'+deleteExerciseRoutineId)
+                            console.log('response.data');
+                            console.log(response.data);
+                        } catch (error) {
+                            console.log(error.response.data);
+                        }
+                    }
+                }
+                pageRender()
+                        setShowExercise(true)
+                        setDeleteExerciseRoutine(false)
+                        setDeleteExerciseRoutineId(null)
+                        pageRender()
+                    }}
+                    >
+                    Yes
+                </Button>
+                <Button
+                    variant="secondary"
+                    onClick={function (e) {
+                        setShowExercise(true)
+                        setDeleteExerciseRoutine(false)
+                        setDeleteExerciseRoutineId(null)
+                    }}
+                >
+                    No
+                </Button>
+                </Modal.Footer>
+            </Modal> :
+                null
+                }
                 <div className="row">
                     <div className="col-12 mt-4">
                         <h1 className="text-center mb-4">Your Activity</h1>

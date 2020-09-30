@@ -999,7 +999,7 @@ const ActivityManagementForm = props => {
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header style={{ backgroundColor: "#0C0C52" }}>
                     <Modal.Title style={{ color: "white" }}>
-                      Modal heading
+                      Teresa
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>Do you want to reset this item?</Modal.Body>
@@ -1195,7 +1195,7 @@ const ActivityManagementForm = props => {
                               </div>
                               <div className="col-6 col-sm-4 col-md-3 col-xl-1 ml-n1 mr-n4 mb-4 mb-xl-0">
                                 <Form.Label className={"d-block text-center " +(i > 0 ? "d-xl-none" : "")}>Unit</Form.Label>
-                                <Form.Control className="form-control rounded-pill form-input-background activity-medicine-input" type="number" placeholder="Unit" name="unit" value={x.unit} onChange={(e) =>
+                                <Form.Control className="form-control rounded-pill form-input-background activity-medicine-input" type="number" placeholder="Unit" name="unit" min="1" value={x.unit} onChange={(e) =>
                                   handleInputChangeInMedicineList(e, i)
                                 } required={activityItem.activityItem.value === "Medicine"? "required": ""}/>
                               </div>
@@ -1244,7 +1244,7 @@ const ActivityManagementForm = props => {
                             </div>
                             <div className="col-6 col-sm-4 col-md-3 col-xl-form-size mb-4 mb-xl-0 d-xl-none">
                               <Form.Label className={"d-block text-center " +(i > 0 ? "d-xl-none" : "")}>Unit</Form.Label>
-                              <Form.Control className="form-control rounded-pill form-input-background activity-medicine-input" type="number" placeholder="Unit" name="unit" value={x.unit} onChange={(e) =>
+                              <Form.Control className="form-control rounded-pill form-input-background activity-medicine-input" type="number" placeholder="Unit" name="unit" min="1" value={x.unit} onChange={(e) =>
                                 handleInputChangeInMedicineList(e, i)
                               } required={activityItem.activityItem.value === "Medicine"? "required": ""}/>
                             </div>
@@ -1313,7 +1313,7 @@ const ActivityManagementForm = props => {
                               </div>
                               <div className="col-6 col-sm-4 col-md-3 col-xl-form-size mb-4 mb-xl-0 mr-n4">
                                 <Form.Label className={"d-block text-center " +(i > 0 ? "d-xl-none" : "")}>Unit</Form.Label>
-                                <Form.Control className="rounded-pill form-input-background activity-medicine-input" type="number" placeholder="Unit" name="unit" value={x.unit} onChange={(e) =>
+                                <Form.Control className="rounded-pill form-input-background activity-medicine-input" type="number" min="1" placeholder="Unit" name="unit" value={x.unit} onChange={(e) =>
                                   handleInputChangeInDietList(e, i)
                                 } required={activityItem.activityItem.value === "Diet"? "required": ""}/>
                               </div>
@@ -1356,7 +1356,7 @@ const ActivityManagementForm = props => {
                             </div>
                             <div className="col-6 col-sm-4 col-md-3 col-xl-form-size mb-4 mb-xl-0 d-xl-none">
                               <Form.Label className={"d-block text-center " +(i > 0 ? "d-xl-none" : "")}>Unit</Form.Label>
-                              <Form.Control className="rounded-pill form-input-background activity-medicine-input" type="number" placeholder="Unit" name="unit" value={x.unit} onChange={(e) =>
+                              <Form.Control className="rounded-pill form-input-background activity-medicine-input" type="number" min="1" placeholder="Unit" name="unit" value={x.unit} onChange={(e) =>
                                 handleInputChangeInDietList(e, i)
                               } required={activityItem.activityItem.value === "Diet"? "required": ""}/>
                             </div>
